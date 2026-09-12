@@ -60,10 +60,29 @@
 
   <script>
 
+    const colors = [
+      "酒红色",
+      "米白色",
+      "牛油果绿",
+      "浅灰色",
+      "金黄色",
+      "大红色",
+      "橘黄色",
+      "玫红色",
+      "深粉色",
+      "浅粉色",
+      "浅紫色",
+      "米黄色"
+    ];
+
     function startDraw() {
 
+      const randomIndex = Math.floor(Math.random() * colors.length);
+
+      const randomColor = colors[randomIndex];
+
       document.getElementById("result").innerText =
-        "🎉 抽到了：金黄色！";
+        "🎉 抽到了：" + randomColor + "！";
 
     }
 
