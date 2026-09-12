@@ -39,9 +39,14 @@ body{
 button,input{font-family:inherit}
 button{cursor:pointer}
 
+/* =====================================================
+HEADER
+===================================================== */
+
 header{
   text-align:center;
   padding:25px 15px 14px;
+  position:relative;
 }
 
 .logo{
@@ -55,28 +60,50 @@ header{
   color:#a98691;
 }
 
+
+/* =====================================================
+NAV
+===================================================== */
+
 .nav{
+  position:absolute;
+  top:18px;
+  right:18px;
+
   display:flex;
-  justify-content:center;
-  gap:10px;
-  margin:10px auto 20px;
-  padding:0 12px;
+  justify-content:flex-end;
+  gap:5px;
+
+  margin:0;
+  padding:0;
+
+  z-index:50;
 }
 
 .nav button{
-  border:none;
-  background:#fff;
+  border:1px solid #f2d1dd;
+  background:rgba(255,255,255,.92);
   color:#a56d7e;
-  padding:10px 20px;
-  border-radius:30px;
-  box-shadow:var(--shadow);
-  font-size:15px;
+
+  padding:6px 10px;
+  border-radius:18px;
+
+  box-shadow:0 3px 10px rgba(190,120,145,.10);
+
+  font-size:12px;
+  line-height:1;
 }
 
 .nav button.active{
   background:#f5a5c0;
   color:white;
+  border-color:#f5a5c0;
 }
+
+
+/* =====================================================
+PAGE
+===================================================== */
 
 .page{display:none}
 .page.active{display:block}
@@ -86,32 +113,46 @@ header{
   margin:auto;
 }
 
-/* ORDER */
+
+/* =====================================================
+ORDER
+===================================================== */
 
 .order-box{
   background:#fff;
   border:2px solid #f6d5e1;
   border-radius:22px;
-  padding:18px;
+
+  padding:14px 18px;
   margin-bottom:18px;
+
   box-shadow:var(--shadow);
-  text-align:center;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
 .order-title{
-  font-size:18px;
-  margin-bottom:10px;
+  font-size:16px;
   color:#d96d96;
+  white-space:nowrap;
 }
 
 .order-input{
-  width:min(400px,90%);
+  width:min(300px,60vw);
+
   border:2px solid #f0c7d6;
   border-radius:30px;
-  padding:12px 18px;
+
+  padding:9px 15px;
+
   outline:none;
-  font-size:16px;
+  font-size:14px;
   text-align:center;
+
   background:#fffafc;
 }
 
@@ -120,7 +161,35 @@ header{
   box-shadow:0 0 0 4px #ffeaf2;
 }
 
-/* BUTTONS */
+/* HISTORY BUTTON BESIDE ORDER */
+
+.history-small-btn{
+  border:none;
+
+  background:#fff0f5;
+  color:#c96789;
+
+  border:1px solid #f3ccd9;
+
+  border-radius:18px;
+
+  padding:8px 12px;
+
+  font-size:12px;
+
+  white-space:nowrap;
+
+  box-shadow:0 3px 8px rgba(190,120,145,.08);
+}
+
+.history-small-btn:hover{
+  background:#ffe3ed;
+}
+
+
+/* =====================================================
+BUTTONS
+===================================================== */
 
 .draw-controls{
   display:flex;
@@ -155,7 +224,10 @@ header{
   border:2px solid #f2bfd0;
 }
 
-/* SIX MACHINES */
+
+/* =====================================================
+SIX MACHINES
+===================================================== */
 
 .machine-scroll{
   width:100%;
@@ -188,7 +260,10 @@ header{
   white-space:nowrap;
 }
 
-/* REEL */
+
+/* =====================================================
+REEL
+===================================================== */
 
 .reel-window{
   position:relative;
@@ -239,9 +314,11 @@ header{
 .reel-item{
   width:100%;
   height:clamp(105px,11vw,145px);
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   padding:5px;
   text-align:center;
 }
@@ -249,9 +326,11 @@ header{
 .reel-item-inner{
   width:100%;
   height:100%;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   overflow:hidden;
   border-radius:12px;
 }
@@ -275,23 +354,32 @@ header{
   left:3px;
   right:3px;
   top:50%;
+
   height:clamp(105px,11vw,145px);
+
   transform:translateY(-50%);
+
   border:3px solid #f19bb9;
   border-radius:12px;
+
   z-index:10;
   pointer-events:none;
+
   box-shadow:0 0 0 3px rgba(255,255,255,.65);
 }
 
 .machine-stop{
   width:100%;
   border:none;
+
   margin-top:8px;
   padding:8px 4px;
+
   border-radius:20px;
+
   background:#ffe5ee;
   color:#c96789;
+
   font-size:clamp(9px,1.1vw,15px);
 }
 
@@ -300,7 +388,10 @@ header{
   cursor:not-allowed;
 }
 
-/* SETTINGS */
+
+/* =====================================================
+SETTINGS
+===================================================== */
 
 .settings-container{
   width:min(1100px,95%);
@@ -343,9 +434,11 @@ header{
   border-radius:12px;
   background:#fff;
   border:1px solid #efd2dd;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   overflow:hidden;
 }
 
@@ -391,18 +484,23 @@ header{
 .stock-row button{
   width:32px;
   height:32px;
+
   border:none;
   border-radius:50%;
+
   background:#ffdce9;
   color:#c86687;
+
   font-size:18px;
 }
 
 .stock-input{
   width:65px;
   height:32px;
+
   border:1px solid #edc9d6;
   border-radius:10px;
+
   text-align:center;
   background:white;
 }
@@ -426,6 +524,7 @@ header{
 .photo-check{
   font-size:12px;
   color:#9b7d88;
+
   display:flex;
   align-items:center;
   gap:5px;
@@ -441,8 +540,10 @@ header{
 .add-input{
   flex:1;
   min-width:150px;
+
   border:1px solid #ebcbd7;
   border-radius:20px;
+
   padding:10px 14px;
   outline:none;
 }
@@ -450,12 +551,17 @@ header{
 .add-btn{
   border:none;
   border-radius:20px;
+
   padding:10px 18px;
+
   background:#f4a3bd;
   color:white;
 }
 
-/* RULES */
+
+/* =====================================================
+RULES
+===================================================== */
 
 .rules-box{
   background:#fff8fb;
@@ -469,7 +575,9 @@ header{
   grid-template-columns:120px 1fr;
   gap:10px;
   align-items:start;
+
   padding:10px 0;
+
   border-bottom:1px dashed #efd6df;
 }
 
@@ -491,14 +599,22 @@ header{
   display:flex;
   align-items:center;
   gap:4px;
+
   font-size:13px;
+
   background:white;
+
   padding:5px 8px;
+
   border-radius:12px;
+
   border:1px solid #f0d9e2;
 }
 
-/* HISTORY */
+
+/* =====================================================
+HISTORY
+===================================================== */
 
 .history-card{
   background:#fff;
@@ -562,32 +678,46 @@ header{
 
 .history-delete{
   margin-top:10px;
+
   border:none;
   background:#ffe8ef;
   color:#c96789;
+
   border-radius:18px;
+
   padding:6px 12px;
 }
 
 .clear-history{
   border:none;
   border-radius:20px;
+
   padding:9px 16px;
+
   background:#fff;
   color:#d96d96;
+
   border:1px solid #f2bfd0;
 }
 
-/* RESULT */
+
+/* =====================================================
+RESULT
+===================================================== */
 
 .modal{
   display:none;
+
   position:fixed;
   inset:0;
+
   z-index:1000;
+
   background:rgba(92,56,67,.42);
+
   align-items:center;
   justify-content:center;
+
   padding:15px;
 }
 
@@ -598,10 +728,15 @@ header{
 .result-box{
   width:min(560px,94vw);
   max-height:90vh;
+
   overflow:auto;
+
   background:#fffafc;
+
   border-radius:28px;
+
   padding:22px;
+
   box-shadow:0 20px 50px rgba(80,40,50,.25);
 }
 
@@ -629,15 +764,19 @@ header{
   display:flex;
   align-items:center;
   gap:12px;
+
   background:#fff;
+
   border:1px solid #f0d7e1;
   border-radius:16px;
+
   padding:9px;
 }
 
 .result-label{
   width:75px;
   flex:none;
+
   color:#bd758d;
   font-size:14px;
 }
@@ -645,9 +784,12 @@ header{
 .result-visual{
   width:62px;
   height:62px;
+
   border-radius:12px;
   overflow:hidden;
+
   background:#fff7fa;
+
   display:flex;
   align-items:center;
   justify-content:center;
@@ -667,31 +809,78 @@ header{
 .confirm-btn{
   display:block;
   width:100%;
+
   margin-top:18px;
+
   border:none;
   border-radius:30px;
+
   background:#f29cba;
   color:white;
+
   padding:13px;
+
   font-size:18px;
 }
 
 .empty{
   text-align:center;
   padding:15px;
+
   color:#b997a2;
   font-size:13px;
 }
 
+
+/* =====================================================
+MOBILE
+===================================================== */
+
 @media(max-width:700px){
 
-  header{padding-top:18px}
+  header{
+    padding-top:18px;
+    padding-right:105px;
+    padding-left:15px;
+  }
 
-  .logo{font-size:24px}
+  .logo{
+    font-size:24px;
+  }
+
+  .subtitle{
+    font-size:12px;
+  }
+
+  .nav{
+    top:12px;
+    right:10px;
+  }
 
   .nav button{
-    padding:8px 14px;
+    padding:6px 8px;
+    font-size:11px;
+  }
+
+  .order-box{
+    padding:12px;
+    gap:7px;
+  }
+
+  .order-title{
+    width:100%;
+    font-size:14px;
+  }
+
+  .order-input{
+    width:min(230px,65vw);
     font-size:13px;
+    padding:8px 12px;
+  }
+
+  .history-small-btn{
+    padding:7px 9px;
+    font-size:11px;
   }
 
   .machine-grid{
@@ -712,34 +901,106 @@ header{
     padding:6px 1px;
   }
 
-  .reel-item{padding:3px}
+  .reel-item{
+    padding:3px;
+  }
 
-  .reel-text{font-size:9px}
-
-  .order-box{padding:13px}
+  .reel-text{
+    font-size:9px;
+  }
 
   .history-results{
     grid-template-columns:repeat(2,1fr);
   }
+
+  .history-head{
+    align-items:flex-start;
+  }
+
+  .history-time{
+    font-size:10px;
+  }
+
+}
+
+
+/* =====================================================
+VERY SMALL PHONE
+===================================================== */
+
+@media(max-width:430px){
+
+  .nav{
+    gap:3px;
+  }
+
+  .nav button{
+    padding:5px 6px;
+    font-size:10px;
+  }
+
+  .logo{
+    font-size:21px;
+  }
+
+  .order-title{
+    font-size:13px;
+  }
+
+  .order-input{
+    width:180px;
+  }
+
+  .history-small-btn{
+    font-size:10px;
+    padding:6px 7px;
+  }
+
 }
 </style>
 </head>
 
 <body>
 
+
+<!-- =====================================================
+HEADER
+===================================================== -->
+
 <header>
-  <div class="logo">🧶 Krystal 的毛线研究室</div>
-  <div class="subtitle">甜甜配色 · 今天抽到什么呢？</div>
+
+  <div class="logo">
+    🧶 Krystal 的毛线研究室
+  </div>
+
+  <div class="subtitle">
+    甜甜配色 · 今天抽到什么呢？
+  </div>
+
 </header>
 
+
+<!-- =====================================================
+TOP RIGHT NAV
+===================================================== -->
+
 <div class="nav">
-  <button id="navDraw" class="active" onclick="showPage('draw')">
-    🎰 开始抽取
+
+  <button
+    id="navDraw"
+    class="active"
+    onclick="showPage('draw')"
+  >
+    🎰 抽取
   </button>
 
-  <button id="navSettings" onclick="showPage('settings')">
-    ⚙️ 页面设置
+  <button
+    id="navSettings"
+    onclick="showPage('settings')"
+  >
+    ⚙️ 设置
   </button>
+
 </div>
 
 
@@ -747,14 +1008,20 @@ header{
 DRAW
 ===================================================== -->
 
-<section id="drawPage" class="page active">
+<section
+  id="drawPage"
+  class="page active"
+>
 
 <div class="container">
+
+
+  <!-- ORDER -->
 
   <div class="order-box">
 
     <div class="order-title">
-      💗 先输入订单号，再开始抽取
+      💗 订单号
     </div>
 
     <input
@@ -765,7 +1032,17 @@ DRAW
       autocomplete="off"
     >
 
+    <button
+      class="history-small-btn"
+      onclick="openHistory()"
+    >
+      📖 历史记录
+    </button>
+
   </div>
+
+
+  <!-- CONTROLS -->
 
   <div class="draw-controls">
 
@@ -787,9 +1064,15 @@ DRAW
 
   </div>
 
+
+  <!-- SIX MACHINES -->
+
   <div class="machine-scroll">
 
-    <div id="machineGrid" class="machine-grid"></div>
+    <div
+      id="machineGrid"
+      class="machine-grid"
+    ></div>
 
   </div>
 
@@ -802,7 +1085,10 @@ DRAW
 SETTINGS
 ===================================================== -->
 
-<section id="settingsPage" class="page">
+<section
+  id="settingsPage"
+  class="page"
+>
 
 <div class="settings-container">
 
@@ -819,7 +1105,10 @@ SETTINGS
 RESULT
 ===================================================== -->
 
-<div id="resultModal" class="modal">
+<div
+  id="resultModal"
+  class="modal"
+>
 
   <div class="result-box">
 
@@ -827,9 +1116,15 @@ RESULT
       🎀 抽取结果
     </div>
 
-    <div id="resultOrder" class="result-order"></div>
+    <div
+      id="resultOrder"
+      class="result-order"
+    ></div>
 
-    <div id="resultList" class="result-list"></div>
+    <div
+      id="resultList"
+      class="result-list"
+    ></div>
 
     <button
       class="confirm-btn"
@@ -844,6 +1139,7 @@ RESULT
 
 
 <script>
+
 
 /* =====================================================
 DEFAULT DATA
@@ -876,45 +1172,225 @@ const DEFAULT_DATA={
   ],
 
   mainColors:[
-    {id:"main_red",name:"大红色",image:"",photoOnly:false,stock:5},
-    {id:"main_wine",name:"酒红色",image:"",photoOnly:false,stock:5},
-    {id:"main_cream",name:"米白色",image:"",photoOnly:false,stock:5},
-    {id:"main_green",name:"牛油果绿",image:"",photoOnly:false,stock:5},
-    {id:"main_gray",name:"浅灰色",image:"",photoOnly:false,stock:5},
-    {id:"main_gold",name:"金黄色",image:"",photoOnly:false,stock:5},
-    {id:"main_orange",name:"橘黄色",image:"",photoOnly:false,stock:5},
-    {id:"main_rose",name:"玫红色",image:"",photoOnly:false,stock:5},
-    {id:"main_pinkdark",name:"深粉色",image:"",photoOnly:false,stock:5},
-    {id:"main_pink",name:"浅粉色",image:"",photoOnly:false,stock:5},
-    {id:"main_purple",name:"浅紫色",image:"",photoOnly:false,stock:5},
-    {id:"main_beige",name:"米黄色",image:"",photoOnly:false,stock:5}
+    {
+      id:"main_red",
+      name:"大红色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"main_wine",
+      name:"酒红色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"main_cream",
+      name:"米白色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"main_green",
+      name:"牛油果绿",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"main_gray",
+      name:"浅灰色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"main_gold",
+      name:"金黄色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"main_orange",
+      name:"橘黄色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"main_rose",
+      name:"玫红色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"main_pinkdark",
+      name:"深粉色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"main_pink",
+      name:"浅粉色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"main_purple",
+      name:"浅紫色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"main_beige",
+      name:"米黄色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    }
   ],
 
   secondaryColors:[
-    {id:"sub_white",name:"白色",image:"",photoOnly:false,stock:5},
-    {id:"sub_pink",name:"粉色",image:"",photoOnly:false,stock:5},
-    {id:"sub_red",name:"红色",image:"",photoOnly:false,stock:5},
-    {id:"sub_purple",name:"紫色",image:"",photoOnly:false,stock:5},
-    {id:"sub_yellow",name:"黄色",image:"",photoOnly:false,stock:5},
-    {id:"sub_orange",name:"橘色",image:"",photoOnly:false,stock:5},
-    {id:"sub_brown",name:"棕色",image:"",photoOnly:false,stock:5}
+    {
+      id:"sub_white",
+      name:"白色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"sub_pink",
+      name:"粉色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"sub_red",
+      name:"红色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"sub_purple",
+      name:"紫色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"sub_yellow",
+      name:"黄色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"sub_orange",
+      name:"橘色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"sub_brown",
+      name:"棕色",
+      image:"",
+      photoOnly:false,
+      stock:5
+    }
   ],
 
   mainButtons:[
-    {id:"button_red",name:"红色主扣",image:"",photoOnly:false,stock:5},
-    {id:"button_white",name:"白色主扣",image:"",photoOnly:false,stock:5},
-    {id:"button_purple",name:"紫色主扣",image:"",photoOnly:false,stock:5},
-    {id:"button_yellow",name:"黄色主扣",image:"",photoOnly:false,stock:5},
-    {id:"button_orange",name:"橘色主扣",image:"",photoOnly:false,stock:5},
-    {id:"button_brown",name:"棕色主扣",image:"",photoOnly:false,stock:5}
+    {
+      id:"button_red",
+      name:"红色主扣",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"button_white",
+      name:"白色主扣",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"button_purple",
+      name:"紫色主扣",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"button_yellow",
+      name:"黄色主扣",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"button_orange",
+      name:"橘色主扣",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"button_brown",
+      name:"棕色主扣",
+      image:"",
+      photoOnly:false,
+      stock:5
+    }
   ],
 
   charms:[
-    {id:"charm_star",name:"星星",image:"",photoOnly:false,stock:5},
-    {id:"charm_flower",name:"小花",image:"",photoOnly:false,stock:5},
-    {id:"charm_heart",name:"爱心",image:"",photoOnly:false,stock:5},
-    {id:"charm_bear",name:"小熊",image:"",photoOnly:false,stock:5},
-    {id:"charm_pearl",name:"珍珠",image:"",photoOnly:false,stock:5}
+    {
+      id:"charm_star",
+      name:"星星",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"charm_flower",
+      name:"小花",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"charm_heart",
+      name:"爱心",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"charm_bear",
+      name:"小熊",
+      image:"",
+      photoOnly:false,
+      stock:5
+    },
+    {
+      id:"charm_pearl",
+      name:"珍珠",
+      image:"",
+      photoOnly:false,
+      stock:5
+    }
   ],
 
   rules:{
@@ -932,21 +1408,41 @@ DATA
 ===================================================== */
 
 function clone(obj){
-  return JSON.parse(JSON.stringify(obj));
+
+  return JSON.parse(
+    JSON.stringify(obj)
+  );
+
 }
 
 function createId(){
-  return "id_"+Date.now()+"_"+Math.random().toString(36).slice(2,8);
+
+  return "id_"+
+    Date.now()+
+    "_"+
+    Math.random()
+      .toString(36)
+      .slice(2,8);
+
 }
 
 function loadData(){
 
-  const saved=localStorage.getItem(
-    "krystal_slot_machine"
-  );
+  const saved=
+    localStorage.getItem(
+      "krystal_slot_machine"
+    );
 
   if(!saved){
-    return clone(DEFAULT_DATA);
+
+    const fresh=clone(
+      DEFAULT_DATA
+    );
+
+    fresh.history=[];
+
+    return fresh;
+
   }
 
   try{
@@ -962,37 +1458,57 @@ function loadData(){
     ].forEach(category=>{
 
       if(!Array.isArray(data[category])){
-        data[category]=clone(DEFAULT_DATA[category]);
+
+        data[category]=
+          clone(DEFAULT_DATA[category]);
+
       }
 
       data[category].forEach(item=>{
 
-        if(item.stock===undefined)item.stock=5;
-        if(item.image===undefined)item.image="";
-        if(item.photoOnly===undefined)item.photoOnly=false;
+        if(item.stock===undefined)
+          item.stock=5;
+
+        if(item.image===undefined)
+          item.image="";
+
+        if(item.photoOnly===undefined)
+          item.photoOnly=false;
 
       });
 
     });
 
     if(!data.rules){
-      data.rules=clone(DEFAULT_DATA.rules);
+
+      data.rules=
+        clone(DEFAULT_DATA.rules);
+
     }
 
     if(!Array.isArray(data.history)){
+
       data.history=[];
+
     }
 
     return data;
 
   }catch(e){
 
-    return clone(DEFAULT_DATA);
+    const fresh=
+      clone(DEFAULT_DATA);
+
+    fresh.history=[];
+
+    return fresh;
 
   }
+
 }
 
 let data=loadData();
+
 
 function saveData(){
 
@@ -1011,32 +1527,70 @@ PAGE
 function showPage(page){
 
   document.querySelectorAll(".page")
-    .forEach(el=>el.classList.remove("active"));
+    .forEach(el=>
+      el.classList.remove("active")
+    );
 
   document.querySelectorAll(".nav button")
-    .forEach(el=>el.classList.remove("active"));
+    .forEach(el=>
+      el.classList.remove("active")
+    );
+
 
   if(page==="draw"){
 
-    document.getElementById("drawPage")
-      .classList.add("active");
+    document.getElementById(
+      "drawPage"
+    ).classList.add("active");
 
-    document.getElementById("navDraw")
-      .classList.add("active");
+    document.getElementById(
+      "navDraw"
+    ).classList.add("active");
 
     renderReels();
 
   }else{
 
-    document.getElementById("settingsPage")
-      .classList.add("active");
+    document.getElementById(
+      "settingsPage"
+    ).classList.add("active");
 
-    document.getElementById("navSettings")
-      .classList.add("active");
+    document.getElementById(
+      "navSettings"
+    ).classList.add("active");
 
     renderSettings();
 
   }
+
+}
+
+
+/* =====================================================
+OPEN HISTORY
+===================================================== */
+
+function openHistory(){
+
+  showPage("settings");
+
+  setTimeout(()=>{
+
+    const history=
+      document.getElementById(
+        "historyContent"
+      );
+
+    if(history){
+
+      history.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+    }
+
+  },100);
 
 }
 
@@ -1066,41 +1620,68 @@ function visualHTML(item){
   if(item.image){
 
     return `
+
       <div class="reel-item-inner">
-        <img src="${item.image}" alt="">
+
+        <img
+          src="${item.image}"
+          alt=""
+        >
+
       </div>
+
     `;
 
   }
 
   return `
+
     <div class="reel-item-inner">
+
       <div class="reel-text">
+
         ${escapeHTML(item.name)}
+
       </div>
+
     </div>
+
   `;
 
 }
+
 
 function resultVisualHTML(item){
 
   if(item.image){
 
     return `
+
       <div class="result-visual">
-        <img src="${item.image}" alt="">
+
+        <img
+          src="${item.image}"
+          alt=""
+        >
+
       </div>
+
     `;
 
   }
 
   return `
+
     <div class="result-visual">
+
       <div class="reel-text">
+
         ${escapeHTML(item.name)}
+
       </div>
+
     </div>
+
   `;
 
 }
@@ -1117,50 +1698,72 @@ function getRule(ruleObj,key){
     Array.isArray(ruleObj[key]) &&
     ruleObj[key].length>0
   ){
+
     return ruleObj[key];
+
   }
 
   return null;
+
 }
 
 
-function getVisualPool(slot,context={}){
+function getVisualPool(
+  slot,
+  context={}
+){
 
   let list=[];
 
+
   if(slot==="style"){
+
     list=data.styles;
+
   }
+
 
   if(slot==="mainColor"){
 
     list=data.mainColors;
 
-    const allowed=getRule(
-      data.rules.styleMain,
-      context.style
-    );
+    const allowed=
+      getRule(
+        data.rules.styleMain,
+        context.style
+      );
 
     if(allowed){
-      list=list.filter(x=>allowed.includes(x.id));
+
+      list=list.filter(
+        x=>allowed.includes(x.id)
+      );
+
     }
 
   }
+
 
   if(slot==="secondaryColor"){
 
     list=data.secondaryColors;
 
-    const allowed=getRule(
-      data.rules.mainSecondary,
-      context.mainColor
-    );
+    const allowed=
+      getRule(
+        data.rules.mainSecondary,
+        context.mainColor
+      );
 
     if(allowed){
-      list=list.filter(x=>allowed.includes(x.id));
+
+      list=list.filter(
+        x=>allowed.includes(x.id)
+      );
+
     }
 
   }
+
 
   if(
     slot==="mainButton" ||
@@ -1169,37 +1772,53 @@ function getVisualPool(slot,context={}){
 
     list=data.mainButtons;
 
-    const allowed=getRule(
-      data.rules.styleButtons,
-      context.style
-    );
+    const allowed=
+      getRule(
+        data.rules.styleButtons,
+        context.style
+      );
 
     if(allowed){
-      list=list.filter(x=>allowed.includes(x.id));
+
+      list=list.filter(
+        x=>allowed.includes(x.id)
+      );
+
     }
 
   }
+
 
   if(slot==="charm"){
 
     list=data.charms;
 
-    const allowed=getRule(
-      data.rules.styleCharms,
-      context.style
-    );
+    const allowed=
+      getRule(
+        data.rules.styleCharms,
+        context.style
+      );
 
     if(allowed){
-      list=list.filter(x=>allowed.includes(x.id));
+
+      list=list.filter(
+        x=>allowed.includes(x.id)
+      );
+
     }
 
   }
 
+
   return list;
+
 }
 
 
-function getAvailablePool(slot,context={}){
+function getAvailablePool(
+  slot,
+  context={}
+){
 
   return getVisualPool(
     slot,
@@ -1217,19 +1836,45 @@ SLOTS
 
 const SLOTS=[
 
-  {key:"style",title:"款式"},
-  {key:"mainColor",title:"线材主色"},
-  {key:"secondaryColor",title:"线材配色"},
-  {key:"mainButton",title:"主扣"},
-  {key:"subButton",title:"副扣"},
-  {key:"charm",title:"小吊饰"}
+  {
+    key:"style",
+    title:"款式"
+  },
+
+  {
+    key:"mainColor",
+    title:"线材主色"
+  },
+
+  {
+    key:"secondaryColor",
+    title:"线材配色"
+  },
+
+  {
+    key:"mainButton",
+    title:"主扣"
+  },
+
+  {
+    key:"subButton",
+    title:"副扣"
+  },
+
+  {
+    key:"charm",
+    title:"小吊饰"
+  }
 
 ];
+
 
 const machineState={};
 
 let finalResult=null;
+
 let isRunning=false;
+
 let currentOrder="";
 
 
@@ -1239,23 +1884,30 @@ RENDER REELS
 
 function renderReels(){
 
-  const grid=document.getElementById(
-    "machineGrid"
-  );
+  const grid=
+    document.getElementById(
+      "machineGrid"
+    );
 
   grid.innerHTML="";
 
+
   SLOTS.forEach(slot=>{
 
-    const machine=document.createElement("div");
+    const machine=
+      document.createElement("div");
 
     machine.className="machine";
+
 
     machine.innerHTML=`
 
       <div class="machine-title">
+
         ${slot.title}
+
       </div>
+
 
       <div class="reel-window">
 
@@ -1268,20 +1920,26 @@ function renderReels(){
 
       </div>
 
+
       <button
         class="machine-stop"
         id="stop_${slot.key}"
         onclick="stopSingle('${slot.key}')"
         disabled
       >
+
         🛑 单独停止
+
       </button>
 
     `;
 
+
     grid.appendChild(machine);
 
-    setupMachine(slot.key);
+    setupMachine(
+      slot.key
+    );
 
   });
 
@@ -1294,52 +1952,78 @@ SETUP
 
 function setupMachine(key){
 
-  const track=document.getElementById(
-    "track_"+key
-  );
+  const track=
+    document.getElementById(
+      "track_"+key
+    );
 
-  const pool=getVisualPool(
-    key,
-    {}
-  );
+
+  const pool=
+    getVisualPool(
+      key,
+      {}
+    );
+
 
   if(!pool.length){
 
     track.innerHTML=`
+
       <div class="reel-item">
+
         <div class="reel-item-inner">
+
           <div class="reel-text">
             暂无内容
           </div>
+
         </div>
+
       </div>
+
     `;
 
     return;
+
   }
+
 
   let html="";
 
+
   for(let i=0;i<100;i++){
 
-    const item=pool[i%pool.length];
+    const item=
+      pool[i%pool.length];
+
 
     html+=`
+
       <div class="reel-item">
+
         ${visualHTML(item)}
+
       </div>
+
     `;
 
   }
 
+
   track.innerHTML=html;
 
-  track.style.transform="translateY(0px)";
+  track.style.transform=
+    "translateY(0px)";
+
 
   machineState[key]={
+
     running:false,
+
     offset:0,
+
     timer:null
+
   };
 
 }
@@ -1351,8 +2035,13 @@ RANDOM
 
 function randomItem(list){
 
-  if(!list || !list.length){
+  if(
+    !list ||
+    !list.length
+  ){
+
     return null;
+
   }
 
   return list[
@@ -1370,82 +2059,130 @@ FINAL RESULT
 
 function generateFinalResult(){
 
-  const style=randomItem(
-    getAvailablePool("style")
-  );
+  const style=
+    randomItem(
+      getAvailablePool("style")
+    );
+
 
   if(!style){
 
-    alert("目前没有可抽取的款式库存。");
+    alert(
+      "目前没有可抽取的款式库存。"
+    );
+
     return null;
 
   }
 
-  const mainColor=randomItem(
-    getAvailablePool(
-      "mainColor",
-      {style:style.id}
-    )
-  );
+
+  const mainColor=
+    randomItem(
+      getAvailablePool(
+        "mainColor",
+        {
+          style:style.id
+        }
+      )
+    );
+
 
   if(!mainColor){
 
-    alert("目前没有符合条件的主色库存。");
+    alert(
+      "目前没有符合条件的主色库存。"
+    );
+
     return null;
 
   }
 
-  const secondaryColor=randomItem(
-    getAvailablePool(
-      "secondaryColor",
-      {mainColor:mainColor.id}
-    )
-  );
+
+  const secondaryColor=
+    randomItem(
+      getAvailablePool(
+        "secondaryColor",
+        {
+          mainColor:mainColor.id
+        }
+      )
+    );
+
 
   if(!secondaryColor){
 
-    alert("目前没有符合条件的配色库存。");
+    alert(
+      "目前没有符合条件的配色库存。"
+    );
+
     return null;
 
   }
 
-  const buttonPool=getAvailablePool(
-    "mainButton",
-    {style:style.id}
-  );
+
+  const buttonPool=
+    getAvailablePool(
+      "mainButton",
+      {
+        style:style.id
+      }
+    );
+
 
   if(buttonPool.length===0){
 
-    alert("目前没有主扣库存。");
+    alert(
+      "目前没有主扣库存。"
+    );
+
     return null;
 
   }
 
-  const mainButton=randomItem(buttonPool);
 
-  const subButton=randomItem(buttonPool);
+  const mainButton=
+    randomItem(buttonPool);
 
-  const charm=randomItem(
-    getAvailablePool(
-      "charm",
-      {style:style.id}
-    )
-  );
+  const subButton=
+    randomItem(buttonPool);
+
+
+  const charm=
+    randomItem(
+      getAvailablePool(
+        "charm",
+        {
+          style:style.id
+        }
+      )
+    );
+
 
   if(!charm){
 
-    alert("目前没有小吊饰库存。");
+    alert(
+      "目前没有小吊饰库存。"
+    );
+
     return null;
 
   }
 
+
   return{
+
     style,
+
     mainColor,
+
     secondaryColor,
+
     mainButton,
+
     subButton,
+
     charm
+
   };
 
 }
@@ -1457,15 +2194,21 @@ START
 
 function startAll(){
 
-  const orderInput=document.getElementById(
-    "orderInput"
-  );
+  const orderInput=
+    document.getElementById(
+      "orderInput"
+    );
 
-  const order=orderInput.value.trim();
+
+  const order=
+    orderInput.value.trim();
+
 
   if(!order){
 
-    alert("💗 请先输入订单号");
+    alert(
+      "💗 请先输入订单号"
+    );
 
     orderInput.focus();
 
@@ -1473,29 +2216,45 @@ function startAll(){
 
   }
 
+
   if(isRunning){
+
     return;
+
   }
 
-  const result=generateFinalResult();
+
+  const result=
+    generateFinalResult();
+
 
   if(!result){
+
     return;
+
   }
 
+
   currentOrder=order;
+
   finalResult=result;
+
   isRunning=true;
+
 
   document.getElementById(
     "startAllBtn"
   ).disabled=true;
 
+
   document.querySelectorAll(
     ".machine-stop"
   ).forEach(btn=>{
+
     btn.disabled=false;
+
   });
+
 
   SLOTS.forEach(slot=>{
 
@@ -1516,47 +2275,72 @@ function startAll(){
 INFINITE SPIN
 ===================================================== */
 
-function startSlot(key,context){
+function startSlot(
+  key,
+  context
+){
 
-  const track=document.getElementById(
-    "track_"+key
-  );
+  const track=
+    document.getElementById(
+      "track_"+key
+    );
 
-  const pool=getVisualPool(
-    key,
-    context
-  );
+
+  const pool=
+    getVisualPool(
+      key,
+      context
+    );
+
 
   if(!pool.length){
+
     return;
+
   }
 
-  const state=machineState[key];
+
+  const state=
+    machineState[key];
+
 
   state.running=true;
 
-  let position=state.offset||0;
 
-  track.style.transition="none";
+  let position=
+    state.offset||0;
+
+
+  track.style.transition=
+    "none";
+
 
   function animate(){
 
     if(!state.running){
+
       return;
+
     }
 
+
     position-=10;
+
 
     track.style.transform=
       `translateY(${position}px)`;
 
+
     state.offset=position;
 
-    state.timer=requestAnimationFrame(
-      animate
-    );
+
+    state.timer=
+      requestAnimationFrame(
+        animate
+      );
 
   }
+
 
   animate();
 
@@ -1569,88 +2353,135 @@ STOP SINGLE
 
 function stopSingle(key){
 
-  const state=machineState[key];
+  const state=
+    machineState[key];
 
-  if(!state || !state.running){
+
+  if(
+    !state ||
+    !state.running
+  ){
+
     return;
+
   }
 
-  const resultItem=finalResult[key];
+
+  const resultItem=
+    finalResult[key];
+
 
   if(!resultItem){
+
     return;
+
   }
 
+
   state.running=false;
+
 
   cancelAnimationFrame(
     state.timer
   );
 
-  const track=document.getElementById(
-    "track_"+key
-  );
 
-  const item=track.parentElement
-    .querySelector(".reel-item");
+  const track=
+    document.getElementById(
+      "track_"+key
+    );
 
-  const itemHeight=item.offsetHeight;
 
-  const pool=getVisualPool(
-    key,
-    {
-      style:finalResult.style.id,
-      mainColor:finalResult.mainColor.id
-    }
-  );
+  const item=
+    track.parentElement
+      .querySelector(
+        ".reel-item"
+      );
 
-  let targetIndex=pool.findIndex(
-    x=>x.id===resultItem.id
-  );
+
+  const itemHeight=
+    item.offsetHeight;
+
+
+  const pool=
+    getVisualPool(
+      key,
+      {
+        style:finalResult.style.id,
+        mainColor:finalResult.mainColor.id
+      }
+    );
+
+
+  let targetIndex=
+    pool.findIndex(
+      x=>x.id===resultItem.id
+    );
+
 
   if(targetIndex<0){
+
     targetIndex=0;
+
   }
 
-  const reelWindow=track.parentElement;
+
+  const reelWindow=
+    track.parentElement;
+
 
   const windowCenter=
     reelWindow.clientHeight/2;
 
+
   const itemCenter=
     itemHeight/2;
+
 
   const targetY=
     windowCenter-
     itemCenter-
     targetIndex*itemHeight;
 
+
   const extraLoops=
     itemHeight*
     pool.length*
     3;
 
+
   const finalY=
     targetY-extraLoops;
+
 
   track.style.transition=
     "transform 1.3s cubic-bezier(.15,.75,.25,1)";
 
+
   track.style.transform=
     `translateY(${finalY}px)`;
 
+
   state.offset=finalY;
 
-  const stopBtn=document.getElementById(
-    "stop_"+key
-  );
+
+  const stopBtn=
+    document.getElementById(
+      "stop_"+key
+    );
+
 
   if(stopBtn){
+
     stopBtn.disabled=true;
+
   }
 
+
   setTimeout(()=>{
+
     checkAllStopped();
+
   },1350);
 
 }
@@ -1663,8 +2494,11 @@ STOP ALL
 function stopAll(){
 
   if(!isRunning){
+
     return;
+
   }
+
 
   SLOTS.forEach(slot=>{
 
@@ -1673,7 +2507,9 @@ function stopAll(){
       machineState[slot.key].running
     ){
 
-      stopSingle(slot.key);
+      stopSingle(
+        slot.key
+      );
 
     }
 
@@ -1688,26 +2524,36 @@ CHECK
 
 function checkAllStopped(){
 
-  const stillRunning=SLOTS.some(slot=>
-    machineState[slot.key] &&
-    machineState[slot.key].running
-  );
+  const stillRunning=
+    SLOTS.some(slot=>
+      machineState[slot.key] &&
+      machineState[slot.key].running
+    );
+
 
   if(stillRunning){
+
     return;
+
   }
 
+
   isRunning=false;
+
 
   document.getElementById(
     "startAllBtn"
   ).disabled=false;
 
+
   document.querySelectorAll(
     ".machine-stop"
   ).forEach(btn=>{
+
     btn.disabled=true;
+
   });
+
 
   showResult();
 
@@ -1720,61 +2566,93 @@ RESULT
 
 function showResult(){
 
-  const modal=document.getElementById(
-    "resultModal"
-  );
+  const modal=
+    document.getElementById(
+      "resultModal"
+    );
 
-  const order=document.getElementById(
-    "resultOrder"
-  );
 
-  const list=document.getElementById(
-    "resultList"
-  );
+  const order=
+    document.getElementById(
+      "resultOrder"
+    );
+
+
+  const list=
+    document.getElementById(
+      "resultList"
+    );
+
 
   order.innerHTML=
     "订单号：<b>"+
     escapeHTML(currentOrder)+
     "</b>";
 
+
   list.innerHTML="";
+
 
   const resultMap=[
 
     ["style","款式"],
+
     ["mainColor","线材主色"],
+
     ["secondaryColor","线材配色"],
+
     ["mainButton","主扣"],
+
     ["subButton","副扣"],
+
     ["charm","小吊饰"]
 
   ];
 
-  resultMap.forEach(([key,label])=>{
 
-    const item=finalResult[key];
+  resultMap.forEach(
+    ([key,label])=>{
 
-    const row=document.createElement("div");
+      const item=
+        finalResult[key];
 
-    row.className="result-row";
 
-    row.innerHTML=`
+      const row=
+        document.createElement(
+          "div"
+        );
 
-      <div class="result-label">
-        ${label}
-      </div>
 
-      ${resultVisualHTML(item)}
+      row.className=
+        "result-row";
 
-      <div class="result-name">
-        ${escapeHTML(item.name)}
-      </div>
 
-    `;
+      row.innerHTML=`
 
-    list.appendChild(row);
+        <div class="result-label">
 
-  });
+          ${label}
+
+        </div>
+
+
+        ${resultVisualHTML(item)}
+
+
+        <div class="result-name">
+
+          ${escapeHTML(item.name)}
+
+        </div>
+
+      `;
+
+
+      list.appendChild(row);
+
+    }
+  );
+
 
   modal.classList.add("show");
 
@@ -1788,33 +2666,41 @@ CONFIRM + SAVE HISTORY
 function confirmResult(){
 
   if(!finalResult){
+
     return;
+
   }
+
 
   decreaseStock(
     "styles",
     finalResult.style.id
   );
 
+
   decreaseStock(
     "mainColors",
     finalResult.mainColor.id
   );
+
 
   decreaseStock(
     "secondaryColors",
     finalResult.secondaryColor.id
   );
 
+
   decreaseStock(
     "mainButtons",
     finalResult.mainButton.id
   );
 
+
   decreaseStock(
     "mainButtons",
     finalResult.subButton.id
   );
+
 
   decreaseStock(
     "charms",
@@ -1827,8 +2713,11 @@ function confirmResult(){
   ========================= */
 
   if(!Array.isArray(data.history)){
+
     data.history=[];
+
   }
+
 
   data.history.unshift({
 
@@ -1910,15 +2799,23 @@ function confirmResult(){
 STOCK
 ===================================================== */
 
-function decreaseStock(category,id){
+function decreaseStock(
+  category,
+  id
+){
 
-  const item=data[category].find(
-    x=>x.id===id
-  );
+  const item=
+    data[category].find(
+      x=>x.id===id
+    );
+
 
   if(!item){
+
     return;
+
   }
+
 
   item.stock=Math.max(
     0,
@@ -1934,11 +2831,14 @@ SETTINGS
 
 function renderSettings(){
 
-  const container=document.getElementById(
-    "settingsContent"
-  );
+  const container=
+    document.getElementById(
+      "settingsContent"
+    );
+
 
   container.innerHTML="";
+
 
   renderCategory(
     container,
@@ -1946,11 +2846,13 @@ function renderSettings(){
     "🎀 款式"
   );
 
+
   renderCategory(
     container,
     "mainColors",
     "🧶 线材主色"
   );
+
 
   renderCategory(
     container,
@@ -1958,11 +2860,13 @@ function renderSettings(){
     "🌷 线材配色"
   );
 
+
   renderCategory(
     container,
     "mainButtons",
     "🎀 主扣 / 副扣"
   );
+
 
   renderCategory(
     container,
@@ -1970,7 +2874,11 @@ function renderSettings(){
     "✨ 小吊饰"
   );
 
-  renderRules(container);
+
+  renderRules(
+    container
+  );
+
 
   renderHistory();
 
@@ -1987,13 +2895,20 @@ function renderCategory(
   title
 ){
 
-  const card=document.createElement("div");
+  const card=
+    document.createElement(
+      "div"
+    );
 
-  card.className="settings-card";
+
+  card.className=
+    "settings-card";
+
 
   card.innerHTML=`
 
     <h2>${title}</h2>
+
 
     <div class="add-area">
 
@@ -2003,193 +2918,262 @@ function renderCategory(
         placeholder="输入新项目名称"
       >
 
+
       <button
         class="add-btn"
         onclick="addItem('${category}')"
       >
+
         ＋ 添加
+
       </button>
 
     </div>
 
-    <div id="list_${category}"></div>
+
+    <div
+      id="list_${category}"
+    ></div>
 
   `;
 
-  container.appendChild(card);
 
-  const list=card.querySelector(
-    "#list_"+category
+  container.appendChild(
+    card
   );
 
-  if(data[category].length===0){
+
+  const list=
+    card.querySelector(
+      "#list_"+category
+    );
+
+
+  if(
+    data[category].length===0
+  ){
 
     list.innerHTML=
-      `<div class="empty">暂无项目</div>`;
+      `<div class="empty">
+        暂无项目
+      </div>`;
 
     return;
+
   }
 
-  data[category].forEach(item=>{
 
-    const row=document.createElement("div");
+  data[category].forEach(
+    item=>{
 
-    row.className="setting-item";
+      const row=
+        document.createElement(
+          "div"
+        );
 
-    row.innerHTML=`
 
-      <div class="setting-top">
+      row.className=
+        "setting-item";
 
-        <div class="item-preview">
 
-          ${
-            item.image
-            ?
-            `<img src="${item.image}" alt="">`
-            :
-            `<span>🧶</span>`
-          }
+      row.innerHTML=`
 
-        </div>
+        <div class="setting-top">
 
-        <div class="item-name">
-          ${escapeHTML(item.name)}
-        </div>
 
-        <label class="photo-check">
+          <div class="item-preview">
 
-          <input
-            type="checkbox"
-            ${item.photoOnly?"checked":""}
-            onchange="
-              togglePhotoOnly(
-                '${category}',
-                '${item.id}',
-                this.checked
-              )
-            "
-          >
+            ${
+              item.image
+              ?
+              `
+              <img
+                src="${item.image}"
+                alt=""
+              >
+              `
+              :
+              `<span>🧶</span>`
+            }
 
-          只显示照片
+          </div>
 
-        </label>
 
-        <button
-          class="photo-btn"
-          onclick="
-            uploadPhoto(
-              '${category}',
-              '${item.id}'
-            )
-          "
-        >
-          ${item.image?"更换照片":"添加照片"}
-        </button>
+          <div class="item-name">
 
-        ${
-          item.image
-          ?
-          `
+            ${escapeHTML(item.name)}
+
+          </div>
+
+
+          <label class="photo-check">
+
+            <input
+              type="checkbox"
+              ${item.photoOnly?"checked":""}
+
+              onchange="
+                togglePhotoOnly(
+                  '${category}',
+                  '${item.id}',
+                  this.checked
+                )
+              "
+            >
+
+            只显示照片
+
+          </label>
+
+
           <button
-            class="delete-btn"
+            class="photo-btn"
+
             onclick="
-              removePhoto(
+              uploadPhoto(
                 '${category}',
                 '${item.id}'
               )
             "
           >
-            删除照片
+
+            ${
+              item.image
+              ?
+              "更换照片"
+              :
+              "添加照片"
+            }
+
           </button>
-          `
-          :
-          ""
-        }
 
-        <button
-          class="delete-btn"
-          onclick="
-            deleteItem(
-              '${category}',
-              '${item.id}'
-            )
-          "
-        >
-          删除
-        </button>
 
-      </div>
+          ${
+            item.image
+            ?
+            `
+            <button
+              class="delete-btn"
 
-      <div class="stock-row">
+              onclick="
+                removePhoto(
+                  '${category}',
+                  '${item.id}'
+                )
+              "
+            >
 
-        <span>库存</span>
+              删除照片
 
-        <button
-          onclick="
-            changeStock(
-              '${category}',
-              '${item.id}',
-              -1
-            )
-          "
-        >
-          −
-        </button>
+            </button>
+            `
+            :
+            ""
+          }
 
-        <input
-          class="stock-input"
-          type="number"
-          min="0"
-          value="${Number(item.stock)||0}"
-          onchange="
-            setStock(
-              '${category}',
-              '${item.id}',
-              this.value
-            )
-          "
-        >
 
-        <button
-          onclick="
-            changeStock(
-              '${category}',
-              '${item.id}',
-              1
-            )
-          "
-        >
-          ＋
-        </button>
+          <button
+            class="delete-btn"
 
-        <span
-          class="
-            stock-status
+            onclick="
+              deleteItem(
+                '${category}',
+                '${item.id}'
+              )
+            "
+          >
+
+            删除
+
+          </button>
+
+
+        </div>
+
+
+        <div class="stock-row">
+
+          <span>
+            库存
+          </span>
+
+
+          <button
+            onclick="
+              changeStock(
+                '${category}',
+                '${item.id}',
+                -1
+              )
+            "
+          >
+            −
+          </button>
+
+
+          <input
+            class="stock-input"
+            type="number"
+            min="0"
+            value="${Number(item.stock)||0}"
+
+            onchange="
+              setStock(
+                '${category}',
+                '${item.id}',
+                this.value
+              )
+            "
+          >
+
+
+          <button
+            onclick="
+              changeStock(
+                '${category}',
+                '${item.id}',
+                1
+              )
+            "
+          >
+            ＋
+          </button>
+
+
+          <span
+            class="
+              stock-status
+              ${
+                Number(item.stock)>0
+                ?
+                "in"
+                :
+                "out"
+              }
+            "
+          >
+
             ${
               Number(item.stock)>0
               ?
-              "in"
+              "有货"
               :
-              "out"
+              "缺货"
             }
-          "
-        >
-          ${
-            Number(item.stock)>0
-            ?
-            "有货"
-            :
-            "缺货"
-          }
-        </span>
 
-      </div>
+          </span>
 
-    `;
+        </div>
 
-    list.appendChild(row);
+      `;
 
-  });
+
+      list.appendChild(
+        row
+      );
+
+    }
+  );
 
 }
 
@@ -2200,30 +3184,44 @@ ADD
 
 function addItem(category){
 
-  const input=document.getElementById(
-    "add_"+category
-  );
+  const input=
+    document.getElementById(
+      "add_"+category
+    );
 
-  const name=input.value.trim();
+
+  const name=
+    input.value.trim();
+
 
   if(!name){
 
-    alert("请输入名称");
+    alert(
+      "请输入名称"
+    );
+
     return;
 
   }
 
+
   data[category].push({
 
     id:createId(),
+
     name:name,
+
     image:"",
+
     photoOnly:false,
+
     stock:5
 
   });
 
+
   input.value="";
+
 
   saveData();
 
@@ -2236,27 +3234,42 @@ function addItem(category){
 DELETE
 ===================================================== */
 
-function deleteItem(category,id){
+function deleteItem(
+  category,
+  id
+){
 
-  const item=data[category].find(
-    x=>x.id===id
-  );
+  const item=
+    data[category].find(
+      x=>x.id===id
+    );
+
 
   if(!item){
+
     return;
+
   }
+
 
   if(!confirm(
     `确定要删除「${item.name}」吗？`
   )){
+
     return;
+
   }
 
-  data[category]=data[category].filter(
-    x=>x.id!==id
-  );
 
-  Object.keys(data.rules).forEach(
+  data[category]=
+    data[category].filter(
+      x=>x.id!==id
+    );
+
+
+  Object.keys(
+    data.rules
+  ).forEach(
     ruleGroup=>{
 
       Object.keys(
@@ -2265,12 +3278,15 @@ function deleteItem(category,id){
 
         data.rules[ruleGroup][key]=
           data.rules[ruleGroup][key]
-            .filter(x=>x!==id);
+            .filter(
+              x=>x!==id
+            );
 
       });
 
     }
   );
+
 
   saveData();
 
@@ -2283,34 +3299,57 @@ function deleteItem(category,id){
 PHOTO
 ===================================================== */
 
-function uploadPhoto(category,id){
+function uploadPhoto(
+  category,
+  id
+){
 
-  const input=document.createElement("input");
+  const input=
+    document.createElement(
+      "input"
+    );
+
 
   input.type="file";
+
   input.accept="image/*";
+
 
   input.onchange=function(){
 
-    const file=input.files[0];
+    const file=
+      input.files[0];
+
 
     if(!file){
+
       return;
+
     }
 
-    const reader=new FileReader();
+
+    const reader=
+      new FileReader();
+
 
     reader.onload=function(e){
 
-      const item=data[category].find(
-        x=>x.id===id
-      );
+      const item=
+        data[category].find(
+          x=>x.id===id
+        );
+
 
       if(!item){
+
         return;
+
       }
 
-      item.image=e.target.result;
+
+      item.image=
+        e.target.result;
+
 
       saveData();
 
@@ -2318,27 +3357,41 @@ function uploadPhoto(category,id){
 
     };
 
-    reader.readAsDataURL(file);
+
+    reader.readAsDataURL(
+      file
+    );
 
   };
+
 
   input.click();
 
 }
 
 
-function removePhoto(category,id){
+function removePhoto(
+  category,
+  id
+){
 
-  const item=data[category].find(
-    x=>x.id===id
-  );
+  const item=
+    data[category].find(
+      x=>x.id===id
+    );
+
 
   if(!item){
+
     return;
+
   }
 
+
   item.image="";
+
   item.photoOnly=false;
+
 
   saveData();
 
@@ -2353,15 +3406,22 @@ function togglePhotoOnly(
   checked
 ){
 
-  const item=data[category].find(
-    x=>x.id===id
-  );
+  const item=
+    data[category].find(
+      x=>x.id===id
+    );
+
 
   if(!item){
+
     return;
+
   }
 
-  item.photoOnly=checked;
+
+  item.photoOnly=
+    checked;
+
 
   saveData();
 
@@ -2378,18 +3438,24 @@ function changeStock(
   amount
 ){
 
-  const item=data[category].find(
-    x=>x.id===id
-  );
+  const item=
+    data[category].find(
+      x=>x.id===id
+    );
+
 
   if(!item){
+
     return;
+
   }
+
 
   item.stock=Math.max(
     0,
     Number(item.stock||0)+amount
   );
+
 
   saveData();
 
@@ -2404,18 +3470,24 @@ function setStock(
   value
 ){
 
-  const item=data[category].find(
-    x=>x.id===id
-  );
+  const item=
+    data[category].find(
+      x=>x.id===id
+    );
+
 
   if(!item){
+
     return;
+
   }
+
 
   item.stock=Math.max(
     0,
     parseInt(value)||0
   );
+
 
   saveData();
 
@@ -2428,17 +3500,29 @@ function setStock(
 RULES
 ===================================================== */
 
-function renderRules(container){
+function renderRules(
+  container
+){
 
-  const card=document.createElement("div");
+  const card=
+    document.createElement(
+      "div"
+    );
 
-  card.className="settings-card";
+
+  card.className=
+    "settings-card";
+
 
   card.innerHTML=`
 
-    <h2>🎀 搭配限制</h2>
+    <h2>
+      🎀 搭配限制
+    </h2>
+
 
     <div class="rules-box">
+
 
       <div class="rule-row">
 
@@ -2453,6 +3537,7 @@ function renderRules(container){
 
       </div>
 
+
       <div class="rule-row">
 
         <div class="rule-title">
@@ -2465,6 +3550,7 @@ function renderRules(container){
         ></div>
 
       </div>
+
 
       <div class="rule-row">
 
@@ -2479,6 +3565,7 @@ function renderRules(container){
 
       </div>
 
+
       <div class="rule-row">
 
         <div class="rule-title">
@@ -2492,19 +3579,28 @@ function renderRules(container){
 
       </div>
 
+
     </div>
+
 
     <p style="
       font-size:12px;
       color:#a78994;
       margin:12px 0 0;
     ">
-      💡 不勾选任何选项 = 不限制，可以随机抽取全部。
+
+      💡 不勾选任何选项 =
+      不限制，可以随机抽取全部。
+
     </p>
 
   `;
 
-  container.appendChild(card);
+
+  container.appendChild(
+    card
+  );
+
 
   renderRuleGroup(
     "rule_styleMain",
@@ -2513,6 +3609,7 @@ function renderRules(container){
     data.rules.styleMain
   );
 
+
   renderRuleGroup(
     "rule_styleButtons",
     data.styles,
@@ -2520,12 +3617,14 @@ function renderRules(container){
     data.rules.styleButtons
   );
 
+
   renderRuleGroup(
     "rule_styleCharms",
     data.styles,
     data.charms,
     data.rules.styleCharms
   );
+
 
   renderRuleGroup(
     "rule_mainSecondary",
@@ -2544,78 +3643,113 @@ function renderRuleGroup(
   ruleObject
 ){
 
-  const box=document.getElementById(
-    elementId
-  );
+  const box=
+    document.getElementById(
+      elementId
+    );
+
 
   box.innerHTML="";
 
-  parents.forEach(parent=>{
 
-    const group=document.createElement("div");
+  parents.forEach(
+    parent=>{
 
-    group.style.width="100%";
-    group.style.marginBottom="8px";
+      const group=
+        document.createElement(
+          "div"
+        );
 
-    const current=
-      ruleObject[parent.id]||[];
 
-    let html=`
+      group.style.width=
+        "100%";
 
-      <div style="
-        font-size:12px;
-        color:#a56d7e;
-        margin-bottom:5px;
-      ">
-        ${escapeHTML(parent.name)}
-      </div>
+      group.style.marginBottom=
+        "8px";
 
-      <div style="
-        display:flex;
-        flex-wrap:wrap;
-        gap:5px;
-      ">
 
-    `;
+      const current=
+        ruleObject[parent.id]||[];
 
-    children.forEach(child=>{
 
-      const checked=current.includes(
-        child.id
-      );
+      let html=`
 
-      html+=`
+        <div style="
+          font-size:12px;
+          color:#a56d7e;
+          margin-bottom:5px;
+        ">
 
-        <label class="rule-option">
+          ${escapeHTML(
+            parent.name
+          )}
 
-          <input
-            type="checkbox"
-            ${checked?"checked":""}
-            onchange="
-              toggleRule(
-                '${elementId}',
-                '${parent.id}',
-                '${child.id}',
-                this.checked
-              )
-            "
-          >
+        </div>
 
-          ${escapeHTML(child.name)}
 
-        </label>
+        <div style="
+          display:flex;
+          flex-wrap:wrap;
+          gap:5px;
+        ">
 
       `;
 
-    });
 
-    html+=`</div>`;
+      children.forEach(
+        child=>{
 
-    group.innerHTML=html;
+          const checked=
+            current.includes(
+              child.id
+            );
 
-    box.appendChild(group);
 
-  });
+          html+=`
+
+            <label
+              class="rule-option"
+            >
+
+              <input
+                type="checkbox"
+                ${checked?"checked":""}
+
+                onchange="
+                  toggleRule(
+                    '${elementId}',
+                    '${parent.id}',
+                    '${child.id}',
+                    this.checked
+                  )
+                "
+              >
+
+              ${escapeHTML(
+                child.name
+              )}
+
+            </label>
+
+          `;
+
+        }
+      );
+
+
+      html+=`</div>`;
+
+
+      group.innerHTML=
+        html;
+
+
+      box.appendChild(
+        group
+      );
+
+    }
+  );
 
 }
 
@@ -2629,47 +3763,85 @@ function toggleRule(
 
   let ruleName="";
 
-  if(elementId==="rule_styleMain"){
+
+  if(
+    elementId==="rule_styleMain"
+  ){
+
     ruleName="styleMain";
+
   }
 
-  if(elementId==="rule_styleButtons"){
+
+  if(
+    elementId==="rule_styleButtons"
+  ){
+
     ruleName="styleButtons";
+
   }
 
-  if(elementId==="rule_styleCharms"){
+
+  if(
+    elementId==="rule_styleCharms"
+  ){
+
     ruleName="styleCharms";
+
   }
 
-  if(elementId==="rule_mainSecondary"){
+
+  if(
+    elementId==="rule_mainSecondary"
+  ){
+
     ruleName="mainSecondary";
+
   }
+
 
   if(!ruleName){
+
     return;
+
   }
 
-  if(!data.rules[ruleName][parentId]){
+
+  if(
+    !data.rules[ruleName][parentId]
+  ){
+
     data.rules[ruleName][parentId]=[];
+
   }
 
-  let arr=data.rules[ruleName][parentId];
+
+  let arr=
+    data.rules[ruleName][parentId];
+
 
   if(checked){
 
-    if(!arr.includes(childId)){
+    if(
+      !arr.includes(childId)
+    ){
+
       arr.push(childId);
+
     }
 
   }else{
 
-    arr=arr.filter(
-      x=>x!==childId
-    );
+    arr=
+      arr.filter(
+        x=>x!==childId
+      );
 
-    data.rules[ruleName][parentId]=arr;
+    data.rules[ruleName][parentId]=
+      arr;
 
   }
+
 
   saveData();
 
@@ -2682,15 +3854,24 @@ HISTORY
 
 function renderHistory(){
 
-  const container=document.getElementById(
-    "historyContent"
-  );
+  const container=
+    document.getElementById(
+      "historyContent"
+    );
+
 
   container.innerHTML="";
 
-  const card=document.createElement("div");
 
-  card.className="history-card";
+  const card=
+    document.createElement(
+      "div"
+    );
+
+
+  card.className=
+    "history-card";
+
 
   card.innerHTML=`
 
@@ -2699,6 +3880,7 @@ function renderHistory(){
       <div class="history-title">
         📖 抽取历史记录
       </div>
+
 
       ${
         data.history.length
@@ -2717,112 +3899,166 @@ function renderHistory(){
 
     </div>
 
+
     <div id="historyList"></div>
 
   `;
 
-  container.appendChild(card);
 
-  const list=document.getElementById(
-    "historyList"
+  container.appendChild(
+    card
   );
+
+
+  const list=
+    document.getElementById(
+      "historyList"
+    );
+
 
   if(!data.history.length){
 
     list.innerHTML=`
+
       <div class="empty">
+
         还没有抽取记录 💗
+
       </div>
+
     `;
 
     return;
+
   }
 
-  data.history.forEach(record=>{
 
-    const item=document.createElement("div");
+  data.history.forEach(
+    record=>{
 
-    item.className="history-item";
+      const item=
+        document.createElement(
+          "div"
+        );
 
-    const result=record.result;
 
-    item.innerHTML=`
+      item.className=
+        "history-item";
 
-      <div class="history-head">
 
-        <div class="history-order">
-          📦 ${escapeHTML(record.order)}
+      const result=
+        record.result;
+
+
+      item.innerHTML=`
+
+        <div class="history-head">
+
+          <div class="history-order">
+
+            📦
+            ${escapeHTML(
+              record.order
+            )}
+
+          </div>
+
+
+          <div class="history-time">
+
+            ${escapeHTML(
+              record.time
+            )}
+
+          </div>
+
         </div>
 
-        <div class="history-time">
-          ${escapeHTML(record.time)}
+
+        <div class="history-results">
+
+
+          ${historyResult(
+            "款式",
+            result.style
+          )}
+
+
+          ${historyResult(
+            "主色",
+            result.mainColor
+          )}
+
+
+          ${historyResult(
+            "配色",
+            result.secondaryColor
+          )}
+
+
+          ${historyResult(
+            "主扣",
+            result.mainButton
+          )}
+
+
+          ${historyResult(
+            "副扣",
+            result.subButton
+          )}
+
+
+          ${historyResult(
+            "吊饰",
+            result.charm
+          )}
+
+
         </div>
 
-      </div>
 
-      <div class="history-results">
+        <button
+          class="history-delete"
 
-        ${historyResult(
-          "款式",
-          result.style
-        )}
+          onclick="
+            deleteHistory(
+              '${record.id}'
+            )
+          "
+        >
 
-        ${historyResult(
-          "主色",
-          result.mainColor
-        )}
+          删除这条记录
 
-        ${historyResult(
-          "配色",
-          result.secondaryColor
-        )}
+        </button>
 
-        ${historyResult(
-          "主扣",
-          result.mainButton
-        )}
+      `;
 
-        ${historyResult(
-          "副扣",
-          result.subButton
-        )}
 
-        ${historyResult(
-          "吊饰",
-          result.charm
-        )}
+      list.appendChild(
+        item
+      );
 
-      </div>
-
-      <button
-        class="history-delete"
-        onclick="
-          deleteHistory(
-            '${record.id}'
-          )
-        "
-      >
-        删除这条记录
-      </button>
-
-    `;
-
-    list.appendChild(item);
-
-  });
+    }
+  );
 
 }
 
 
-function historyResult(label,item){
+function historyResult(
+  label,
+  item
+){
 
   return `
 
     <div class="history-result">
 
       <div class="history-label">
+
         ${label}
+
       </div>
+
 
       ${
         item.image
@@ -2830,6 +4066,7 @@ function historyResult(label,item){
         `
         <img
           src="${item.image}"
+
           style="
             width:42px;
             height:42px;
@@ -2844,7 +4081,10 @@ function historyResult(label,item){
         ""
       }
 
-      ${escapeHTML(item.name)}
+
+      ${escapeHTML(
+        item.name
+      )}
 
     </div>
 
@@ -2855,9 +4095,11 @@ function historyResult(label,item){
 
 function deleteHistory(id){
 
-  data.history=data.history.filter(
-    x=>x.id!==id
-  );
+  data.history=
+    data.history.filter(
+      x=>x.id!==id
+    );
+
 
   saveData();
 
@@ -2869,16 +4111,23 @@ function deleteHistory(id){
 function clearHistory(){
 
   if(!data.history.length){
+
     return;
+
   }
+
 
   if(!confirm(
     "确定要清空全部历史记录吗？"
   )){
+
     return;
+
   }
 
+
   data.history=[];
+
 
   saveData();
 
