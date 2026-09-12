@@ -1,3337 +1,2606 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>Krystal 的毛线老虎机</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krystal 研究室的老虎机</title>
 
 <style>
-
-/* =========================
-   基础
-========================= */
-
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
 }
 
-body {
-
-  margin: 0;
-
+body{
+  margin:0;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "PingFang SC",
     "Microsoft YaHei",
-    Arial,
     sans-serif;
-
-  background:
-    radial-gradient(
-      circle at 15% 15%,
-      #ffe5ef 0,
-      transparent 25%
-    ),
-    radial-gradient(
-      circle at 85% 10%,
-      #fff1c9 0,
-      transparent 25%
-    ),
-    #fff8fb;
-
-  color: #875d70;
-
+  background:#fff8fb;
+  color:#684f59;
 }
 
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(255,248,251,.95);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid #f5dfe8;
+}
+
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:800;
+  color:#d9789c;
+}
+
+.nav-buttons{
+  display:flex;
+  gap:8px;
+}
+
+.nav-buttons button{
+  border:0;
+  border-radius:20px;
+  padding:9px 16px;
+  background:#fff;
+  color:#a9607c;
+  box-shadow:0 3px 12px rgba(190,120,150,.12);
+}
+
+.nav-buttons button.active{
+  background:#f39abb;
+  color:white;
+}
+
+.page{
+  display:none;
+  max-width:1200px;
+  margin:auto;
+  padding:25px 18px 50px;
+}
+
+.page.active{
+  display:block;
+}
+
+.hero{
+  text-align:center;
+  margin:10px 0 25px;
+}
+
+.hero h1{
+  margin:0 0 8px;
+  font-size:32px;
+  color:#d66f96;
+}
+
+.hero p{
+  margin:0;
+  color:#aa8795;
+}
+
+.controls{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:20px 0 25px;
+}
+
+.main-btn{
+  border:0;
+  padding:12px 24px;
+  border-radius:25px;
+  font-size:15px;
+  font-weight:700;
+  box-shadow:0 5px 15px rgba(200,120,150,.18);
+}
+
+.start-btn{
+  background:#f28fb4;
+  color:white;
+}
+
+.stop-all-btn{
+  background:#fff;
+  color:#d96e91;
+  border:1px solid #f0bfd0;
+}
+
+.reset-btn{
+  background:#fff;
+  color:#99727f;
+  border:1px solid #ead9df;
+}
 
 /* =========================
-   页面
+   六个老虎机
 ========================= */
 
-.page {
-
-  max-width: 1100px;
-
-  margin: auto;
-
-  padding:
-    30px 18px 60px;
-
+.slots-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:12px;
 }
 
+.slot-card{
+  background:#fff;
+  border:1px solid #f2dce5;
+  border-radius:22px;
+  padding:12px;
+  box-shadow:0 7px 20px rgba(200,130,155,.10);
+  min-width:0;
+}
+
+.slot-title{
+  text-align:center;
+  font-weight:800;
+  color:#a95f7c;
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+.reel-window{
+  height:150px;
+  overflow:hidden;
+  position:relative;
+  border-radius:16px;
+  background:#fff9fb;
+  border:2px solid #f5dbe5;
+}
+
+.reel-window:before,
+.reel-window:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:35px;
+  z-index:5;
+  pointer-events:none;
+}
+
+.reel-window:before{
+  top:0;
+  background:linear-gradient(to bottom,rgba(255,249,251,.95),transparent);
+}
+
+.reel-window:after{
+  bottom:0;
+  background:linear-gradient(to top,rgba(255,249,251,.95),transparent);
+}
+
+.reel{
+  position:absolute;
+  width:100%;
+  top:0;
+  left:0;
+  will-change:transform;
+}
+
+.reel-item{
+  height:150px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:10px;
+}
+
+.reel-item img{
+  width:82px;
+  height:82px;
+  object-fit:cover;
+  border-radius:18px;
+  border:3px solid white;
+  box-shadow:0 3px 10px rgba(150,100,120,.12);
+}
+
+.reel-item .item-name{
+  font-size:13px;
+  font-weight:700;
+  text-align:center;
+  word-break:break-word;
+}
+
+.stop-one{
+  width:100%;
+  margin-top:10px;
+  border:0;
+  border-radius:17px;
+  padding:8px 5px;
+  background:#fff0f5;
+  color:#cc6c8d;
+  font-size:13px;
+  font-weight:700;
+}
+
+.stop-one:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.slot-status{
+  text-align:center;
+  margin-top:6px;
+  min-height:18px;
+  font-size:11px;
+  color:#b797a3;
+}
 
 /* =========================
-   标题
+   最终结果
 ========================= */
 
-.header {
-
-  text-align: center;
-
-  margin-bottom: 25px;
-
+.final-result{
+  display:none;
+  margin:30px auto 0;
+  padding:20px;
+  background:#fff;
+  border:2px dashed #efb5ca;
+  border-radius:24px;
+  max-width:1000px;
 }
 
-.logo {
-
-  color: #d58aa5;
-
-  font-size: 13px;
-
-  letter-spacing: 3px;
-
-  margin-bottom: 8px;
-
+.final-result.show{
+  display:block;
 }
 
-h1 {
-
-  margin: 0;
-
-  color: #d46f97;
-
-  font-size: 32px;
-
+.final-result h2{
+  text-align:center;
+  color:#d66f96;
+  margin-top:0;
 }
 
-.subtitle {
-
-  margin-top: 10px;
-
-  color: #b795a4;
-
+.result-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:10px;
 }
 
-
-/* =========================
-   顶部按钮
-========================= */
-
-.top-buttons {
-
-  display: flex;
-
-  justify-content: center;
-
-  gap: 10px;
-
-  margin: 20px 0;
-
+.result-item{
+  text-align:center;
+  background:#fff8fb;
+  border-radius:15px;
+  padding:10px;
 }
 
-.top-buttons button {
-
-  border: none;
-
-  border-radius: 30px;
-
-  padding: 10px 18px;
-
-  cursor: pointer;
-
-  font-size: 14px;
-
-  background: #f5c2d4;
-
-  color: white;
-
+.result-item .label{
+  font-size:11px;
+  color:#b28b98;
 }
 
-.top-buttons button.active {
-
-  background: #dc82a5;
-
+.result-item .value{
+  margin-top:4px;
+  font-size:13px;
+  font-weight:800;
+  color:#8f5b70;
 }
-
-
-/* =========================
-   抽取页面
-========================= */
-
-#drawPage {
-
-  display: block;
-
-}
-
-
-/* 六个老虎机 */
-
-.slots {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(6, minmax(130px, 1fr));
-
-  gap: 12px;
-
-  overflow-x: auto;
-
-  padding: 10px 3px 20px;
-
-}
-
-
-/* 单个老虎机 */
-
-.slot {
-
-  min-width: 130px;
-
-  background: white;
-
-  border: 3px solid #f1b2c9;
-
-  border-radius: 25px;
-
-  padding: 12px;
-
-  box-shadow:
-    0 8px 20px
-    rgba(210,110,150,0.12);
-
-}
-
-
-/* 标题 */
-
-.slot-title {
-
-  text-align: center;
-
-  font-size: 14px;
-
-  font-weight: bold;
-
-  color: #d37698;
-
-  margin-bottom: 10px;
-
-}
-
-
-/* 滚轮外框 */
-
-.reel-window {
-
-  height: 180px;
-
-  overflow: hidden;
-
-  border-radius: 18px;
-
-  border: 3px solid #f7d3df;
-
-  background: #fff8fb;
-
-  position: relative;
-
-}
-
-
-/* 中间中奖框 */
-
-.reel-window::after {
-
-  content: "";
-
-  position: absolute;
-
-  left: 4px;
-
-  right: 4px;
-
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  height: 70px;
-
-  border-top: 2px solid #ef9fba;
-
-  border-bottom: 2px solid #ef9fba;
-
-  background:
-    rgba(255,230,240,0.25);
-
-  pointer-events: none;
-
-}
-
-
-/* 真正移动的滚轮 */
-
-.reel {
-
-  position: absolute;
-
-  top: 0;
-
-  left: 0;
-
-  width: 100%;
-
-}
-
-
-/* 滚轮项目 */
-
-.reel-item {
-
-  height: 70px;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  padding: 5px;
-
-}
-
-
-/* 图片 */
-
-.reel-item img {
-
-  width: 58px;
-
-  height: 58px;
-
-  object-fit: cover;
-
-  border-radius: 14px;
-
-  border: 2px solid #f3cad8;
-
-}
-
-
-/* 没有照片时 */
-
-.reel-placeholder {
-
-  width: 90%;
-
-  height: 55px;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  border-radius: 15px;
-
-  background: #fff0f6;
-
-  color: #d6819e;
-
-  font-size: 13px;
-
-  font-weight: bold;
-
-  text-align: center;
-
-}
-
-
-/* 抽取按钮 */
-
-.draw-main-button {
-
-  display: block;
-
-  margin: 25px auto;
-
-  border: none;
-
-  border-radius: 50px;
-
-  padding: 16px 45px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #f5aac4,
-      #dc7fa4
-    );
-
-  color: white;
-
-  font-size: 18px;
-
-  font-weight: bold;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 8px 18px
-    rgba(215,115,153,0.25);
-
-}
-
-.draw-main-button:disabled {
-
-  opacity: 0.6;
-
-}
-
-
-/* 最终结果 */
-
-.final-result {
-
-  background: white;
-
-  border: 3px solid #f4bfd2;
-
-  border-radius: 25px;
-
-  padding: 20px;
-
-  text-align: center;
-
-  margin-top: 20px;
-
-}
-
-.final-result h2 {
-
-  color: #d87599;
-
-  margin-top: 0;
-
-}
-
-.result-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(6, 1fr);
-
-  gap: 10px;
-
-}
-
-.result-item {
-
-  background: #fff5f9;
-
-  border-radius: 15px;
-
-  padding: 10px;
-
-}
-
-.result-item img {
-
-  width: 55px;
-
-  height: 55px;
-
-  object-fit: cover;
-
-  border-radius: 12px;
-
-}
-
 
 /* =========================
    设置页面
 ========================= */
 
-#settingsPage {
-
-  display: none;
-
+.settings-title{
+  text-align:center;
+  color:#d66f96;
+  margin-bottom:8px;
 }
 
-.settings-box {
-
-  background: white;
-
-  border-radius: 28px;
-
-  padding: 22px;
-
-  margin-bottom: 20px;
-
-  border: 3px solid #f3c1d2;
-
-  box-shadow:
-    0 8px 20px
-    rgba(210,110,150,0.08);
-
+.settings-desc{
+  text-align:center;
+  color:#aa8795;
+  margin-bottom:25px;
 }
 
-.settings-box h2 {
-
-  color: #d37498;
-
-  margin-top: 0;
-
+.settings-section{
+  background:#fff;
+  border:1px solid #f1dce5;
+  border-radius:22px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 5px 15px rgba(200,130,155,.07);
 }
 
-
-/* 项目 */
-
-.data-row {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 10px;
-
-  margin-bottom: 8px;
-
-  background: #fff7fa;
-
-  border-radius: 16px;
-
+.settings-section h2{
+  margin-top:0;
+  color:#a85e7c;
 }
 
-
-.data-row img {
-
-  width: 55px;
-
-  height: 55px;
-
-  object-fit: cover;
-
-  border-radius: 12px;
-
+.add-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:15px;
 }
 
-
-.data-name {
-
-  flex: 1;
-
-  font-weight: bold;
-
+.add-row input[type="text"]{
+  flex:1;
+  min-width:160px;
+  border:1px solid #ecd7df;
+  border-radius:15px;
+  padding:10px 13px;
+  outline:none;
 }
 
-
-.small-button {
-
-  border: none;
-
-  border-radius: 20px;
-
-  padding: 7px 12px;
-
-  cursor: pointer;
-
-  background: #f1aec4;
-
-  color: white;
-
+.upload-label{
+  background:#fff0f5;
+  color:#c96d8d;
+  border-radius:15px;
+  padding:10px 14px;
+  cursor:pointer;
 }
 
-
-.delete-button {
-
-  background: #e7a0a0;
-
+.upload-label input{
+  display:none;
 }
 
-
-/* 上传 */
-
-.upload-area {
-
-  border: 2px dashed #efb5c9;
-
-  border-radius: 18px;
-
-  padding: 15px;
-
-  margin-top: 15px;
-
-  background: #fffafd;
-
+.add-btn{
+  border:0;
+  border-radius:15px;
+  padding:10px 18px;
+  background:#f292b6;
+  color:white;
+  font-weight:700;
 }
 
-
-.upload-area input {
-
-  width: 100%;
-
-  margin-bottom: 10px;
-
+.manage-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:12px;
 }
 
-
-/* 限制设置 */
-
-.limit-section {
-
-  background: #fff6fa;
-
-  padding: 15px;
-
-  border-radius: 18px;
-
-  margin-top: 15px;
-
+.manage-card{
+  background:#fff8fb;
+  border-radius:18px;
+  padding:12px;
+  text-align:center;
+  border:1px solid #f2dce5;
 }
 
-
-.checkbox-list {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(auto-fill, minmax(140px, 1fr));
-
-  gap: 8px;
-
-  margin-top: 10px;
-
+.manage-card img{
+  width:90px;
+  height:90px;
+  object-fit:cover;
+  border-radius:15px;
+  display:block;
+  margin:0 auto 8px;
 }
 
-
-.checkbox-list label {
-
-  background: white;
-
-  padding: 8px;
-
-  border-radius: 12px;
-
-  font-size: 13px;
-
+.manage-card-name{
+  font-weight:700;
+  font-size:13px;
+  margin-bottom:8px;
 }
 
-
-select {
-
-  width: 100%;
-
-  padding: 10px;
-
-  border-radius: 12px;
-
-  border: 2px solid #f0c5d4;
-
-  background: white;
-
+.delete-btn{
+  border:0;
+  border-radius:12px;
+  padding:6px 12px;
+  background:#ffe4ec;
+  color:#c86b8c;
+  font-size:12px;
 }
 
+/* =========================
+   限制设置
+========================= */
 
-/* 手机 */
+.rule-select{
+  width:100%;
+  max-width:400px;
+  padding:11px;
+  border:1px solid #ead7df;
+  border-radius:15px;
+  background:white;
+  margin-bottom:15px;
+}
 
-@media (max-width: 700px) {
+.rule-box{
+  background:#fff8fb;
+  padding:15px;
+  border-radius:18px;
+  margin-bottom:15px;
+}
 
-  h1 {
+.rule-box h3{
+  margin-top:0;
+  color:#a85e7c;
+}
 
-    font-size: 27px;
+.checkbox-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+  gap:8px;
+}
 
+.check-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:8px;
+  border-radius:12px;
+  background:white;
+  border:1px solid #f0dfe5;
+  font-size:13px;
+}
+
+.save-rule-btn{
+  border:0;
+  background:#f292b6;
+  color:white;
+  padding:10px 18px;
+  border-radius:15px;
+  font-weight:700;
+}
+
+.clear-rule-btn{
+  border:0;
+  background:#fff;
+  border:1px solid #efd5df;
+  color:#a77989;
+  padding:10px 18px;
+  border-radius:15px;
+}
+
+/* =========================
+   提示
+========================= */
+
+.notice{
+  background:#fff3f7;
+  border-radius:15px;
+  padding:12px 15px;
+  color:#9d7180;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+/* =========================
+   响应式
+========================= */
+
+@media(max-width:900px){
+  .slots-grid{
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .slots {
-
-    grid-template-columns:
-      repeat(6, 135px);
-
+  .result-grid{
+    grid-template-columns:repeat(3,1fr);
   }
-
-  .result-grid {
-
-    grid-template-columns:
-      repeat(2, 1fr);
-
-  }
-
 }
 
+@media(max-width:600px){
+  .header-inner{
+    flex-direction:column;
+  }
+
+  .slots-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .result-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero h1{
+    font-size:25px;
+  }
+
+  .reel-window{
+    height:135px;
+  }
+
+  .reel-item{
+    height:135px;
+  }
+
+  .reel-item img{
+    width:65px;
+    height:65px;
+  }
+}
 </style>
-
 </head>
-
 
 <body>
 
+<header>
+  <div class="header-inner">
+    <div class="logo">🧶 Krystal 的毛线研究室</div>
 
-<div class="page">
+    <div class="nav-buttons">
+      <button id="drawNav" class="active" onclick="showPage('draw')">
+        🎰 开始抽取
+      </button>
+
+      <button id="settingsNav" onclick="showPage('settings')">
+        ⚙️ 页面设置
+      </button>
+    </div>
+  </div>
+</header>
 
 
 <!-- =========================
-     顶部
+     抽取页面
 ========================= -->
 
-<div class="header">
+<main id="drawPage" class="page active">
 
-  <div class="logo">
-    KRYSTAL'S YARN LAB
+  <div class="hero">
+    <h1>🎰 Krystal 研究室的老虎机</h1>
+    <p>抽一个属于你的甜甜配色吧 ♡</p>
   </div>
 
-  <h1>
-    🎀 毛线老虎机
-  </h1>
+  <div class="controls">
 
-  <div class="subtitle">
-    抽出今天的小幸运 ✨
-  </div>
+    <button class="main-btn start-btn" onclick="startAll()">
+      🎰 全部开始
+    </button>
 
-</div>
+    <button class="main-btn stop-all-btn" onclick="stopAll()">
+      🛑 全部停止
+    </button>
 
-
-<div class="top-buttons">
-
-  <button
-    id="drawTab"
-    class="active"
-    onclick="showDrawPage()"
-  >
-    🎰 开始抽取
-  </button>
-
-  <button
-    id="settingsTab"
-    onclick="showSettingsPage()"
-  >
-    ⚙️ 设置
-  </button>
-
-</div>
-
-
-<!-- ==================================================
-     抽取页面
-================================================== -->
-
-<div id="drawPage">
-
-
-  <div class="slots">
-
-
-    <!-- 1 款式 -->
-
-    <div class="slot">
-
-      <div class="slot-title">
-        ① 款式
-      </div>
-
-      <div class="reel-window">
-
-        <div
-          class="reel"
-          id="reel-style"
-        ></div>
-
-      </div>
-
-    </div>
-
-
-    <!-- 2 主色 -->
-
-    <div class="slot">
-
-      <div class="slot-title">
-        ② 线材主色
-      </div>
-
-      <div class="reel-window">
-
-        <div
-          class="reel"
-          id="reel-mainColor"
-        ></div>
-
-      </div>
-
-    </div>
-
-
-    <!-- 3 配色 -->
-
-    <div class="slot">
-
-      <div class="slot-title">
-        ③ 线材配色
-      </div>
-
-      <div class="reel-window">
-
-        <div
-          class="reel"
-          id="reel-secondaryColor"
-        ></div>
-
-      </div>
-
-    </div>
-
-
-    <!-- 4 扣子1 -->
-
-    <div class="slot">
-
-      <div class="slot-title">
-        ④ 扣子①
-      </div>
-
-      <div class="reel-window">
-
-        <div
-          class="reel"
-          id="reel-button1"
-        ></div>
-
-      </div>
-
-    </div>
-
-
-    <!-- 5 扣子2 -->
-
-    <div class="slot">
-
-      <div class="slot-title">
-        ⑤ 扣子②
-      </div>
-
-      <div class="reel-window">
-
-        <div
-          class="reel"
-          id="reel-button2"
-        ></div>
-
-      </div>
-
-    </div>
-
-
-    <!-- 6 吊饰 -->
-
-    <div class="slot">
-
-      <div class="slot-title">
-        ⑥ 小吊饰
-      </div>
-
-      <div class="reel-window">
-
-        <div
-          class="reel"
-          id="reel-charm"
-        ></div>
-
-      </div>
-
-    </div>
-
+    <button class="main-btn reset-btn" onclick="resetAll()">
+      🔄 重置
+    </button>
 
   </div>
 
+  <div class="slots-grid" id="slotsGrid"></div>
 
-  <button
-    class="draw-main-button"
-    id="drawButton"
-    onclick="startFullDraw()"
-  >
-    🎰 开始抽取
-  </button>
+  <div class="final-result" id="finalResult">
 
+    <h2>✨ 今日抽取结果 ✨</h2>
 
-  <div
-    class="final-result"
-    id="finalResult"
-    style="display:none"
-  >
-
-    <h2>
-      ✨ 今日幸运组合 ✨
-    </h2>
-
-    <div
-      class="result-grid"
-      id="resultGrid"
-    ></div>
+    <div class="result-grid" id="resultGrid"></div>
 
   </div>
 
+</main>
 
-</div>
 
-
-<!-- ==================================================
+<!-- =========================
      设置页面
-================================================== -->
+========================= -->
 
-<div id="settingsPage">
+<main id="settingsPage" class="page">
+
+  <h1 class="settings-title">⚙️ 页面设置</h1>
+
+  <p class="settings-desc">
+    所有材料、图片和搭配限制，都可以直接在这里管理
+  </p>
+
+  <div class="notice">
+    💡 这里的设置会自动保存在浏览器里。以后新增颜色、扣子、吊饰时，不需要修改代码。
+  </div>
 
 
-  <!-- =========================
-       款式
-  ========================= -->
+  <!-- 款式 -->
 
-  <div class="settings-box">
+  <section class="settings-section">
 
-    <h2>
-      👜 ① 款式管理
-    </h2>
+    <h2>👜 1. 款式管理</h2>
 
-    <div id="styleList"></div>
-
-    <div class="upload-area">
-
-      <strong>
-        添加新款式
-      </strong>
-
-      <br><br>
+    <div class="add-row">
 
       <input
         type="text"
-        id="newStyleName"
-        placeholder="例如：云朵包"
+        id="styleName"
+        placeholder="例如：小云朵包"
       >
 
-      <input
-        type="file"
-        id="newStyleImage"
-        accept="image/*"
-      >
+      <label class="upload-label">
+        📷 上传图片
+        <input
+          type="file"
+          id="styleImage"
+          accept="image/*"
+        >
+      </label>
 
-      <button
-        class="small-button"
-        onclick="addStyle()"
-      >
+      <button class="add-btn" onclick="addItem('styles')">
         ＋ 添加款式
       </button>
 
     </div>
 
-  </div>
+    <div class="manage-list" id="stylesList"></div>
+
+  </section>
 
 
-  <!-- =========================
-       主色
-  ========================= -->
+  <!-- 主色 -->
 
-  <div class="settings-box">
+  <section class="settings-section">
 
-    <h2>
-      🧶 ② 线材主色
-    </h2>
+    <h2>🎨 2. 线材主色</h2>
 
-    <div id="mainColorList"></div>
-
-    <div class="upload-area">
-
-      <strong>
-        添加主色
-      </strong>
-
-      <br><br>
+    <div class="add-row">
 
       <input
         type="text"
-        id="newMainColorName"
+        id="mainColorName"
         placeholder="例如：浅粉色"
       >
 
-      <input
-        type="file"
-        id="newMainColorImage"
-        accept="image/*"
-      >
+      <label class="upload-label">
+        📷 上传图片
+        <input
+          type="file"
+          id="mainColorImage"
+          accept="image/*"
+        >
+      </label>
 
-      <button
-        class="small-button"
-        onclick="addMainColor()"
-      >
+      <button class="add-btn" onclick="addItem('mainColors')">
         ＋ 添加主色
       </button>
 
     </div>
 
-  </div>
+    <div class="manage-list" id="mainColorsList"></div>
+
+  </section>
 
 
-  <!-- =========================
-       配色
-  ========================= -->
+  <!-- 配色 -->
 
-  <div class="settings-box">
+  <section class="settings-section">
 
-    <h2>
-      🎨 ③ 线材配色
-    </h2>
+    <h2>🌈 3. 线材配色</h2>
 
-    <div id="secondaryColorList"></div>
-
-    <div class="upload-area">
-
-      <strong>
-        添加配色
-      </strong>
-
-      <br><br>
+    <div class="add-row">
 
       <input
         type="text"
-        id="newSecondaryColorName"
+        id="secondaryColorName"
         placeholder="例如：米白色"
       >
 
-      <input
-        type="file"
-        id="newSecondaryColorImage"
-        accept="image/*"
-      >
+      <label class="upload-label">
+        📷 上传图片
+        <input
+          type="file"
+          id="secondaryColorImage"
+          accept="image/*"
+        >
+      </label>
 
-      <button
-        class="small-button"
-        onclick="addSecondaryColor()"
-      >
+      <button class="add-btn" onclick="addItem('secondaryColors')">
         ＋ 添加配色
       </button>
 
     </div>
 
-  </div>
+    <div class="manage-list" id="secondaryColorsList"></div>
+
+  </section>
 
 
-  <!-- =========================
-       扣子
-  ========================= -->
+  <!-- 扣子 -->
 
-  <div class="settings-box">
+  <section class="settings-section">
 
-    <h2>
-      🔘 ④⑤ 扣子
-    </h2>
+    <h2>🔘 4. 扣子</h2>
 
-    <div id="buttonList"></div>
-
-    <div class="upload-area">
-
-      <strong>
-        添加扣子
-      </strong>
-
-      <br><br>
+    <div class="add-row">
 
       <input
         type="text"
-        id="newButtonName"
-        placeholder="例如：白色圆扣"
+        id="buttonName"
+        placeholder="例如：草莓粉扣"
       >
 
-      <input
-        type="file"
-        id="newButtonImage"
-        accept="image/*"
-      >
+      <label class="upload-label">
+        📷 上传图片
+        <input
+          type="file"
+          id="buttonImage"
+          accept="image/*"
+        >
+      </label>
 
-      <button
-        class="small-button"
-        onclick="addButtonItem()"
-      >
+      <button class="add-btn" onclick="addItem('buttons')">
         ＋ 添加扣子
       </button>
 
     </div>
 
-  </div>
+    <div class="manage-list" id="buttonsList"></div>
+
+  </section>
 
 
-  <!-- =========================
-       吊饰
-  ========================= -->
+  <!-- 吊饰 -->
 
-  <div class="settings-box">
+  <section class="settings-section">
 
-    <h2>
-      🍓 ⑥ 小吊饰
-    </h2>
+    <h2>🍓 5. 小吊饰</h2>
 
-    <div id="charmList"></div>
-
-    <div class="upload-area">
-
-      <strong>
-        添加小吊饰
-      </strong>
-
-      <br><br>
+    <div class="add-row">
 
       <input
         type="text"
-        id="newCharmName"
-        placeholder="例如：苹果"
+        id="charmName"
+        placeholder="例如：草莓吊饰"
       >
 
-      <input
-        type="file"
-        id="newCharmImage"
-        accept="image/*"
-      >
+      <label class="upload-label">
+        📷 上传图片
+        <input
+          type="file"
+          id="charmImage"
+          accept="image/*"
+        >
+      </label>
 
-      <button
-        class="small-button"
-        onclick="addCharm()"
-      >
+      <button class="add-btn" onclick="addItem('charms')">
         ＋ 添加吊饰
       </button>
 
     </div>
 
-  </div>
+    <div class="manage-list" id="charmsList"></div>
+
+  </section>
 
 
-  <!-- =========================
-       搭配限制
-  ========================= -->
+  <!-- 款式限制 -->
 
-  <div class="settings-box">
+  <section class="settings-section">
 
-    <h2>
-      🔗 搭配限制
-    </h2>
+    <h2>🔗 6. 款式搭配限制</h2>
 
+    <p>选择一个款式，然后决定它允许出现什么。</p>
 
-    <div class="limit-section">
+    <select
+      id="styleRuleSelect"
+      class="rule-select"
+      onchange="loadStyleRule()"
+    >
+      <option value="">请选择款式</option>
+    </select>
 
-      <strong>
-        选择款式
-      </strong>
+    <div id="styleRuleArea"></div>
 
-      <select
-        id="limitStyleSelect"
-        onchange="renderLimits()"
-      ></select>
+  </section>
 
 
-      <h3>
-        主色允许出现：
-      </h3>
+  <!-- 主色限制 -->
 
-      <div
-        id="styleMainColorLimits"
-        class="checkbox-list"
-      ></div>
+  <section class="settings-section">
 
+    <h2>🎨 7. 主色 → 配色限制</h2>
 
-      <h3>
-        扣子①允许出现：
-      </h3>
+    <p>例如：金黄色只允许搭配米白、橘黄色。</p>
 
-      <div
-        id="styleButton1Limits"
-        class="checkbox-list"
-      ></div>
+    <select
+      id="colorRuleSelect"
+      class="rule-select"
+      onchange="loadColorRule()"
+    >
+      <option value="">请选择主色</option>
+    </select>
 
+    <div id="colorRuleArea"></div>
 
-      <h3>
-        扣子②允许出现：
-      </h3>
+  </section>
 
-      <div
-        id="styleButton2Limits"
-        class="checkbox-list"
-      ></div>
-
-
-      <h3>
-        吊饰允许出现：
-      </h3>
-
-      <div
-        id="styleCharmLimits"
-        class="checkbox-list"
-      ></div>
-
-    </div>
-
-
-    <div class="limit-section">
-
-      <strong>
-        选择主色
-      </strong>
-
-      <select
-        id="limitColorSelect"
-        onchange="renderColorLimits()"
-      ></select>
-
-
-      <h3>
-        这个主色允许搭配：
-      </h3>
-
-      <div
-        id="secondaryLimits"
-        class="checkbox-list"
-      ></div>
-
-    </div>
-
-  </div>
-
-
-</div>
-
-
-</div>
+</main>
 
 
 <script>
 
-/* ==================================================
-   数据
-================================================== */
+/* =====================================================
+   默认数据
+===================================================== */
 
-
-/*
-  第一次打开时使用这些示例资料。
-  以后全部可以在网页设置里面修改。
-*/
-
-let data = {
+const DEFAULT_DATA = {
 
   styles: [
-
     {
-      id: "style1",
-      name: "示例款式",
-      image: ""
+      id:"style_default_1",
+      name:"基础款",
+      image:""
     }
-
   ],
 
-
-  mainColors: [
-
-    {
-      id: "main1",
-      name: "酒红色",
-      image: ""
-    },
-
-    {
-      id: "main2",
-      name: "米白色",
-      image: ""
-    },
-
-    {
-      id: "main3",
-      name: "牛油果绿",
-      image: ""
-    },
-
-    {
-      id: "main4",
-      name: "浅灰色",
-      image: ""
-    },
-
-    {
-      id: "main5",
-      name: "金黄色",
-      image: ""
-    },
-
-    {
-      id: "main6",
-      name: "大红色",
-      image: ""
-    },
-
-    {
-      id: "main7",
-      name: "橘黄色",
-      image: ""
-    },
-
-    {
-      id: "main8",
-      name: "玫红色",
-      image: ""
-    },
-
-    {
-      id: "main9",
-      name: "深粉色",
-      image: ""
-    },
-
-    {
-      id: "main10",
-      name: "浅粉色",
-      image: ""
-    },
-
-    {
-      id: "main11",
-      name: "浅紫色",
-      image: ""
-    },
-
-    {
-      id: "main12",
-      name: "米黄色",
-      image: ""
-    }
-
+  mainColors:[
+    {id:"main_1",name:"酒红色",image:""},
+    {id:"main_2",name:"米白色",image:""},
+    {id:"main_3",name:"牛油果绿",image:""},
+    {id:"main_4",name:"浅灰色",image:""},
+    {id:"main_5",name:"金黄色",image:""},
+    {id:"main_6",name:"大红色",image:""},
+    {id:"main_7",name:"橘黄色",image:""},
+    {id:"main_8",name:"玫红色",image:""},
+    {id:"main_9",name:"深粉色",image:""},
+    {id:"main_10",name:"浅粉色",image:""},
+    {id:"main_11",name:"浅紫色",image:""},
+    {id:"main_12",name:"米黄色",image:""}
   ],
 
+  secondaryColors:[
+    {id:"secondary_1",name:"米白色",image:""},
+    {id:"secondary_2",name:"浅粉色",image:""},
+    {id:"secondary_3",name:"米黄色",image:""},
+    {id:"secondary_4",name:"浅紫色",image:""},
+    {id:"secondary_5",name:"橘黄色",image:""},
+    {id:"secondary_6",name:"浅灰色",image:""}
+  ],
 
-  secondaryColors: [],
+  buttons:[
+    {id:"button_1",name:"红色",image:""},
+    {id:"button_2",name:"白色",image:""},
+    {id:"button_3",name:"紫色",image:""},
+    {id:"button_4",name:"黄色",image:""},
+    {id:"button_5",name:"橘色",image:""},
+    {id:"button_6",name:"棕色",image:""}
+  ],
 
+  charms:[
+    {id:"charm_1",name:"草莓",image:""},
+    {id:"charm_2",name:"爱心",image:""},
+    {id:"charm_3",name:"蝴蝶结",image:""},
+    {id:"charm_4",name:"小花",image:""}
+  ],
 
-  buttons: [],
-
-
-  charms: [],
-
-
-  /*
-    款式限制
-  */
-
-  styleRules: {},
-
-
-  /*
-    主色 → 配色限制
-  */
-
-  colorRules: {}
+  styleRules:{},
+  colorRules:{}
 
 };
 
 
-/* ==================================================
-   保存 / 读取
-================================================== */
+/* =====================================================
+   数据读取 / 保存
+===================================================== */
 
-function saveData() {
+function loadData(){
+
+  const saved = localStorage.getItem("krystalSlotData");
+
+  if(!saved){
+
+    localStorage.setItem(
+      "krystalSlotData",
+      JSON.stringify(DEFAULT_DATA)
+    );
+
+    return JSON.parse(JSON.stringify(DEFAULT_DATA));
+  }
+
+  try{
+
+    const data = JSON.parse(saved);
+
+    return {
+      styles:data.styles || [],
+      mainColors:data.mainColors || [],
+      secondaryColors:data.secondaryColors || [],
+      buttons:data.buttons || [],
+      charms:data.charms || [],
+      styleRules:data.styleRules || {},
+      colorRules:data.colorRules || {}
+    };
+
+  }catch(e){
+
+    return JSON.parse(JSON.stringify(DEFAULT_DATA));
+
+  }
+}
+
+
+let data = loadData();
+
+
+function saveData(){
 
   localStorage.setItem(
-    "krystalSlotMachineData",
+    "krystalSlotData",
     JSON.stringify(data)
   );
 
 }
 
 
-function loadData() {
-
-  const saved =
-    localStorage.getItem(
-      "krystalSlotMachineData"
-    );
-
-
-  if (saved) {
-
-    try {
-
-      data = JSON.parse(saved);
-
-    }
-
-    catch (error) {
-
-      console.log(
-        "读取资料失败，使用默认资料"
-      );
-
-    }
-
-  }
-
-}
-
-
-loadData();
-
-
-/* ==================================================
-   ID
-================================================== */
-
-function createId(prefix) {
-
-  return (
-    prefix +
-    Date.now() +
-    Math.random()
-      .toString(36)
-      .substring(2, 7)
-  );
-
-}
-
-
-/* ==================================================
-   图片转本地资料
-================================================== */
-
-function readImage(file) {
-
-  return new Promise(
-    function(resolve) {
-
-      if (!file) {
-
-        resolve("");
-
-        return;
-
-      }
-
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        function(event) {
-
-          resolve(
-            event.target.result
-          );
-
-        };
-
-
-      reader.readAsDataURL(file);
-
-    }
-  );
-
-}
-
-
-/* ==================================================
+/* =====================================================
    页面切换
-================================================== */
+===================================================== */
 
-function showDrawPage() {
-
-  document
-    .getElementById("drawPage")
-    .style.display = "block";
+function showPage(page){
 
   document
-    .getElementById("settingsPage")
-    .style.display = "none";
-
-
-  document
-    .getElementById("drawTab")
-    .classList.add("active");
+    .querySelectorAll(".page")
+    .forEach(p => p.classList.remove("active"));
 
   document
-    .getElementById("settingsTab")
-    .classList.remove("active");
+    .querySelectorAll(".nav-buttons button")
+    .forEach(b => b.classList.remove("active"));
 
+  if(page === "draw"){
 
-  refreshDrawPage();
-
-}
-
-
-function showSettingsPage() {
-
-  document
-    .getElementById("drawPage")
-    .style.display = "none";
-
-  document
-    .getElementById("settingsPage")
-    .style.display = "block";
-
-
-  document
-    .getElementById("settingsTab")
-    .classList.add("active");
-
-  document
-    .getElementById("drawTab")
-    .classList.remove("active");
-
-
-  renderSettings();
-
-}
-
-
-/* ==================================================
-   设置页面
-================================================== */
-
-function renderSettings() {
-
-  renderStyles();
-
-  renderMainColors();
-
-  renderSecondaryColors();
-
-  renderButtons();
-
-  renderCharms();
-
-  renderLimitSelectors();
-
-  renderLimits();
-
-  renderColorLimits();
-
-}
-
-
-/* ==================================================
-   款式
-================================================== */
-
-function renderStyles() {
-
-  const box =
-    document.getElementById(
-      "styleList"
-    );
-
-
-  box.innerHTML = "";
-
-
-  data.styles.forEach(
-    function(item) {
-
-      box.innerHTML += `
-
-        <div class="data-row">
-
-          ${
-            item.image
-            ?
-            `<img src="${item.image}">`
-            :
-            `<div class="reel-placeholder">
-              暂无照片
-            </div>`
-          }
-
-          <div class="data-name">
-            ${item.name}
-          </div>
-
-          <button
-            class="small-button delete-button"
-            onclick="deleteItem('styles','${item.id}')"
-          >
-            删除
-          </button>
-
-        </div>
-
-      `;
-
-    }
-  );
-
-}
-
-
-async function addStyle() {
-
-  const name =
     document
-      .getElementById("newStyleName")
-      .value
-      .trim();
+      .getElementById("drawPage")
+      .classList.add("active");
 
-
-  const file =
     document
-      .getElementById("newStyleImage")
-      .files[0];
+      .getElementById("drawNav")
+      .classList.add("active");
 
+  }else{
 
-  if (!name) {
+    document
+      .getElementById("settingsPage")
+      .classList.add("active");
 
-    alert("请输入款式名称");
+    document
+      .getElementById("settingsNav")
+      .classList.add("active");
 
-    return;
+    renderSettings();
 
   }
 
-
-  const image =
-    await readImage(file);
+}
 
 
-  data.styles.push({
+/* =====================================================
+   图片读取
+===================================================== */
 
-    id: createId("style"),
+function getFile(inputId){
 
-    name: name,
+  const input = document.getElementById(inputId);
 
-    image: image
+  if(!input || !input.files || !input.files[0]){
+    return Promise.resolve("");
+  }
+
+  return new Promise(resolve => {
+
+    const reader = new FileReader();
+
+    reader.onload = e => resolve(e.target.result);
+
+    reader.readAsDataURL(input.files[0]);
 
   });
 
-
-  saveData();
-
-
-  document
-    .getElementById("newStyleName")
-    .value = "";
-
-
-  document
-    .getElementById("newStyleImage")
-    .value = "";
-
-
-  renderSettings();
-
 }
 
 
-/* ==================================================
-   主色
-================================================== */
+/* =====================================================
+   新增项目
+===================================================== */
 
-function renderMainColors() {
+async function addItem(type){
 
-  const box =
-    document.getElementById(
-      "mainColorList"
-    );
+  const config = {
 
+    styles:{
+      name:"styleName",
+      image:"styleImage"
+    },
 
-  box.innerHTML = "";
+    mainColors:{
+      name:"mainColorName",
+      image:"mainColorImage"
+    },
 
+    secondaryColors:{
+      name:"secondaryColorName",
+      image:"secondaryColorImage"
+    },
 
-  data.mainColors.forEach(
-    function(item) {
+    buttons:{
+      name:"buttonName",
+      image:"buttonImage"
+    },
 
-      box.innerHTML += `
-
-        <div class="data-row">
-
-          ${
-            item.image
-            ?
-            `<img src="${item.image}">`
-            :
-            `<div class="reel-placeholder">
-              ${item.name}
-            </div>`
-          }
-
-          <div class="data-name">
-            ${item.name}
-          </div>
-
-          <button
-            class="small-button delete-button"
-            onclick="deleteItem('mainColors','${item.id}')"
-          >
-            删除
-          </button>
-
-        </div>
-
-      `;
-
+    charms:{
+      name:"charmName",
+      image:"charmImage"
     }
-  );
 
-}
+  };
 
-
-async function addMainColor() {
+  const c = config[type];
 
   const name =
-    document
-      .getElementById(
-        "newMainColorName"
-      )
-      .value
-      .trim();
+    document.getElementById(c.name).value.trim();
 
+  if(!name){
 
-  const file =
-    document
-      .getElementById(
-        "newMainColorImage"
-      )
-      .files[0];
-
-
-  if (!name) {
-
-    alert("请输入颜色名称");
+    alert("请先输入名称 ♡");
 
     return;
 
   }
 
-
   const image =
-    await readImage(file);
+    await getFile(c.image);
 
+  data[type].push({
 
-  data.mainColors.push({
+    id:
+      type +
+      "_" +
+      Date.now(),
 
-    id: createId("main"),
+    name:name,
 
-    name: name,
-
-    image: image
+    image:image
 
   });
 
-
   saveData();
 
+  document.getElementById(c.name).value = "";
 
-  document
-    .getElementById(
-      "newMainColorName"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "newMainColorImage"
-    )
-    .value = "";
-
+  document.getElementById(c.image).value = "";
 
   renderSettings();
 
-}
-
-
-/* ==================================================
-   配色
-================================================== */
-
-function renderSecondaryColors() {
-
-  const box =
-    document.getElementById(
-      "secondaryColorList"
-    );
-
-
-  box.innerHTML = "";
-
-
-  data.secondaryColors.forEach(
-    function(item) {
-
-      box.innerHTML += `
-
-        <div class="data-row">
-
-          ${
-            item.image
-            ?
-            `<img src="${item.image}">`
-            :
-            `<div class="reel-placeholder">
-              ${item.name}
-            </div>`
-          }
-
-          <div class="data-name">
-            ${item.name}
-          </div>
-
-          <button
-            class="small-button delete-button"
-            onclick="deleteItem('secondaryColors','${item.id}')"
-          >
-            删除
-          </button>
-
-        </div>
-
-      `;
-
-    }
-  );
+  buildSlots();
 
 }
 
 
-async function addSecondaryColor() {
+/* =====================================================
+   删除项目
+===================================================== */
 
-  const name =
-    document
-      .getElementById(
-        "newSecondaryColorName"
-      )
-      .value
-      .trim();
+function deleteItem(type,id){
 
-
-  const file =
-    document
-      .getElementById(
-        "newSecondaryColorImage"
-      )
-      .files[0];
-
-
-  if (!name) {
-
-    alert("请输入配色名称");
-
+  if(!confirm("确定要删除这个项目吗？")){
     return;
-
   }
 
-
-  const image =
-    await readImage(file);
-
-
-  data.secondaryColors.push({
-
-    id: createId("secondary"),
-
-    name: name,
-
-    image: image
-
-  });
-
-
-  saveData();
-
-
-  document
-    .getElementById(
-      "newSecondaryColorName"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "newSecondaryColorImage"
-    )
-    .value = "";
-
-
-  renderSettings();
-
-}
-
-
-/* ==================================================
-   扣子
-================================================== */
-
-function renderButtons() {
-
-  const box =
-    document.getElementById(
-      "buttonList"
-    );
-
-
-  box.innerHTML = "";
-
-
-  data.buttons.forEach(
-    function(item) {
-
-      box.innerHTML += `
-
-        <div class="data-row">
-
-          ${
-            item.image
-            ?
-            `<img src="${item.image}">`
-            :
-            `<div class="reel-placeholder">
-              ${item.name}
-            </div>`
-          }
-
-          <div class="data-name">
-            ${item.name}
-          </div>
-
-          <button
-            class="small-button delete-button"
-            onclick="deleteItem('buttons','${item.id}')"
-          >
-            删除
-          </button>
-
-        </div>
-
-      `;
-
-    }
-  );
-
-}
-
-
-async function addButtonItem() {
-
-  const name =
-    document
-      .getElementById(
-        "newButtonName"
-      )
-      .value
-      .trim();
-
-
-  const file =
-    document
-      .getElementById(
-        "newButtonImage"
-      )
-      .files[0];
-
-
-  if (!name) {
-
-    alert("请输入扣子名称");
-
-    return;
-
-  }
-
-
-  const image =
-    await readImage(file);
-
-
-  data.buttons.push({
-
-    id: createId("button"),
-
-    name: name,
-
-    image: image
-
-  });
-
-
-  saveData();
-
-
-  document
-    .getElementById(
-      "newButtonName"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "newButtonImage"
-    )
-    .value = "";
-
-
-  renderSettings();
-
-}
-
-
-/* ==================================================
-   吊饰
-================================================== */
-
-function renderCharms() {
-
-  const box =
-    document.getElementById(
-      "charmList"
-    );
-
-
-  box.innerHTML = "";
-
-
-  data.charms.forEach(
-    function(item) {
-
-      box.innerHTML += `
-
-        <div class="data-row">
-
-          ${
-            item.image
-            ?
-            `<img src="${item.image}">`
-            :
-            `<div class="reel-placeholder">
-              ${item.name}
-            </div>`
-          }
-
-          <div class="data-name">
-            ${item.name}
-          </div>
-
-          <button
-            class="small-button delete-button"
-            onclick="deleteItem('charms','${item.id}')"
-          >
-            删除
-          </button>
-
-        </div>
-
-      `;
-
-    }
-  );
-
-}
-
-
-async function addCharm() {
-
-  const name =
-    document
-      .getElementById(
-        "newCharmName"
-      )
-      .value
-      .trim();
-
-
-  const file =
-    document
-      .getElementById(
-        "newCharmImage"
-      )
-      .files[0];
-
-
-  if (!name) {
-
-    alert("请输入吊饰名称");
-
-    return;
-
-  }
-
-
-  const image =
-    await readImage(file);
-
-
-  data.charms.push({
-
-    id: createId("charm"),
-
-    name: name,
-
-    image: image
-
-  });
-
-
-  saveData();
-
-
-  document
-    .getElementById(
-      "newCharmName"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "newCharmImage"
-    )
-    .value = "";
-
-
-  renderSettings();
-
-}
-
-
-/* ==================================================
-   删除
-================================================== */
-
-function deleteItem(
-  category,
-  id
-) {
-
-  if (
-    !confirm("确定要删除这个项目吗？")
-  ) {
-
-    return;
-
-  }
-
-
-  data[category] =
-    data[category].filter(
-      function(item) {
-
-        return item.id !== id;
-
-      }
-    );
-
+  data[type] =
+    data[type].filter(item => item.id !== id);
 
   saveData();
 
   renderSettings();
 
-}
-
-
-/* ==================================================
-   限制设置
-================================================== */
-
-function renderLimitSelectors() {
-
-  const styleSelect =
-    document.getElementById(
-      "limitStyleSelect"
-    );
-
-
-  styleSelect.innerHTML = "";
-
-
-  data.styles.forEach(
-    function(style) {
-
-      styleSelect.innerHTML += `
-
-        <option value="${style.id}">
-          ${style.name}
-        </option>
-
-      `;
-
-    }
-  );
-
-
-  const colorSelect =
-    document.getElementById(
-      "limitColorSelect"
-    );
-
-
-  colorSelect.innerHTML = "";
-
-
-  data.mainColors.forEach(
-    function(color) {
-
-      colorSelect.innerHTML += `
-
-        <option value="${color.id}">
-          ${color.name}
-        </option>
-
-      `;
-
-    }
-  );
+  buildSlots();
 
 }
 
 
-/* ==================================================
-   创建 checkbox
-================================================== */
+/* =====================================================
+   设置页面渲染
+===================================================== */
 
-function createCheckboxList(
-  container,
-  items,
-  selected,
-  callback
-) {
+function renderSettings(){
+
+  renderManageList(
+    "styles",
+    "stylesList"
+  );
+
+  renderManageList(
+    "mainColors",
+    "mainColorsList"
+  );
+
+  renderManageList(
+    "secondaryColors",
+    "secondaryColorsList"
+  );
+
+  renderManageList(
+    "buttons",
+    "buttonsList"
+  );
+
+  renderManageList(
+    "charms",
+    "charmsList"
+  );
+
+  renderStyleRuleSelect();
+
+  renderColorRuleSelect();
+
+}
+
+
+/* =====================================================
+   管理卡片
+===================================================== */
+
+function renderManageList(type,elementId){
+
+  const container =
+    document.getElementById(elementId);
 
   container.innerHTML = "";
 
+  data[type].forEach(item => {
 
-  items.forEach(
-    function(item) {
+    const card =
+      document.createElement("div");
 
-      const checked =
-        selected.includes(item.id)
+    card.className = "manage-card";
+
+    card.innerHTML = `
+
+      ${
+        item.image
         ?
-        "checked"
+        `<img src="${item.image}">`
         :
-        "";
+        `<div style="
+          width:90px;
+          height:90px;
+          margin:0 auto 8px;
+          border-radius:15px;
+          background:#ffeef4;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          font-size:30px;
+        ">🧶</div>`
+      }
+
+      <div class="manage-card-name">
+        ${escapeHtml(item.name)}
+      </div>
+
+      <button
+        class="delete-btn"
+        onclick="deleteItem('${type}','${item.id}')"
+      >
+        删除
+      </button>
+
+    `;
+
+    container.appendChild(card);
+
+  });
+
+}
 
 
-      container.innerHTML += `
+/* =====================================================
+   HTML 安全处理
+===================================================== */
 
-        <label>
+function escapeHtml(text){
 
-          <input
-            type="checkbox"
-            value="${item.id}"
-            ${checked}
-            onchange="${callback}(this)"
-          >
+  return text
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
-          ${item.name}
+}
 
-        </label>
+
+/* =====================================================
+   款式规则
+===================================================== */
+
+function renderStyleRuleSelect(){
+
+  const select =
+    document.getElementById("styleRuleSelect");
+
+  const old =
+    select.value;
+
+  select.innerHTML =
+    `<option value="">请选择款式</option>`;
+
+  data.styles.forEach(style => {
+
+    const option =
+      document.createElement("option");
+
+    option.value = style.id;
+
+    option.textContent = style.name;
+
+    select.appendChild(option);
+
+  });
+
+  if(data.styles.some(x => x.id === old)){
+    select.value = old;
+  }
+
+}
+
+
+function loadStyleRule(){
+
+  const styleId =
+    document.getElementById("styleRuleSelect").value;
+
+  const area =
+    document.getElementById("styleRuleArea");
+
+  area.innerHTML = "";
+
+  if(!styleId){
+    return;
+  }
+
+  const rule =
+    data.styleRules[styleId] || {};
+
+  area.innerHTML = `
+
+    <div class="rule-box">
+
+      <h3>🎨 允许的主色</h3>
+
+      <div class="checkbox-grid">
+
+        ${
+          data.mainColors.map(item => `
+
+            <label class="check-item">
+
+              <input
+                type="checkbox"
+                value="${item.id}"
+                class="style-main-check"
+                ${
+                  rule.mainColors === undefined ||
+                  rule.mainColors.includes(item.id)
+                  ? "checked"
+                  : ""
+                }
+              >
+
+              ${escapeHtml(item.name)}
+
+            </label>
+
+          `).join("")
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="rule-box">
+
+      <h3>🔘 允许的扣子</h3>
+
+      <div class="checkbox-grid">
+
+        ${
+          data.buttons.map(item => `
+
+            <label class="check-item">
+
+              <input
+                type="checkbox"
+                value="${item.id}"
+                class="style-button-check"
+                ${
+                  rule.buttons === undefined ||
+                  rule.buttons.includes(item.id)
+                  ? "checked"
+                  : ""
+                }
+              >
+
+              ${escapeHtml(item.name)}
+
+            </label>
+
+          `).join("")
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="rule-box">
+
+      <h3>🍓 允许的吊饰</h3>
+
+      <div class="checkbox-grid">
+
+        ${
+          data.charms.map(item => `
+
+            <label class="check-item">
+
+              <input
+                type="checkbox"
+                value="${item.id}"
+                class="style-charm-check"
+                ${
+                  rule.charms === undefined ||
+                  rule.charms.includes(item.id)
+                  ? "checked"
+                  : ""
+                }
+              >
+
+              ${escapeHtml(item.name)}
+
+            </label>
+
+          `).join("")
+        }
+
+      </div>
+
+    </div>
+
+    <button
+      class="save-rule-btn"
+      onclick="saveStyleRule()"
+    >
+      💾 保存这个款式的限制
+    </button>
+
+    <button
+      class="clear-rule-btn"
+      onclick="clearStyleRule()"
+    >
+      ♡ 不限制
+    </button>
+
+  `;
+
+}
+
+
+function saveStyleRule(){
+
+  const styleId =
+    document.getElementById("styleRuleSelect").value;
+
+  if(!styleId){
+    return;
+  }
+
+  data.styleRules[styleId] = {
+
+    mainColors:
+      [...document.querySelectorAll(".style-main-check:checked")]
+      .map(x => x.value),
+
+    buttons:
+      [...document.querySelectorAll(".style-button-check:checked")]
+      .map(x => x.value),
+
+    charms:
+      [...document.querySelectorAll(".style-charm-check:checked")]
+      .map(x => x.value)
+
+  };
+
+  saveData();
+
+  alert("款式搭配限制已保存 ♡");
+
+}
+
+
+function clearStyleRule(){
+
+  const styleId =
+    document.getElementById("styleRuleSelect").value;
+
+  if(!styleId){
+    return;
+  }
+
+  delete data.styleRules[styleId];
+
+  saveData();
+
+  loadStyleRule();
+
+  alert("已取消这个款式的限制 ♡");
+
+}
+
+
+/* =====================================================
+   主色 → 配色规则
+===================================================== */
+
+function renderColorRuleSelect(){
+
+  const select =
+    document.getElementById("colorRuleSelect");
+
+  const old =
+    select.value;
+
+  select.innerHTML =
+    `<option value="">请选择主色</option>`;
+
+  data.mainColors.forEach(color => {
+
+    const option =
+      document.createElement("option");
+
+    option.value = color.id;
+
+    option.textContent = color.name;
+
+    select.appendChild(option);
+
+  });
+
+  if(data.mainColors.some(x => x.id === old)){
+    select.value = old;
+  }
+
+}
+
+
+function loadColorRule(){
+
+  const colorId =
+    document.getElementById("colorRuleSelect").value;
+
+  const area =
+    document.getElementById("colorRuleArea");
+
+  area.innerHTML = "";
+
+  if(!colorId){
+    return;
+  }
+
+  const rule =
+    data.colorRules[colorId];
+
+  area.innerHTML = `
+
+    <div class="rule-box">
+
+      <h3>🌈 允许搭配的线材配色</h3>
+
+      <div class="checkbox-grid">
+
+        ${
+          data.secondaryColors.map(item => `
+
+            <label class="check-item">
+
+              <input
+                type="checkbox"
+                value="${item.id}"
+                class="secondary-check"
+                ${
+                  rule === undefined ||
+                  rule.includes(item.id)
+                  ? "checked"
+                  : ""
+                }
+              >
+
+              ${escapeHtml(item.name)}
+
+            </label>
+
+          `).join("")
+        }
+
+      </div>
+
+    </div>
+
+    <button
+      class="save-rule-btn"
+      onclick="saveColorRule()"
+    >
+      💾 保存这个主色的限制
+    </button>
+
+    <button
+      class="clear-rule-btn"
+      onclick="clearColorRule()"
+    >
+      ♡ 不限制
+    </button>
+
+  `;
+
+}
+
+
+function saveColorRule(){
+
+  const colorId =
+    document.getElementById("colorRuleSelect").value;
+
+  if(!colorId){
+    return;
+  }
+
+  data.colorRules[colorId] =
+    [...document.querySelectorAll(".secondary-check:checked")]
+    .map(x => x.value);
+
+  saveData();
+
+  alert("主色搭配限制已保存 ♡");
+
+}
+
+
+function clearColorRule(){
+
+  const colorId =
+    document.getElementById("colorRuleSelect").value;
+
+  if(!colorId){
+    return;
+  }
+
+  delete data.colorRules[colorId];
+
+  saveData();
+
+  loadColorRule();
+
+  alert("已取消这个主色的限制 ♡");
+
+}
+
+
+/* =====================================================
+   六个老虎机
+===================================================== */
+
+const SLOT_CONFIG = [
+
+  {
+    key:"style",
+    title:"👜 款式"
+  },
+
+  {
+    key:"mainColor",
+    title:"🎨 线材主色"
+  },
+
+  {
+    key:"secondaryColor",
+    title:"🌈 线材配色"
+  },
+
+  {
+    key:"button1",
+    title:"🔘 扣子 1"
+  },
+
+  {
+    key:"button2",
+    title:"🔘 扣子 2"
+  },
+
+  {
+    key:"charm",
+    title:"🍓 小吊饰"
+  }
+
+];
+
+
+const slotStates = {};
+
+let sessionId = 0;
+
+
+/* =====================================================
+   建立老虎机
+===================================================== */
+
+function buildSlots(){
+
+  const grid =
+    document.getElementById("slotsGrid");
+
+  grid.innerHTML = "";
+
+  SLOT_CONFIG.forEach(slot => {
+
+    const card =
+      document.createElement("div");
+
+    card.className = "slot-card";
+
+    card.innerHTML = `
+
+      <div class="slot-title">
+        ${slot.title}
+      </div>
+
+      <div
+        class="reel-window"
+        id="window-${slot.key}"
+      >
+        <div
+          class="reel"
+          id="reel-${slot.key}"
+        ></div>
+      </div>
+
+      <button
+        class="stop-one"
+        id="stop-${slot.key}"
+        onclick="stopOne('${slot.key}')"
+      >
+        🛑 停止
+      </button>
+
+      <div
+        class="slot-status"
+        id="status-${slot.key}"
+      >
+        准备好了
+      </div>
+
+    `;
+
+    grid.appendChild(card);
+
+  });
+
+  prepareIdleReels();
+
+}
+
+
+/* =====================================================
+   初始显示
+===================================================== */
+
+function prepareIdleReels(){
+
+  const pools = {
+
+    style:data.styles,
+
+    mainColor:data.mainColors,
+
+    secondaryColor:data.secondaryColors,
+
+    button1:data.buttons,
+
+    button2:data.buttons,
+
+    charm:data.charms
+
+  };
+
+  SLOT_CONFIG.forEach(slot => {
+
+    const reel =
+      document.getElementById(
+        "reel-" + slot.key
+      );
+
+    if(!reel){
+      return;
+    }
+
+    const items =
+      pools[slot.key] || [];
+
+    reel.innerHTML = "";
+
+    if(items.length === 0){
+
+      reel.innerHTML = `
+
+        <div class="reel-item">
+
+          <div style="font-size:30px">🧶</div>
+
+          <div class="item-name">
+            请先设置
+          </div>
+
+        </div>
 
       `;
 
-    }
-  );
-
-}
-
-
-/* ==================================================
-   款式限制
-================================================== */
-
-function getStyleRule(
-  styleId
-) {
-
-  if (!data.styleRules[styleId]) {
-
-    data.styleRules[styleId] = {
-
-      mainColors: [],
-
-      button1: [],
-
-      button2: [],
-
-      charms: []
-
-    };
-
-  }
-
-
-  return data.styleRules[styleId];
-
-}
-
-
-function renderLimits() {
-
-  const select =
-    document.getElementById(
-      "limitStyleSelect"
-    );
-
-
-  if (!select.value) {
-    return;
-  }
-
-
-  const rule =
-    getStyleRule(
-      select.value
-    );
-
-
-  createCheckboxList(
-
-    document.getElementById(
-      "styleMainColorLimits"
-    ),
-
-    data.mainColors,
-
-    rule.mainColors,
-
-    "changeStyleMainColor"
-
-  );
-
-
-  createCheckboxList(
-
-    document.getElementById(
-      "styleButton1Limits"
-    ),
-
-    data.buttons,
-
-    rule.button1,
-
-    "changeStyleButton1"
-
-  );
-
-
-  createCheckboxList(
-
-    document.getElementById(
-      "styleButton2Limits"
-    ),
-
-    data.buttons,
-
-    rule.button2,
-
-    "changeStyleButton2"
-
-  );
-
-
-  createCheckboxList(
-
-    document.getElementById(
-      "styleCharmLimits"
-    ),
-
-    data.charms,
-
-    rule.charms,
-
-    "changeStyleCharm"
-
-  );
-
-}
-
-
-function changeStyleMainColor(
-  checkbox
-) {
-
-  const styleId =
-    document.getElementById(
-      "limitStyleSelect"
-    ).value;
-
-
-  updateRuleArray(
-
-    styleId,
-
-    "mainColors",
-
-    checkbox
-
-  );
-
-}
-
-
-function changeStyleButton1(
-  checkbox
-) {
-
-  const styleId =
-    document.getElementById(
-      "limitStyleSelect"
-    ).value;
-
-
-  updateRuleArray(
-
-    styleId,
-
-    "button1",
-
-    checkbox
-
-  );
-
-}
-
-
-function changeStyleButton2(
-  checkbox
-) {
-
-  const styleId =
-    document.getElementById(
-      "limitStyleSelect"
-    ).value;
-
-
-  updateRuleArray(
-
-    styleId,
-
-    "button2",
-
-    checkbox
-
-  );
-
-}
-
-
-function changeStyleCharm(
-  checkbox
-) {
-
-  const styleId =
-    document.getElementById(
-      "limitStyleSelect"
-    ).value;
-
-
-  updateRuleArray(
-
-    styleId,
-
-    "charms",
-
-    checkbox
-
-  );
-
-}
-
-
-function updateRuleArray(
-  styleId,
-  category,
-  checkbox
-) {
-
-  const rule =
-    getStyleRule(styleId);
-
-
-  if (checkbox.checked) {
-
-    if (
-      !rule[category].includes(
-        checkbox.value
-      )
-    ) {
-
-      rule[category].push(
-        checkbox.value
-      );
+      return;
 
     }
 
-  }
+    const displayItems =
+      [...items,...items,...items];
 
-  else {
+    displayItems.forEach(item => {
 
-    rule[category] =
-      rule[category].filter(
-        function(id) {
-
-          return id !== checkbox.value;
-
-        }
+      reel.appendChild(
+        createReelItem(item)
       );
 
-  }
+    });
 
+    reel.style.transform =
+      "translateY(-150px)";
 
-  saveData();
-
-}
-
-
-/* ==================================================
-   主色 → 配色
-================================================== */
-
-function renderColorLimits() {
-
-  const select =
-    document.getElementById(
-      "limitColorSelect"
-    );
-
-
-  if (!select.value) {
-    return;
-  }
-
-
-  const colorId =
-    select.value;
-
-
-  if (!data.colorRules[colorId]) {
-
-    data.colorRules[colorId] = [];
-
-  }
-
-
-  createCheckboxList(
-
-    document.getElementById(
-      "secondaryLimits"
-    ),
-
-    data.secondaryColors,
-
-    data.colorRules[colorId],
-
-    "changeSecondaryLimit"
-
-  );
+  });
 
 }
 
 
-function changeSecondaryLimit(
-  checkbox
-) {
+/* =====================================================
+   建立老虎机项目
+===================================================== */
 
-  const colorId =
-    document.getElementById(
-      "limitColorSelect"
-    ).value;
+function createReelItem(item){
+
+  const div =
+    document.createElement("div");
+
+  div.className = "reel-item";
+
+  div.innerHTML = `
+
+    ${
+      item.image
+      ?
+      `<img src="${item.image}">`
+      :
+      `<div style="
+        width:82px;
+        height:82px;
+        border-radius:18px;
+        background:#ffeef4;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:30px;
+      ">🧶</div>`
+    }
+
+    <div class="item-name">
+      ${escapeHtml(item.name)}
+    </div>
+
+  `;
+
+  return div;
+
+}
 
 
-  if (!data.colorRules[colorId]) {
+/* =====================================================
+   获取允许项目
+===================================================== */
 
-    data.colorRules[colorId] = [];
+function getAllowed(type, context){
 
+  let pool = [];
+
+  if(type === "style"){
+    pool = [...data.styles];
   }
 
+  if(type === "mainColor"){
 
-  if (checkbox.checked) {
+    pool = [...data.mainColors];
 
-    if (
-      !data.colorRules[colorId]
-        .includes(
-          checkbox.value
-        )
-    ) {
+    const rule =
+      data.styleRules[context.style];
 
-      data.colorRules[colorId]
-        .push(
-          checkbox.value
+    if(
+      rule &&
+      Array.isArray(rule.mainColors)
+    ){
+
+      pool =
+        pool.filter(x =>
+          rule.mainColors.includes(x.id)
         );
 
     }
 
   }
 
-  else {
+  if(type === "secondaryColor"){
 
-    data.colorRules[colorId] =
-      data.colorRules[colorId]
-        .filter(
-          function(id) {
+    pool = [...data.secondaryColors];
 
-            return id !== checkbox.value;
+    const rule =
+      data.colorRules[context.mainColor];
 
-          }
+    if(
+      Array.isArray(rule)
+    ){
+
+      pool =
+        pool.filter(x =>
+          rule.includes(x.id)
         );
 
-  }
-
-
-  saveData();
-
-}
-
-
-/* ==================================================
-   抽取系统
-================================================== */
-
-
-/*
-  如果某个限制没有设置，
-  就使用全部项目。
-
-  这样你不用每一个东西都设置限制。
-*/
-
-
-function getAllowedItems(
-  items,
-  selectedIds
-) {
-
-  if (
-    !selectedIds ||
-    selectedIds.length === 0
-  ) {
-
-    return items;
+    }
 
   }
 
+  if(
+    type === "button1" ||
+    type === "button2"
+  ){
 
-  return items.filter(
-    function(item) {
+    pool = [...data.buttons];
 
-      return selectedIds.includes(
-        item.id
-      );
+    const rule =
+      data.styleRules[context.style];
+
+    if(
+      rule &&
+      Array.isArray(rule.buttons)
+    ){
+
+      pool =
+        pool.filter(x =>
+          rule.buttons.includes(x.id)
+        );
 
     }
-  );
+
+  }
+
+  if(type === "charm"){
+
+    pool = [...data.charms];
+
+    const rule =
+      data.styleRules[context.style];
+
+    if(
+      rule &&
+      Array.isArray(rule.charms)
+    ){
+
+      pool =
+        pool.filter(x =>
+          rule.charms.includes(x.id)
+        );
+
+    }
+
+  }
+
+  return pool;
 
 }
 
 
-/* 随机 */
+/* =====================================================
+   随机项目
+===================================================== */
 
-function randomItem(items) {
+function randomItem(pool){
 
-  if (!items || items.length === 0) {
-
+  if(!pool || pool.length === 0){
     return null;
-
   }
 
-
-  return items[
+  return pool[
     Math.floor(
-      Math.random() * items.length
+      Math.random() * pool.length
     )
   ];
 
 }
 
 
-/* ==================================================
-   创建滚轮
-================================================== */
+/* =====================================================
+   预先决定最终结果
+===================================================== */
 
-function buildReel(
-  element,
-  items
-) {
+function generateFinalResults(){
 
-  element.innerHTML = "";
+  const result = {};
 
-  element.style.transition =
-    "none";
+  /* 先决定款式 */
 
-  element.style.transform =
-    "translateY(0px)";
+  const styles =
+    getAllowed("style",result);
+
+  result.style =
+    randomItem(styles);
 
 
-  if (!items || items.length === 0) {
+  /* 主色 */
 
-    items = [
+  const mains =
+    getAllowed(
+      "mainColor",
       {
-        id: "empty",
-        name: "请先设置",
-        image: ""
-      }
-    ];
-
-  }
-
-
-  /*
-    重复很多轮，
-    制造真正滚动的感觉。
-  */
-
-  const repeat = 8;
-
-
-  for (
-    let r = 0;
-    r < repeat;
-    r++
-  ) {
-
-    items.forEach(
-      function(item) {
-
-        const div =
-          document.createElement(
-            "div"
-          );
-
-
-        div.className =
-          "reel-item";
-
-
-        if (item.image) {
-
-          div.innerHTML = `
-
-            <img
-              src="${item.image}"
-              alt="${item.name}"
-            >
-
-          `;
-
-        }
-
-        else {
-
-          div.innerHTML = `
-
-            <div
-              class="reel-placeholder"
-            >
-              ${item.name}
-            </div>
-
-          `;
-
-        }
-
-
-        element.appendChild(div);
-
+        style:result.style
+          ? result.style.id
+          : null
       }
     );
 
-  }
+  result.mainColor =
+    randomItem(mains);
 
 
-  return items;
+  /* 配色 */
+
+  const secondaries =
+    getAllowed(
+      "secondaryColor",
+      {
+        mainColor:
+          result.mainColor
+          ? result.mainColor.id
+          : null
+      }
+    );
+
+  result.secondaryColor =
+    randomItem(secondaries);
+
+
+  /* 扣子 */
+
+  const buttonContext = {
+
+    style:
+      result.style
+      ? result.style.id
+      : null
+
+  };
+
+  result.button1 =
+    randomItem(
+      getAllowed(
+        "button1",
+        buttonContext
+      )
+    );
+
+  result.button2 =
+    randomItem(
+      getAllowed(
+        "button2",
+        buttonContext
+      )
+    );
+
+
+  /* 吊饰 */
+
+  result.charm =
+    randomItem(
+      getAllowed(
+        "charm",
+        buttonContext
+      )
+    );
+
+
+  return result;
 
 }
 
 
-/* ==================================================
-   单个老虎机动画
-================================================== */
+/* =====================================================
+   开始全部
+===================================================== */
 
-function animateReel(
-  element,
-  items,
-  finalItem,
-  delay
-) {
+function startAll(){
 
-  return new Promise(
-    function(resolve) {
+  sessionId++;
 
-
-      if (!items.length) {
-
-        resolve(finalItem);
-
-        return;
-
-      }
-
-
-      const finalIndex =
-        items.findIndex(
-          function(item) {
-
-            return item.id ===
-              finalItem.id;
-
-          }
-        );
-
-
-      const rounds = 5;
-
-
-      const targetIndex =
-        rounds * items.length
-        + finalIndex;
-
-
-      const distance =
-        targetIndex * 70;
-
-
-      setTimeout(
-        function() {
-
-
-          element.style.transition =
-            "transform 2.8s cubic-bezier(0.12, 0.72, 0.18, 1)";
-
-
-          element.style.transform =
-            `translateY(-${distance}px)`;
-
-
-          setTimeout(
-            function() {
-
-              resolve(finalItem);
-
-            },
-            3000
-          );
-
-
-        },
-        delay
-      );
-
-    }
-  );
-
-}
-
-
-/* ==================================================
-   整套抽取
-================================================== */
-
-async function startFullDraw() {
-
-
-  const button =
-    document.getElementById(
-      "drawButton"
-    );
-
-
-  if (button.disabled) {
-    return;
-  }
-
-
-  button.disabled = true;
-
-  button.innerText =
-    "🎰 正在抽取...";
-
+  const thisSession =
+    sessionId;
 
   document
-    .getElementById(
-      "finalResult"
-    )
-    .style.display = "none";
+    .getElementById("finalResult")
+    .classList.remove("show");
+
+  const finalResults =
+    generateFinalResults();
+
+  /* 保存这次抽取的最终结果 */
+
+  window.currentFinalResults =
+    finalResults;
 
 
-  /*
-    =================================
-    ① 抽款式
-    =================================
-  */
+  SLOT_CONFIG.forEach(slot => {
 
-  const style =
-    randomItem(
-      data.styles
+    startSlot(
+      slot.key,
+      finalResults[slot.key],
+      thisSession
     );
 
+  });
 
-  /*
-    如果没有款式
-  */
+  /* 最长滚动约 9 秒 */
 
-  if (!style) {
+  setTimeout(() => {
 
-    alert(
-      "请先到设置页面添加款式。"
+    if(thisSession !== sessionId){
+      return;
+    }
+
+    stopAll();
+
+  },9000);
+
+}
+
+
+/* =====================================================
+   开始单个老虎机
+===================================================== */
+
+function startSlot(key,target,session){
+
+  const reel =
+    document.getElementById(
+      "reel-" + key
     );
 
-    button.disabled = false;
+  const stopButton =
+    document.getElementById(
+      "stop-" + key
+    );
 
-    button.innerText =
-      "🎰 开始抽取";
+  const status =
+    document.getElementById(
+      "status-" + key
+    );
+
+  if(!reel){
+    return;
+  }
+
+  if(!target){
+
+    status.textContent =
+      "没有可抽取项目";
 
     return;
 
   }
 
+  const slotItems =
+    getSlotPool(key);
 
-  const styleRule =
-    getStyleRule(
-      style.id
+  if(slotItems.length === 0){
+    return;
+  }
+
+  const targetIndex =
+    slotItems.findIndex(
+      x => x.id === target.id
     );
 
+  const repeated =
+    30;
 
-  /*
-    =================================
-    ② 根据款式抽主色
-    =================================
-  */
+  reel.innerHTML = "";
 
-  const allowedMainColors =
-    getAllowedItems(
-      data.mainColors,
-      styleRule.mainColors
-    );
+  for(let i=0;i<repeated;i++){
 
+    slotItems.forEach(item => {
 
-  const mainColor =
-    randomItem(
-      allowedMainColors
-    );
-
-
-  /*
-    =================================
-    ③ 根据主色抽配色
-    =================================
-  */
-
-  let allowedSecondary =
-    data.secondaryColors;
-
-
-  if (
-    mainColor &&
-    data.colorRules[
-      mainColor.id
-    ] &&
-    data.colorRules[
-      mainColor.id
-    ].length > 0
-  ) {
-
-    allowedSecondary =
-      getAllowedItems(
-        data.secondaryColors,
-        data.colorRules[
-          mainColor.id
-        ]
+      reel.appendChild(
+        createReelItem(item)
       );
+
+    });
 
   }
 
+  const itemHeight =
+    getCurrentItemHeight();
 
-  const secondaryColor =
-    randomItem(
-      allowedSecondary
-    );
+  const cycleHeight =
+    slotItems.length *
+    itemHeight;
 
+  const state = {
 
-  /*
-    =================================
-    ④ 扣子①
-    =================================
-  */
+    key:key,
 
-  const allowedButton1 =
-    getAllowedItems(
-      data.buttons,
-      styleRule.button1
-    );
+    target:target,
 
+    targetIndex:
+      targetIndex < 0
+      ? 0
+      : targetIndex,
 
-  const button1 =
-    randomItem(
-      allowedButton1
-    );
+    items:slotItems,
 
+    itemHeight:itemHeight,
 
-  /*
-    =================================
-    ⑤ 扣子②
-    =================================
-  */
+    cycleHeight:cycleHeight,
 
-  const allowedButton2 =
-    getAllowedItems(
-      data.buttons,
-      styleRule.button2
-    );
+    distance:0,
 
+    startTime:performance.now(),
 
-  const button2 =
-    randomItem(
-      allowedButton2
-    );
+    running:true,
 
+    stopped:false,
 
-  /*
-    =================================
-    ⑥ 吊饰
-    =================================
-  */
+    animationId:null,
 
-  const allowedCharms =
-    getAllowedItems(
-      data.charms,
-      styleRule.charms
-    );
+    session:session
 
+  };
 
-  const charm =
-    randomItem(
-      allowedCharms
-    );
+  slotStates[key] =
+    state;
 
+  stopButton.disabled =
+    false;
 
-  /*
-    =================================
-    建立六个滚轮
-    =================================
-  */
+  status.textContent =
+    "🎰 滚动中…";
 
-
-  const reelStyle =
-    document.getElementById(
-      "reel-style"
-    );
-
-
-  const reelMain =
-    document.getElementById(
-      "reel-mainColor"
-    );
-
-
-  const reelSecondary =
-    document.getElementById(
-      "reel-secondaryColor"
-    );
-
-
-  const reelButton1 =
-    document.getElementById(
-      "reel-button1"
-    );
-
-
-  const reelButton2 =
-    document.getElementById(
-      "reel-button2"
-    );
-
-
-  const reelCharm =
-    document.getElementById(
-      "reel-charm"
-    );
-
-
-  /*
-    建立滚轮
-  */
-
-  buildReel(
-    reelStyle,
-    data.styles
-  );
-
-
-  buildReel(
-    reelMain,
-    allowedMainColors
-  );
-
-
-  buildReel(
-    reelSecondary,
-    allowedSecondary
-  );
-
-
-  buildReel(
-    reelButton1,
-    allowedButton1
-  );
-
-
-  buildReel(
-    reelButton2,
-    allowedButton2
-  );
-
-
-  buildReel(
-    reelCharm,
-    allowedCharms
-  );
-
-
-  /*
-    =================================
-    开始依次滚动
-    =================================
-  */
-
-  await animateReel(
-    reelStyle,
-    data.styles,
-    style,
-    0
-  );
-
-
-  await animateReel(
-    reelMain,
-    allowedMainColors,
-    mainColor,
-    0
-  );
-
-
-  await animateReel(
-    reelSecondary,
-    allowedSecondary,
-    secondaryColor,
-    0
-  );
-
-
-  await animateReel(
-    reelButton1,
-    allowedButton1,
-    button1,
-    0
-  );
-
-
-  await animateReel(
-    reelButton2,
-    allowedButton2,
-    button2,
-    0
-  );
-
-
-  await animateReel(
-    reelCharm,
-    allowedCharms,
-    charm,
-    0
-  );
-
-
-  /*
-    =================================
-    最终结果
-    =================================
-  */
-
-  showFinalResult([
-
-    {
-      title: "款式",
-      item: style
-    },
-
-    {
-      title: "主色",
-      item: mainColor
-    },
-
-    {
-      title: "配色",
-      item: secondaryColor
-    },
-
-    {
-      title: "扣子①",
-      item: button1
-    },
-
-    {
-      title: "扣子②",
-      item: button2
-    },
-
-    {
-      title: "小吊饰",
-      item: charm
-    }
-
-  ]);
-
-
-  button.disabled = false;
-
-  button.innerText =
-    "🎀 再抽一次";
+  spinAnimation(state);
 
 }
 
 
-/* ==================================================
-   显示最终组合
-================================================== */
+/* =====================================================
+   实际上下滚动动画
+===================================================== */
 
-function showFinalResult(
-  results
-) {
+function spinAnimation(state){
 
-  const box =
+  if(!state.running){
+    return;
+  }
+
+  if(state.session !== sessionId){
+    return;
+  }
+
+  const now =
+    performance.now();
+
+  const elapsed =
+    now - state.startTime;
+
+  /* 滚动速度 */
+
+  const speed =
+    850;
+
+  state.distance =
+    elapsed / 1000 * speed;
+
+  state.distance =
+    state.distance %
+    state.cycleHeight;
+
+  state.reel =
+    document.getElementById(
+      "reel-" + state.key
+    );
+
+  if(!state.reel){
+    return;
+  }
+
+  state.reel.style.transform =
+    `translateY(-${state.distance}px)`;
+
+  state.animationId =
+    requestAnimationFrame(
+      () => spinAnimation(state)
+    );
+
+}
+
+
+/* =====================================================
+   单独停止
+===================================================== */
+
+function stopOne(key){
+
+  const state =
+    slotStates[key];
+
+  if(!state || !state.running){
+    return;
+  }
+
+  settleSlot(state);
+
+}
+
+
+/* =====================================================
+   停止全部
+===================================================== */
+
+function stopAll(){
+
+  SLOT_CONFIG.forEach(slot => {
+
+    const state =
+      slotStates[slot.key];
+
+    if(
+      state &&
+      state.running
+    ){
+
+      settleSlot(state);
+
+    }
+
+  });
+
+}
+
+
+/* =====================================================
+   停到最终结果
+===================================================== */
+
+function settleSlot(state){
+
+  if(state.stopped){
+    return;
+  }
+
+  state.running =
+    false;
+
+  state.stopped =
+    true;
+
+  cancelAnimationFrame(
+    state.animationId
+  );
+
+  const reel =
+    document.getElementById(
+      "reel-" + state.key
+    );
+
+  const stopButton =
+    document.getElementById(
+      "stop-" + state.key
+    );
+
+  const status =
+    document.getElementById(
+      "status-" + state.key
+    );
+
+  if(!reel){
+    return;
+  }
+
+  const itemHeight =
+    getCurrentItemHeight();
+
+  const itemCount =
+    state.items.length;
+
+  const cycleHeight =
+    itemCount *
+    itemHeight;
+
+  const currentDistance =
+    state.distance;
+
+  /*
+     找一个在当前滚动位置之后的目标。
+     所以不会突然倒转。
+  */
+
+  const currentCycle =
+    Math.floor(
+      currentDistance /
+      cycleHeight
+    );
+
+  const targetDistance =
+    (
+      currentCycle +
+      3
+    ) *
+    cycleHeight
+    +
+    state.targetIndex *
+    itemHeight;
+
+
+  reel.style.transition =
+    "transform .9s cubic-bezier(.12,.72,.2,1)";
+
+  reel.style.transform =
+    `translateY(-${targetDistance}px)`;
+
+
+  stopButton.disabled =
+    true;
+
+  status.textContent =
+    "✨ 已停止";
+
+
+  setTimeout(() => {
+
+    reel.style.transition =
+      "";
+
+    checkAllStopped();
+
+  },950);
+
+}
+
+
+/* =====================================================
+   获取老虎机高度
+===================================================== */
+
+function getCurrentItemHeight(){
+
+  const item =
+    document.querySelector(
+      ".reel-item"
+    );
+
+  if(!item){
+    return 150;
+  }
+
+  return item.getBoundingClientRect().height;
+
+}
+
+
+/* =====================================================
+   获取当前类别池
+===================================================== */
+
+function getSlotPool(key){
+
+  if(key === "style"){
+    return data.styles;
+  }
+
+  if(key === "mainColor"){
+    return data.mainColors;
+  }
+
+  if(key === "secondaryColor"){
+    return data.secondaryColors;
+  }
+
+  if(
+    key === "button1" ||
+    key === "button2"
+  ){
+    return data.buttons;
+  }
+
+  if(key === "charm"){
+    return data.charms;
+  }
+
+  return [];
+
+}
+
+
+/* =====================================================
+   检查是否全部停止
+===================================================== */
+
+function checkAllStopped(){
+
+  const allStopped =
+    SLOT_CONFIG.every(slot => {
+
+      const state =
+        slotStates[slot.key];
+
+      return state &&
+             state.stopped;
+
+    });
+
+  if(!allStopped){
+    return;
+  }
+
+  showFinalResult();
+
+}
+
+
+/* =====================================================
+   显示最终结果
+===================================================== */
+
+function showFinalResult(){
+
+  const result =
+    window.currentFinalResults;
+
+  if(!result){
+    return;
+  }
+
+  const container =
     document.getElementById(
       "resultGrid"
     );
 
+  container.innerHTML = "";
 
-  box.innerHTML = "";
+  const labels = {
 
+    style:"款式",
 
-  results.forEach(
-    function(result) {
+    mainColor:"线材主色",
 
-      if (!result.item) {
+    secondaryColor:"线材配色",
 
-        return;
+    button1:"扣子 1",
 
-      }
+    button2:"扣子 2",
 
+    charm:"小吊饰"
 
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "result-item";
+  };
 
 
-      let imageHTML = "";
+  SLOT_CONFIG.forEach(slot => {
 
+    const item =
+      result[slot.key];
 
-      if (result.item.image) {
+    const div =
+      document.createElement("div");
 
-        imageHTML = `
+    div.className =
+      "result-item";
 
-          <img
-            src="${result.item.image}"
-          >
+    div.innerHTML = `
 
-        `;
+      <div class="label">
+        ${labels[slot.key]}
+      </div>
 
-      }
+      <div class="value">
+        ${
+          item
+          ? escapeHtml(item.name)
+          : "未设置"
+        }
+      </div>
 
+    `;
 
-      div.innerHTML = `
+    container.appendChild(div);
 
-        ${imageHTML}
-
-        <div>
-          ${result.title}
-        </div>
-
-        <strong>
-          ${result.item.name}
-        </strong>
-
-      `;
-
-
-      box.appendChild(div);
-
-    }
-  );
+  });
 
 
   document
-    .getElementById(
-      "finalResult"
-    )
-    .style.display = "block";
+    .getElementById("finalResult")
+    .classList.add("show");
 
 }
 
 
-/* ==================================================
-   抽取页面初始化
-================================================== */
+/* =====================================================
+   重置
+===================================================== */
 
-function refreshDrawPage() {
+function resetAll(){
 
-  buildReel(
-    document.getElementById(
-      "reel-style"
-    ),
-    data.styles
-  );
+  sessionId++;
+
+  SLOT_CONFIG.forEach(slot => {
+
+    const state =
+      slotStates[slot.key];
+
+    if(state){
+
+      state.running = false;
+      state.stopped = true;
+
+      cancelAnimationFrame(
+        state.animationId
+      );
+
+    }
+
+    const button =
+      document.getElementById(
+        "stop-" + slot.key
+      );
+
+    const status =
+      document.getElementById(
+        "status-" + slot.key
+      );
+
+    if(button){
+      button.disabled = false;
+    }
+
+    if(status){
+      status.textContent =
+        "准备好了";
+    }
+
+  });
 
 
-  buildReel(
-    document.getElementById(
-      "reel-mainColor"
-    ),
-    data.mainColors
-  );
+  document
+    .getElementById("finalResult")
+    .classList.remove("show");
 
+  window.currentFinalResults =
+    null;
 
-  buildReel(
-    document.getElementById(
-      "reel-secondaryColor"
-    ),
-    data.secondaryColors
-  );
-
-
-  buildReel(
-    document.getElementById(
-      "reel-button1"
-    ),
-    data.buttons
-  );
-
-
-  buildReel(
-    document.getElementById(
-      "reel-button2"
-    ),
-    data.buttons
-  );
-
-
-  buildReel(
-    document.getElementById(
-      "reel-charm"
-    ),
-    data.charms
-  );
+  prepareIdleReels();
 
 }
 
 
-/* 页面第一次加载 */
+/* =====================================================
+   初始化
+===================================================== */
 
-refreshDrawPage();
+buildSlots();
 
+renderSettings();
 
 </script>
 
 </body>
-
 </html>
