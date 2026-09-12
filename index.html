@@ -1,174 +1,463 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Krystal 的毛线老虎机</title>
+<title>Krystal 的毛线老虎机</title>
 
-  <style>
+<style>
 
-    body {
-      margin: 0;
-      padding: 40px 20px;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #fff5fa;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    h1 {
-      color: #d96b9b;
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 20%, #ffe4ef 0, transparent 25%),
+    radial-gradient(circle at 80% 10%, #fff0c9 0, transparent 25%),
+    #fff8fb;
 
-    .subtitle {
-      color: #888;
-      margin-bottom: 30px;
-    }
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "PingFang SC",
+    "Microsoft YaHei",
+    Arial,
+    sans-serif;
 
-    /* ====== 彩票机外框 ====== */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #8f6075;
+}
 
-    .machine {
-      width: 330px;
-      margin: 0 auto;
-      padding: 25px 20px 30px;
-      background: #ffffff;
-      border: 5px solid #f3a3c0;
-      border-radius: 30px;
-      box-shadow: 0 10px 25px rgba(217, 107, 155, 0.2);
-    }
 
-    .machine-title {
-      color: #d96b9b;
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
+/* =========================
+   整个页面
+========================= */
 
-    /* ====== 滚轮区域 ====== */
+.page {
+  width: 100%;
+  max-width: 520px;
+  padding: 30px 20px;
+  text-align: center;
+}
 
-    .slot-window {
-      width: 100%;
-      height: 90px;
-      background: #fff0f6;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 3px solid #f5b3cc;
-      position: relative;
-    }
 
-    .reels {
-      display: flex;
-      justify-content: space-around;
-      height: 100%;
-    }
+/* =========================
+   标题
+========================= */
 
-    .reel {
-      width: 30%;
-      height: 90px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      font-weight: bold;
-      color: #d96b9b;
-    }
+.logo {
+  font-size: 15px;
+  color: #d894ad;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
 
-    /* 中间选中线 */
+h1 {
+  margin: 0;
+  color: #d56f98;
+  font-size: 32px;
+  font-weight: 800;
+}
 
-    .slot-window::before,
-    .slot-window::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: #f3a3c0;
-      z-index: 5;
-    }
+.subtitle {
+  margin-top: 10px;
+  color: #b58b9c;
+  font-size: 14px;
+}
 
-    .slot-window::before {
-      top: 28px;
-    }
 
-    .slot-window::after {
-      bottom: 28px;
-    }
+/* =========================
+   糖果机器
+========================= */
 
-    /* ====== 按钮 ====== */
+.machine {
+  position: relative;
 
-    .draw-button {
-      margin-top: 30px;
-      padding: 15px 40px;
-      border: none;
-      border-radius: 50px;
-      background: #f39abb;
-      color: white;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 5px 12px rgba(217, 107, 155, 0.25);
-    }
+  margin: 30px auto 0;
 
-    .draw-button:hover {
-      background: #e47fa5;
-    }
+  width: 100%;
+  max-width: 390px;
 
-    .draw-button:active {
-      transform: scale(0.96);
-    }
+  padding: 25px 22px 30px;
 
-    /* ====== 结果 ====== */
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #fff5f9
+    );
 
-    #result {
-      margin-top: 25px;
-      min-height: 32px;
-      font-size: 22px;
-      font-weight: bold;
-      color: #d96b9b;
-    }
+  border: 4px solid #f4b2c9;
 
-    .hint {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #aaa;
-    }
+  border-radius: 38px;
 
-  </style>
+  box-shadow:
+    0 15px 35px rgba(213,111,152,0.18),
+    inset 0 0 0 4px #fff;
+
+}
+
+
+/* 顶部装饰 */
+
+.machine-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 18px;
+
+  color: #d7799d;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.machine-top span {
+  font-size: 20px;
+}
+
+
+/* =========================
+   真正的老虎机窗口
+========================= */
+
+.slot-frame {
+
+  position: relative;
+
+  padding: 10px;
+
+  background: #f4b1c8;
+
+  border-radius: 25px;
+
+  box-shadow:
+    inset 0 3px 5px rgba(255,255,255,0.8),
+    0 5px 10px rgba(213,111,152,0.12);
+
+}
+
+
+/* 白色窗口 */
+
+.slot-window {
+
+  position: relative;
+
+  height: 130px;
+
+  overflow: hidden;
+
+  background: #fffdfd;
+
+  border-radius: 18px;
+
+  border: 3px solid #f9d4e0;
+
+}
+
+
+/* 中间中奖区域 */
+
+.slot-window::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  height: 76px;
+
+  border-top: 2px solid #f3b1c8;
+  border-bottom: 2px solid #f3b1c8;
+
+  background: rgba(255,236,244,0.35);
+
+  z-index: 10;
+
+  pointer-events: none;
+
+}
+
+
+/* 两边的小箭头 */
+
+.slot-window::after {
+
+  content: "♡";
+
+  position: absolute;
+
+  right: 8px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #ef9fba;
+
+  font-size: 25px;
+
+  z-index: 20;
+
+}
+
+
+/* =========================
+   滚轮
+========================= */
+
+.reel-window {
+
+  height: 130px;
+
+  overflow: hidden;
+
+  position: relative;
+
+}
+
+
+.reel {
+
+  width: 100%;
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  transition:
+    transform 2.8s cubic-bezier(0.12, 0.72, 0.18, 1);
+
+}
+
+
+/* 每一个滚轮项目 */
+
+.item {
+
+  height: 76px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  flex-shrink: 0;
+
+}
+
+
+/* 中间文字 */
+
+.item-inner {
+
+  width: 90%;
+
+  height: 62px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  border-radius: 18px;
+
+  background: linear-gradient(
+    135deg,
+    #fff7fa,
+    #fff
+  );
+
+  color: #d87599;
+
+  font-size: 22px;
+
+  font-weight: 800;
+
+  border: 2px solid #f7d5e1;
+
+}
+
+
+/* =========================
+   按钮
+========================= */
+
+.draw-button {
+
+  margin-top: 25px;
+
+  width: 85%;
+
+  padding: 16px 20px;
+
+  border: none;
+
+  border-radius: 50px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f6a9c3,
+      #e889ad
+    );
+
+  color: white;
+
+  font-size: 19px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 15px rgba(216,115,153,0.25);
+
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+
+}
+
+
+.draw-button:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 18px rgba(216,115,153,0.3);
+
+}
+
+
+.draw-button:active {
+
+  transform: scale(0.96);
+
+}
+
+
+.draw-button:disabled {
+
+  opacity: 0.7;
+
+  cursor: not-allowed;
+
+}
+
+
+/* =========================
+   结果
+========================= */
+
+.result {
+
+  min-height: 32px;
+
+  margin-top: 18px;
+
+  color: #d36f96;
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+}
+
+
+/* =========================
+   底部小字
+========================= */
+
+.tip {
+
+  margin-top: 20px;
+
+  color: #c6a6b3;
+
+  font-size: 12px;
+
+  letter-spacing: 1px;
+
+}
+
+
+/* 小装饰 */
+
+.decor {
+
+  margin-top: 18px;
+
+  font-size: 20px;
+
+  letter-spacing: 8px;
+
+}
+
+</style>
 </head>
 
 
 <body>
 
-  <h1>🎰 Krystal 的毛线老虎机</h1>
+
+<div class="page">
+
+  <div class="logo">
+    KRYSTAL'S YARN LAB
+  </div>
+
+  <h1>
+    🎀 毛线老虎机
+  </h1>
 
   <div class="subtitle">
-    今天会抽到什么颜色呢？
+    今天的幸运配色是什么？
   </div>
 
 
   <div class="machine">
 
-    <div class="machine-title">
-      🧶 毛线研究室 · COLOR MACHINE
+
+    <div class="machine-top">
+      <span>🧶</span>
+      COLOR MACHINE
+      <span>🌷</span>
     </div>
 
 
-    <div class="slot-window">
+    <!-- 真正的老虎机 -->
 
-      <div class="reels">
+    <div class="slot-frame">
 
-        <div class="reel" id="reel1">
-          🌸
-        </div>
+      <div class="slot-window">
 
-        <div class="reel" id="reel2">
-          🧶
-        </div>
+        <div class="reel-window">
 
-        <div class="reel" id="reel3">
-          🌷
+          <div class="reel" id="reel">
+
+            <!-- JavaScript 会自动生成内容 -->
+
+          </div>
+
         </div>
 
       </div>
@@ -176,132 +465,200 @@
     </div>
 
 
-    <button class="draw-button" onclick="startDraw()">
-      开始抽取
+    <button
+      class="draw-button"
+      id="drawButton"
+      onclick="startDraw()"
+    >
+      🎰 开始抽取
     </button>
 
 
-    <div id="result"></div>
+    <div
+      class="result"
+      id="result"
+    ></div>
+
+
+    <div class="decor">
+      ✿ ♡ ✿
+    </div>
 
   </div>
 
 
-  <div class="hint">
-    ✨ 好运正在加载中……
+  <div class="tip">
+    每一次抽取，都是今天的小幸运 ✨
   </div>
 
-
-  <script>
-
-    const colors = [
-      "酒红色",
-      "米白色",
-      "牛油果绿",
-      "浅灰色",
-      "金黄色",
-      "大红色",
-      "橘黄色",
-      "玫红色",
-      "深粉色",
-      "浅粉色",
-      "浅紫色",
-      "米黄色"
-    ];
+</div>
 
 
-    let isDrawing = false;
+
+<script>
 
 
-    function startDraw() {
+/* =========================
+   你的 12 种主色
+========================= */
 
-      if (isDrawing) {
-        return;
-      }
+const colors = [
 
-      isDrawing = true;
+  "酒红色",
+  "米白色",
+  "牛油果绿",
+  "浅灰色",
+  "金黄色",
+  "大红色",
+  "橘黄色",
+  "玫红色",
+  "深粉色",
+  "浅粉色",
+  "浅紫色",
+  "米黄色"
 
-      document.getElementById("result").innerText = "";
-
-      const reel1 = document.getElementById("reel1");
-      const reel2 = document.getElementById("reel2");
-      const reel3 = document.getElementById("reel3");
-
-      const button = document.querySelector(".draw-button");
-
-      button.innerText = "🎰 抽取中...";
-
-
-      /*
-        第一阶段：
-        快速改变三个滚轮的文字
-      */
-
-      let count = 0;
-
-      const rolling = setInterval(function() {
-
-        reel1.innerText =
-          colors[Math.floor(Math.random() * colors.length)];
-
-        reel2.innerText =
-          colors[Math.floor(Math.random() * colors.length)];
-
-        reel3.innerText =
-          colors[Math.floor(Math.random() * colors.length)];
-
-        count++;
-
-        /*
-          滚动约 2 秒后停止
-        */
-
-        if (count >= 20) {
-
-          clearInterval(rolling);
-
-          finishDraw();
-
-        }
-
-      }, 100);
-
-    }
+];
 
 
-    function finishDraw() {
+/* 每个项目高度 */
 
-      const finalColor =
-        colors[Math.floor(Math.random() * colors.length)];
-
-
-      /*
-        三个滚轮最后停在同一个颜色
-      */
-
-      document.getElementById("reel1").innerText = finalColor;
-
-      document.getElementById("reel2").innerText = finalColor;
-
-      document.getElementById("reel3").innerText = finalColor;
+const ITEM_HEIGHT = 76;
 
 
-      /*
-        显示最终结果
-      */
+/* 滚轮 */
 
-      document.getElementById("result").innerText =
-        "🎉 抽到了：" + finalColor + "！";
+const reel = document.getElementById("reel");
+
+const result =
+  document.getElementById("result");
+
+const button =
+  document.getElementById("drawButton");
 
 
-      document.querySelector(".draw-button").innerText =
-        "再抽一次";
+/* =========================
+   创建滚轮内容
+========================= */
+
+function createReel() {
+
+  reel.innerHTML = "";
+
+  /*
+    重复很多次颜色，
+    让滚轮看起来可以一直滚
+  */
+
+  for (let round = 0; round < 8; round++) {
+
+    colors.forEach(function(color) {
+
+      const item =
+        document.createElement("div");
+
+      item.className = "item";
+
+      item.innerHTML = `
+        <div class="item-inner">
+          ${color}
+        </div>
+      `;
+
+      reel.appendChild(item);
+
+    });
+
+  }
+
+}
 
 
-      isDrawing = false;
+/* 页面打开时先建立滚轮 */
 
-    }
+createReel();
 
-  </script>
+
+/* =========================
+   开始抽取
+========================= */
+
+function startDraw() {
+
+
+  if (button.disabled) {
+    return;
+  }
+
+
+  button.disabled = true;
+
+  button.innerText = "🎰 好运滚动中...";
+
+  result.innerText = "";
+
+
+  /*
+    随机决定最后停在哪个颜色
+  */
+
+  const finalIndex =
+    Math.floor(
+      Math.random() * colors.length
+    );
+
+
+  /*
+    让它滚很多圈之后，
+    最后停在中奖颜色
+  */
+
+  const rounds = 5;
+
+
+  const targetIndex =
+    rounds * colors.length
+    + finalIndex;
+
+
+  const distance =
+    targetIndex * ITEM_HEIGHT;
+
+
+  /*
+    开始真正的滚动
+  */
+
+  reel.style.transform =
+    `translateY(-${distance}px)`;
+
+
+  /*
+    等动画完成
+  */
+
+  setTimeout(function() {
+
+
+    const finalColor =
+      colors[finalIndex];
+
+
+    result.innerText =
+      "✨ 今日幸运色：" + finalColor;
+
+
+    button.disabled = false;
+
+    button.innerText =
+      "🎀 再抽一次";
+
+
+  }, 3000);
+
+}
+
+
+</script>
 
 </body>
 </html>
