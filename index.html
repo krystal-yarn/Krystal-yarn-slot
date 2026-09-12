@@ -3,7 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Krystal 的毛线老虎机</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #fff5fa;
+      padding: 50px 20px;
+    }
+
+    h1 {
+      color: #d96b9b;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #777;
+      font-size: 18px;
+    }
+
+    button {
+      background: #f39abb;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 35px;
+      font-size: 20px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #e47fa5;
+    }
+
+    #result {
+      margin-top: 35px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #d96b9b;
+    }
+  </style>
 </head>
 
 <body>
@@ -14,12 +56,17 @@
 
   <button onclick="startDraw()">开始抽取</button>
 
-  <h2 id="result"></h2>
+  <div id="result"></div>
 
   <script>
+
     function startDraw() {
-      document.getElementById("result").innerText = "🎉 抽到了：金黄色！";
+
+      document.getElementById("result").innerText =
+        "🎉 抽到了：金黄色！";
+
     }
+
   </script>
 
 </body>
