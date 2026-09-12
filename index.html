@@ -12,7 +12,15 @@
 
   <p>准备好了吗？</p>
 
-  <button>开始抽取</button>
+  <button onclick="startDraw()">开始抽取</button>
+
+  <h2 id="result"></h2>
+
+  <script>
+    function startDraw() {
+      document.getElementById("result").innerText = "🎉 抽到了：金黄色！";
+    }
+  </script>
 
 </body>
 </html>
