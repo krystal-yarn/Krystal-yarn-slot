@@ -39,13 +39,11 @@ body{
 button,input{font-family:inherit}
 button{cursor:pointer}
 
-/* =====================================================
-HEADER
-===================================================== */
+/* ================= HEADER ================= */
 
 header{
   text-align:center;
-  padding:25px 15px 14px;
+  padding:58px 15px 14px;
   position:relative;
 }
 
@@ -60,23 +58,16 @@ header{
   color:#a98691;
 }
 
-
-/* =====================================================
-NAV
-===================================================== */
+/* ================= NAV ================= */
 
 .nav{
   position:absolute;
   top:18px;
   right:18px;
-
   display:flex;
-  justify-content:flex-end;
   gap:5px;
-
   margin:0;
   padding:0;
-
   z-index:50;
 }
 
@@ -84,12 +75,9 @@ NAV
   border:1px solid #f2d1dd;
   background:rgba(255,255,255,.92);
   color:#a56d7e;
-
   padding:6px 10px;
   border-radius:18px;
-
   box-shadow:0 3px 10px rgba(190,120,145,.10);
-
   font-size:12px;
   line-height:1;
 }
@@ -100,10 +88,7 @@ NAV
   border-color:#f5a5c0;
 }
 
-
-/* =====================================================
-PAGE
-===================================================== */
+/* ================= PAGE ================= */
 
 .page{display:none}
 .page.active{display:block}
@@ -113,21 +98,15 @@ PAGE
   margin:auto;
 }
 
-
-/* =====================================================
-ORDER
-===================================================== */
+/* ================= ORDER ================= */
 
 .order-box{
   background:#fff;
   border:2px solid #f6d5e1;
   border-radius:22px;
-
   padding:14px 18px;
   margin-bottom:18px;
-
   box-shadow:var(--shadow);
-
   display:flex;
   align-items:center;
   justify-content:center;
@@ -143,16 +122,12 @@ ORDER
 
 .order-input{
   width:min(300px,60vw);
-
   border:2px solid #f0c7d6;
   border-radius:30px;
-
   padding:9px 15px;
-
   outline:none;
   font-size:14px;
   text-align:center;
-
   background:#fffafc;
 }
 
@@ -161,24 +136,15 @@ ORDER
   box-shadow:0 0 0 4px #ffeaf2;
 }
 
-/* HISTORY BUTTON BESIDE ORDER */
-
 .history-small-btn{
   border:none;
-
   background:#fff0f5;
   color:#c96789;
-
   border:1px solid #f3ccd9;
-
   border-radius:18px;
-
   padding:8px 12px;
-
   font-size:12px;
-
   white-space:nowrap;
-
   box-shadow:0 3px 8px rgba(190,120,145,.08);
 }
 
@@ -186,10 +152,7 @@ ORDER
   background:#ffe3ed;
 }
 
-
-/* =====================================================
-BUTTONS
-===================================================== */
+/* ================= BUTTONS ================= */
 
 .draw-controls{
   display:flex;
@@ -224,10 +187,7 @@ BUTTONS
   border:2px solid #f2bfd0;
 }
 
-
-/* =====================================================
-SIX MACHINES
-===================================================== */
+/* ================= SIX MACHINES ================= */
 
 .machine-scroll{
   width:100%;
@@ -260,10 +220,7 @@ SIX MACHINES
   white-space:nowrap;
 }
 
-
-/* =====================================================
-REEL
-===================================================== */
+/* ================= REEL ================= */
 
 .reel-window{
   position:relative;
@@ -287,20 +244,12 @@ REEL
 
 .reel-window::before{
   top:0;
-  background:linear-gradient(
-    to bottom,
-    rgba(255,248,251,.98),
-    rgba(255,248,251,0)
-  );
+  background:linear-gradient(to bottom,rgba(255,248,251,.98),rgba(255,248,251,0));
 }
 
 .reel-window::after{
   bottom:0;
-  background:linear-gradient(
-    to top,
-    rgba(255,248,251,.98),
-    rgba(255,248,251,0)
-  );
+  background:linear-gradient(to top,rgba(255,248,251,.98),rgba(255,248,251,0));
 }
 
 .reel-track{
@@ -314,11 +263,9 @@ REEL
 .reel-item{
   width:100%;
   height:clamp(105px,11vw,145px);
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   padding:5px;
   text-align:center;
 }
@@ -326,11 +273,9 @@ REEL
 .reel-item-inner{
   width:100%;
   height:100%;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   overflow:hidden;
   border-radius:12px;
 }
@@ -354,32 +299,23 @@ REEL
   left:3px;
   right:3px;
   top:50%;
-
   height:clamp(105px,11vw,145px);
-
   transform:translateY(-50%);
-
   border:3px solid #f19bb9;
   border-radius:12px;
-
   z-index:10;
   pointer-events:none;
-
   box-shadow:0 0 0 3px rgba(255,255,255,.65);
 }
 
 .machine-stop{
   width:100%;
   border:none;
-
   margin-top:8px;
   padding:8px 4px;
-
   border-radius:20px;
-
   background:#ffe5ee;
   color:#c96789;
-
   font-size:clamp(9px,1.1vw,15px);
 }
 
@@ -388,10 +324,7 @@ REEL
   cursor:not-allowed;
 }
 
-
-/* =====================================================
-SETTINGS
-===================================================== */
+/* ================= SETTINGS ================= */
 
 .settings-container{
   width:min(1100px,95%);
@@ -434,11 +367,9 @@ SETTINGS
   border-radius:12px;
   background:#fff;
   border:1px solid #efd2dd;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   overflow:hidden;
 }
 
@@ -484,23 +415,18 @@ SETTINGS
 .stock-row button{
   width:32px;
   height:32px;
-
   border:none;
   border-radius:50%;
-
   background:#ffdce9;
   color:#c86687;
-
   font-size:18px;
 }
 
 .stock-input{
   width:65px;
   height:32px;
-
   border:1px solid #edc9d6;
   border-radius:10px;
-
   text-align:center;
   background:white;
 }
@@ -524,7 +450,6 @@ SETTINGS
 .photo-check{
   font-size:12px;
   color:#9b7d88;
-
   display:flex;
   align-items:center;
   gap:5px;
@@ -540,10 +465,8 @@ SETTINGS
 .add-input{
   flex:1;
   min-width:150px;
-
   border:1px solid #ebcbd7;
   border-radius:20px;
-
   padding:10px 14px;
   outline:none;
 }
@@ -551,17 +474,12 @@ SETTINGS
 .add-btn{
   border:none;
   border-radius:20px;
-
   padding:10px 18px;
-
   background:#f4a3bd;
   color:white;
 }
 
-
-/* =====================================================
-RULES
-===================================================== */
+/* ================= RULES ================= */
 
 .rules-box{
   background:#fff8fb;
@@ -575,9 +493,7 @@ RULES
   grid-template-columns:120px 1fr;
   gap:10px;
   align-items:start;
-
   padding:10px 0;
-
   border-bottom:1px dashed #efd6df;
 }
 
@@ -599,22 +515,14 @@ RULES
   display:flex;
   align-items:center;
   gap:4px;
-
   font-size:13px;
-
   background:white;
-
   padding:5px 8px;
-
   border-radius:12px;
-
   border:1px solid #f0d9e2;
 }
 
-
-/* =====================================================
-HISTORY
-===================================================== */
+/* ================= HISTORY ================= */
 
 .history-card{
   background:#fff;
@@ -628,7 +536,6 @@ HISTORY
 .history-title{
   color:#d96d96;
   font-size:20px;
-  margin-bottom:15px;
 }
 
 .history-item{
@@ -678,46 +585,32 @@ HISTORY
 
 .history-delete{
   margin-top:10px;
-
   border:none;
   background:#ffe8ef;
   color:#c96789;
-
   border-radius:18px;
-
   padding:6px 12px;
 }
 
 .clear-history{
   border:none;
   border-radius:20px;
-
   padding:9px 16px;
-
   background:#fff;
   color:#d96d96;
-
   border:1px solid #f2bfd0;
 }
 
-
-/* =====================================================
-RESULT
-===================================================== */
+/* ================= RESULT ================= */
 
 .modal{
   display:none;
-
   position:fixed;
   inset:0;
-
   z-index:1000;
-
   background:rgba(92,56,67,.42);
-
   align-items:center;
   justify-content:center;
-
   padding:15px;
 }
 
@@ -728,15 +621,10 @@ RESULT
 .result-box{
   width:min(560px,94vw);
   max-height:90vh;
-
   overflow:auto;
-
   background:#fffafc;
-
   border-radius:28px;
-
   padding:22px;
-
   box-shadow:0 20px 50px rgba(80,40,50,.25);
 }
 
@@ -764,19 +652,15 @@ RESULT
   display:flex;
   align-items:center;
   gap:12px;
-
   background:#fff;
-
   border:1px solid #f0d7e1;
   border-radius:16px;
-
   padding:9px;
 }
 
 .result-label{
   width:75px;
   flex:none;
-
   color:#bd758d;
   font-size:14px;
 }
@@ -784,12 +668,9 @@ RESULT
 .result-visual{
   width:62px;
   height:62px;
-
   border-radius:12px;
   overflow:hidden;
-
   background:#fff7fa;
-
   display:flex;
   align-items:center;
   justify-content:center;
@@ -809,39 +690,28 @@ RESULT
 .confirm-btn{
   display:block;
   width:100%;
-
   margin-top:18px;
-
   border:none;
   border-radius:30px;
-
   background:#f29cba;
   color:white;
-
   padding:13px;
-
   font-size:18px;
 }
 
 .empty{
   text-align:center;
   padding:15px;
-
   color:#b997a2;
   font-size:13px;
 }
 
-
-/* =====================================================
-MOBILE
-===================================================== */
+/* ================= MOBILE ================= */
 
 @media(max-width:700px){
 
   header{
-    padding-top:18px;
-    padding-right:105px;
-    padding-left:15px;
+    padding-top:52px;
   }
 
   .logo{
@@ -853,13 +723,14 @@ MOBILE
   }
 
   .nav{
-    top:12px;
+    top:10px;
     right:10px;
+    gap:4px;
   }
 
   .nav button{
-    padding:6px 8px;
-    font-size:11px;
+    padding:5px 7px;
+    font-size:10px;
   }
 
   .order-box{
@@ -880,7 +751,7 @@ MOBILE
 
   .history-small-btn{
     padding:7px 9px;
-    font-size:11px;
+    font-size:10px;
   }
 
   .machine-grid{
@@ -920,13 +791,7 @@ MOBILE
   .history-time{
     font-size:10px;
   }
-
 }
-
-
-/* =====================================================
-VERY SMALL PHONE
-===================================================== */
 
 @media(max-width:430px){
 
@@ -936,7 +801,7 @@ VERY SMALL PHONE
 
   .nav button{
     padding:5px 6px;
-    font-size:10px;
+    font-size:9px;
   }
 
   .logo{
@@ -955,68 +820,44 @@ VERY SMALL PHONE
     font-size:10px;
     padding:6px 7px;
   }
-
 }
 </style>
 </head>
 
 <body>
 
-
-<!-- =====================================================
-HEADER
-===================================================== -->
-
 <header>
-
-  <div class="logo">
-    🧶 Krystal 的毛线研究室
-  </div>
-
-  <div class="subtitle">
-    甜甜配色 · 今天抽到什么呢？
-  </div>
-
+  <div class="logo">🧶 Krystal 的毛线研究室</div>
+  <div class="subtitle">甜甜配色 · 今天抽到什么呢？</div>
 </header>
 
-
-<!-- =====================================================
-TOP RIGHT NAV
-===================================================== -->
+<!-- ================= TOP RIGHT NAV ================= -->
 
 <div class="nav">
 
-  <button
-    id="navDraw"
+  <button id="navDraw"
     class="active"
-    onclick="showPage('draw')"
-  >
+    onclick="showPage('draw')">
     🎰 抽取
   </button>
 
-  <button
-    id="navSettings"
-    onclick="showPage('settings')"
-  >
+  <button id="navHistory"
+    onclick="showPage('history')">
+    📖 历史
+  </button>
+
+  <button id="navSettings"
+    onclick="showPage('settings')">
     ⚙️ 设置
   </button>
 
 </div>
 
+<!-- ================= DRAW PAGE ================= -->
 
-<!-- =====================================================
-DRAW
-===================================================== -->
-
-<section
-  id="drawPage"
-  class="page active"
->
+<section id="drawPage" class="page active">
 
 <div class="container">
-
-
-  <!-- ORDER -->
 
   <div class="order-box">
 
@@ -1034,81 +875,65 @@ DRAW
 
     <button
       class="history-small-btn"
-      onclick="openHistory()"
-    >
-      📖 历史记录
+      onclick="showPage('history')">
+      📖 历史
     </button>
 
   </div>
-
-
-  <!-- CONTROLS -->
 
   <div class="draw-controls">
 
     <button
       id="startAllBtn"
       class="main-btn"
-      onclick="startAll()"
-    >
+      onclick="startAll()">
       🎰 全部开始
     </button>
 
     <button
       id="stopAllBtn"
       class="stop-all-btn"
-      onclick="stopAll()"
-    >
+      onclick="stopAll()">
       🛑 全部停止
     </button>
 
   </div>
 
-
-  <!-- SIX MACHINES -->
-
   <div class="machine-scroll">
-
-    <div
-      id="machineGrid"
-      class="machine-grid"
-    ></div>
-
+    <div id="machineGrid" class="machine-grid"></div>
   </div>
 
 </div>
 
 </section>
 
+<!-- ================= HISTORY PAGE ================= -->
 
-<!-- =====================================================
-SETTINGS
-===================================================== -->
+<section id="historyPage" class="page">
 
-<section
-  id="settingsPage"
-  class="page"
->
+  <div class="settings-container">
 
-<div class="settings-container">
+    <div id="historyContent"></div>
 
-  <div id="settingsContent"></div>
-
-  <div id="historyContent"></div>
-
-</div>
+  </div>
 
 </section>
 
+<!-- ================= SETTINGS PAGE ================= -->
 
-<!-- =====================================================
-RESULT
-===================================================== -->
+<section id="settingsPage" class="page">
 
-<div
-  id="resultModal"
-  class="modal"
->
+  <div class="settings-container">
+
+    <div id="settingsContent"></div>
+
+  </div>
+
+</section>
+
+<!-- ================= RESULT ================= -->
+
+<div id="resultModal" class="modal">
 
   <div class="result-box">
 
@@ -1116,20 +941,13 @@ RESULT
       🎀 抽取结果
     </div>
 
-    <div
-      id="resultOrder"
-      class="result-order"
-    ></div>
+    <div id="resultOrder" class="result-order"></div>
 
-    <div
-      id="resultList"
-      class="result-list"
-    ></div>
+    <div id="resultList" class="result-list"></div>
 
     <button
       class="confirm-btn"
-      onclick="confirmResult()"
-    >
+      onclick="confirmResult()">
       💗 确认
     </button>
 
@@ -1137,9 +955,7 @@ RESULT
 
 </div>
 
-
 <script>
-
 
 /* =====================================================
 DEFAULT DATA
@@ -1148,249 +964,51 @@ DEFAULT DATA
 const DEFAULT_DATA={
 
   styles:[
-    {
-      id:"style_basic",
-      name:"基础款",
-      image:"",
-      photoOnly:false,
-      stock:999
-    },
-    {
-      id:"style_bag",
-      name:"小花包",
-      image:"",
-      photoOnly:false,
-      stock:999
-    },
-    {
-      id:"style_cloud",
-      name:"云朵包",
-      image:"",
-      photoOnly:false,
-      stock:999
-    }
+    {id:"style_basic",name:"基础款",image:"",photoOnly:false,stock:999},
+    {id:"style_bag",name:"小花包",image:"",photoOnly:false,stock:999},
+    {id:"style_cloud",name:"云朵包",image:"",photoOnly:false,stock:999}
   ],
 
   mainColors:[
-    {
-      id:"main_red",
-      name:"大红色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"main_wine",
-      name:"酒红色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"main_cream",
-      name:"米白色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"main_green",
-      name:"牛油果绿",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"main_gray",
-      name:"浅灰色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"main_gold",
-      name:"金黄色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"main_orange",
-      name:"橘黄色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"main_rose",
-      name:"玫红色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"main_pinkdark",
-      name:"深粉色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"main_pink",
-      name:"浅粉色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"main_purple",
-      name:"浅紫色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"main_beige",
-      name:"米黄色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    }
+    {id:"main_red",name:"大红色",image:"",photoOnly:false,stock:5},
+    {id:"main_wine",name:"酒红色",image:"",photoOnly:false,stock:5},
+    {id:"main_cream",name:"米白色",image:"",photoOnly:false,stock:5},
+    {id:"main_green",name:"牛油果绿",image:"",photoOnly:false,stock:5},
+    {id:"main_gray",name:"浅灰色",image:"",photoOnly:false,stock:5},
+    {id:"main_gold",name:"金黄色",image:"",photoOnly:false,stock:5},
+    {id:"main_orange",name:"橘黄色",image:"",photoOnly:false,stock:5},
+    {id:"main_rose",name:"玫红色",image:"",photoOnly:false,stock:5},
+    {id:"main_pinkdark",name:"深粉色",image:"",photoOnly:false,stock:5},
+    {id:"main_pink",name:"浅粉色",image:"",photoOnly:false,stock:5},
+    {id:"main_purple",name:"浅紫色",image:"",photoOnly:false,stock:5},
+    {id:"main_beige",name:"米黄色",image:"",photoOnly:false,stock:5}
   ],
 
   secondaryColors:[
-    {
-      id:"sub_white",
-      name:"白色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"sub_pink",
-      name:"粉色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"sub_red",
-      name:"红色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"sub_purple",
-      name:"紫色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"sub_yellow",
-      name:"黄色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"sub_orange",
-      name:"橘色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"sub_brown",
-      name:"棕色",
-      image:"",
-      photoOnly:false,
-      stock:5
-    }
+    {id:"sub_white",name:"白色",image:"",photoOnly:false,stock:5},
+    {id:"sub_pink",name:"粉色",image:"",photoOnly:false,stock:5},
+    {id:"sub_red",name:"红色",image:"",photoOnly:false,stock:5},
+    {id:"sub_purple",name:"紫色",image:"",photoOnly:false,stock:5},
+    {id:"sub_yellow",name:"黄色",image:"",photoOnly:false,stock:5},
+    {id:"sub_orange",name:"橘色",image:"",photoOnly:false,stock:5},
+    {id:"sub_brown",name:"棕色",image:"",photoOnly:false,stock:5}
   ],
 
   mainButtons:[
-    {
-      id:"button_red",
-      name:"红色主扣",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"button_white",
-      name:"白色主扣",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"button_purple",
-      name:"紫色主扣",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"button_yellow",
-      name:"黄色主扣",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"button_orange",
-      name:"橘色主扣",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"button_brown",
-      name:"棕色主扣",
-      image:"",
-      photoOnly:false,
-      stock:5
-    }
+    {id:"button_red",name:"红色主扣",image:"",photoOnly:false,stock:5},
+    {id:"button_white",name:"白色主扣",image:"",photoOnly:false,stock:5},
+    {id:"button_purple",name:"紫色主扣",image:"",photoOnly:false,stock:5},
+    {id:"button_yellow",name:"黄色主扣",image:"",photoOnly:false,stock:5},
+    {id:"button_orange",name:"橘色主扣",image:"",photoOnly:false,stock:5},
+    {id:"button_brown",name:"棕色主扣",image:"",photoOnly:false,stock:5}
   ],
 
   charms:[
-    {
-      id:"charm_star",
-      name:"星星",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"charm_flower",
-      name:"小花",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"charm_heart",
-      name:"爱心",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"charm_bear",
-      name:"小熊",
-      image:"",
-      photoOnly:false,
-      stock:5
-    },
-    {
-      id:"charm_pearl",
-      name:"珍珠",
-      image:"",
-      photoOnly:false,
-      stock:5
-    }
+    {id:"charm_star",name:"星星",image:"",photoOnly:false,stock:5},
+    {id:"charm_flower",name:"小花",image:"",photoOnly:false,stock:5},
+    {id:"charm_heart",name:"爱心",image:"",photoOnly:false,stock:5},
+    {id:"charm_bear",name:"小熊",image:"",photoOnly:false,stock:5},
+    {id:"charm_pearl",name:"珍珠",image:"",photoOnly:false,stock:5}
   ],
 
   rules:{
@@ -1402,45 +1020,26 @@ const DEFAULT_DATA={
 
 };
 
-
 /* =====================================================
 DATA
 ===================================================== */
 
 function clone(obj){
-
-  return JSON.parse(
-    JSON.stringify(obj)
-  );
-
+  return JSON.parse(JSON.stringify(obj));
 }
 
 function createId(){
-
-  return "id_"+
-    Date.now()+
-    "_"+
-    Math.random()
-      .toString(36)
-      .slice(2,8);
-
+  return "id_"+Date.now()+"_"+Math.random().toString(36).slice(2,8);
 }
 
 function loadData(){
 
-  const saved=
-    localStorage.getItem(
-      "krystal_slot_machine"
-    );
+  const saved=localStorage.getItem("krystal_slot_machine");
 
   if(!saved){
 
-    const fresh=clone(
-      DEFAULT_DATA
-    );
-
+    const fresh=clone(DEFAULT_DATA);
     fresh.history=[];
-
     return fresh;
 
   }
@@ -1458,57 +1057,39 @@ function loadData(){
     ].forEach(category=>{
 
       if(!Array.isArray(data[category])){
-
-        data[category]=
-          clone(DEFAULT_DATA[category]);
-
+        data[category]=clone(DEFAULT_DATA[category]);
       }
 
       data[category].forEach(item=>{
 
-        if(item.stock===undefined)
-          item.stock=5;
-
-        if(item.image===undefined)
-          item.image="";
-
-        if(item.photoOnly===undefined)
-          item.photoOnly=false;
+        if(item.stock===undefined) item.stock=5;
+        if(item.image===undefined) item.image="";
+        if(item.photoOnly===undefined) item.photoOnly=false;
 
       });
 
     });
 
     if(!data.rules){
-
-      data.rules=
-        clone(DEFAULT_DATA.rules);
-
+      data.rules=clone(DEFAULT_DATA.rules);
     }
 
     if(!Array.isArray(data.history)){
-
       data.history=[];
-
     }
 
     return data;
 
   }catch(e){
 
-    const fresh=
-      clone(DEFAULT_DATA);
-
+    const fresh=clone(DEFAULT_DATA);
     fresh.history=[];
-
     return fresh;
 
   }
-
 }
 
 let data=loadData();
-
 
 function saveData(){
 
@@ -1519,7 +1100,6 @@ function saveData(){
 
 }
 
-
 /* =====================================================
 PAGE
 ===================================================== */
@@ -1527,73 +1107,39 @@ PAGE
 function showPage(page){
 
   document.querySelectorAll(".page")
-    .forEach(el=>
-      el.classList.remove("active")
-    );
+    .forEach(el=>el.classList.remove("active"));
 
   document.querySelectorAll(".nav button")
-    .forEach(el=>
-      el.classList.remove("active")
-    );
-
+    .forEach(el=>el.classList.remove("active"));
 
   if(page==="draw"){
 
-    document.getElementById(
-      "drawPage"
-    ).classList.add("active");
-
-    document.getElementById(
-      "navDraw"
-    ).classList.add("active");
+    document.getElementById("drawPage").classList.add("active");
+    document.getElementById("navDraw").classList.add("active");
 
     renderReels();
 
-  }else{
+  }
 
-    document.getElementById(
-      "settingsPage"
-    ).classList.add("active");
+  if(page==="history"){
 
-    document.getElementById(
-      "navSettings"
-    ).classList.add("active");
+    document.getElementById("historyPage").classList.add("active");
+    document.getElementById("navHistory").classList.add("active");
+
+    renderHistory();
+
+  }
+
+  if(page==="settings"){
+
+    document.getElementById("settingsPage").classList.add("active");
+    document.getElementById("navSettings").classList.add("active");
 
     renderSettings();
 
   }
 
 }
-
-
-/* =====================================================
-OPEN HISTORY
-===================================================== */
-
-function openHistory(){
-
-  showPage("settings");
-
-  setTimeout(()=>{
-
-    const history=
-      document.getElementById(
-        "historyContent"
-      );
-
-    if(history){
-
-      history.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-
-    }
-
-  },100);
-
-}
-
 
 /* =====================================================
 ESCAPE
@@ -1610,7 +1156,6 @@ function escapeHTML(text){
 
 }
 
-
 /* =====================================================
 VISUAL
 ===================================================== */
@@ -1620,72 +1165,44 @@ function visualHTML(item){
   if(item.image){
 
     return `
-
       <div class="reel-item-inner">
-
-        <img
-          src="${item.image}"
-          alt=""
-        >
-
+        <img src="${item.image}" alt="">
       </div>
-
     `;
 
   }
 
   return `
-
     <div class="reel-item-inner">
-
       <div class="reel-text">
-
         ${escapeHTML(item.name)}
-
       </div>
-
     </div>
-
   `;
 
 }
-
 
 function resultVisualHTML(item){
 
   if(item.image){
 
     return `
-
       <div class="result-visual">
-
-        <img
-          src="${item.image}"
-          alt=""
-        >
-
+        <img src="${item.image}" alt="">
       </div>
-
     `;
 
   }
 
   return `
-
     <div class="result-visual">
-
       <div class="reel-text">
-
         ${escapeHTML(item.name)}
-
       </div>
-
     </div>
-
   `;
 
 }
-
 
 /* =====================================================
 RULES
@@ -1698,137 +1215,89 @@ function getRule(ruleObj,key){
     Array.isArray(ruleObj[key]) &&
     ruleObj[key].length>0
   ){
-
     return ruleObj[key];
-
   }
 
   return null;
-
 }
 
-
-function getVisualPool(
-  slot,
-  context={}
-){
+function getVisualPool(slot,context={}){
 
   let list=[];
 
-
   if(slot==="style"){
-
     list=data.styles;
-
   }
-
 
   if(slot==="mainColor"){
 
     list=data.mainColors;
 
-    const allowed=
-      getRule(
-        data.rules.styleMain,
-        context.style
-      );
+    const allowed=getRule(
+      data.rules.styleMain,
+      context.style
+    );
 
     if(allowed){
-
-      list=list.filter(
-        x=>allowed.includes(x.id)
-      );
-
+      list=list.filter(x=>allowed.includes(x.id));
     }
 
   }
-
 
   if(slot==="secondaryColor"){
 
     list=data.secondaryColors;
 
-    const allowed=
-      getRule(
-        data.rules.mainSecondary,
-        context.mainColor
-      );
+    const allowed=getRule(
+      data.rules.mainSecondary,
+      context.mainColor
+    );
 
     if(allowed){
-
-      list=list.filter(
-        x=>allowed.includes(x.id)
-      );
-
+      list=list.filter(x=>allowed.includes(x.id));
     }
 
   }
 
-
-  if(
-    slot==="mainButton" ||
-    slot==="subButton"
-  ){
+  if(slot==="mainButton" || slot==="subButton"){
 
     list=data.mainButtons;
 
-    const allowed=
-      getRule(
-        data.rules.styleButtons,
-        context.style
-      );
+    const allowed=getRule(
+      data.rules.styleButtons,
+      context.style
+    );
 
     if(allowed){
-
-      list=list.filter(
-        x=>allowed.includes(x.id)
-      );
-
+      list=list.filter(x=>allowed.includes(x.id));
     }
 
   }
-
 
   if(slot==="charm"){
 
     list=data.charms;
 
-    const allowed=
-      getRule(
-        data.rules.styleCharms,
-        context.style
-      );
+    const allowed=getRule(
+      data.rules.styleCharms,
+      context.style
+    );
 
     if(allowed){
-
-      list=list.filter(
-        x=>allowed.includes(x.id)
-      );
-
+      list=list.filter(x=>allowed.includes(x.id));
     }
 
   }
 
-
   return list;
-
 }
 
+function getAvailablePool(slot,context={}){
 
-function getAvailablePool(
-  slot,
-  context={}
-){
-
-  return getVisualPool(
-    slot,
-    context
-  ).filter(
-    item=>Number(item.stock)>0
-  );
+  return getVisualPool(slot,context)
+    .filter(item=>Number(item.stock)>0);
 
 }
-
 
 /* =====================================================
 SLOTS
@@ -1836,47 +1305,20 @@ SLOTS
 
 const SLOTS=[
 
-  {
-    key:"style",
-    title:"款式"
-  },
-
-  {
-    key:"mainColor",
-    title:"线材主色"
-  },
-
-  {
-    key:"secondaryColor",
-    title:"线材配色"
-  },
-
-  {
-    key:"mainButton",
-    title:"主扣"
-  },
-
-  {
-    key:"subButton",
-    title:"副扣"
-  },
-
-  {
-    key:"charm",
-    title:"小吊饰"
-  }
+  {key:"style",title:"款式"},
+  {key:"mainColor",title:"线材主色"},
+  {key:"secondaryColor",title:"线材配色"},
+  {key:"mainButton",title:"主扣"},
+  {key:"subButton",title:"副扣"},
+  {key:"charm",title:"小吊饰"}
 
 ];
-
 
 const machineState={};
 
 let finalResult=null;
-
 let isRunning=false;
-
 let currentOrder="";
-
 
 /* =====================================================
 RENDER REELS
@@ -1884,67 +1326,52 @@ RENDER REELS
 
 function renderReels(){
 
-  const grid=
-    document.getElementById(
-      "machineGrid"
-    );
+  const grid=document.getElementById("machineGrid");
+
+  if(!grid) return;
 
   grid.innerHTML="";
 
-
   SLOTS.forEach(slot=>{
 
-    const machine=
-      document.createElement("div");
+    const machine=document.createElement("div");
 
     machine.className="machine";
-
 
     machine.innerHTML=`
 
       <div class="machine-title">
-
         ${slot.title}
-
       </div>
-
 
       <div class="reel-window">
 
         <div
           class="reel-track"
-          id="track_${slot.key}"
-        ></div>
+          id="track_${slot.key}">
+        </div>
 
         <div class="reel-middle"></div>
 
       </div>
 
-
       <button
         class="machine-stop"
         id="stop_${slot.key}"
         onclick="stopSingle('${slot.key}')"
-        disabled
-      >
-
+        disabled>
         🛑 单独停止
-
       </button>
 
     `;
 
-
     grid.appendChild(machine);
 
-    setupMachine(
-      slot.key
-    );
+    setupMachine(slot.key);
 
   });
 
 }
-
 
 /* =====================================================
 SETUP
@@ -1952,82 +1379,54 @@ SETUP
 
 function setupMachine(key){
 
-  const track=
-    document.getElementById(
-      "track_"+key
-    );
+  const track=document.getElementById("track_"+key);
 
-
-  const pool=
-    getVisualPool(
-      key,
-      {}
-    );
-
+  const pool=getVisualPool(key,{});
 
   if(!pool.length){
 
     track.innerHTML=`
-
       <div class="reel-item">
-
         <div class="reel-item-inner">
-
-          <div class="reel-text">
-            暂无内容
-          </div>
-
+          <div class="reel-text">暂无内容</div>
         </div>
-
       </div>
-
     `;
 
+    machineState[key]={
+      running:false,
+      offset:0,
+      timer:null
+    };
+
     return;
-
   }
-
 
   let html="";
 
-
   for(let i=0;i<100;i++){
 
-    const item=
-      pool[i%pool.length];
-
+    const item=pool[i%pool.length];
 
     html+=`
-
       <div class="reel-item">
-
         ${visualHTML(item)}
-
       </div>
-
     `;
 
   }
 
-
   track.innerHTML=html;
 
-  track.style.transform=
-    "translateY(0px)";
-
+  track.style.transform="translateY(0px)";
 
   machineState[key]={
-
     running:false,
-
     offset:0,
-
     timer:null
-
   };
 
 }
-
 
 /* =====================================================
 RANDOM
@@ -2035,23 +1434,15 @@ RANDOM
 
 function randomItem(list){
 
-  if(
-    !list ||
-    !list.length
-  ){
-
+  if(!list || !list.length){
     return null;
-
   }
 
   return list[
-    Math.floor(
-      Math.random()*list.length
-    )
+    Math.floor(Math.random()*list.length)
   ];
 
 }
-
 
 /* =====================================================
 FINAL RESULT
@@ -2059,134 +1450,84 @@ FINAL RESULT
 
 function generateFinalResult(){
 
-  const style=
-    randomItem(
-      getAvailablePool("style")
-    );
-
+  const style=randomItem(
+    getAvailablePool("style")
+  );
 
   if(!style){
 
-    alert(
-      "目前没有可抽取的款式库存。"
-    );
-
+    alert("目前没有可抽取的款式库存。");
     return null;
 
   }
 
-
-  const mainColor=
-    randomItem(
-      getAvailablePool(
-        "mainColor",
-        {
-          style:style.id
-        }
-      )
-    );
-
+  const mainColor=randomItem(
+    getAvailablePool(
+      "mainColor",
+      {style:style.id}
+    )
+  );
 
   if(!mainColor){
 
-    alert(
-      "目前没有符合条件的主色库存。"
-    );
-
+    alert("目前没有符合条件的主色库存。");
     return null;
 
   }
 
-
-  const secondaryColor=
-    randomItem(
-      getAvailablePool(
-        "secondaryColor",
-        {
-          mainColor:mainColor.id
-        }
-      )
-    );
-
+  const secondaryColor=randomItem(
+    getAvailablePool(
+      "secondaryColor",
+      {mainColor:mainColor.id}
+    )
+  );
 
   if(!secondaryColor){
 
-    alert(
-      "目前没有符合条件的配色库存。"
-    );
-
+    alert("目前没有符合条件的配色库存。");
     return null;
 
   }
 
-
-  const buttonPool=
-    getAvailablePool(
-      "mainButton",
-      {
-        style:style.id
-      }
-    );
-
+  const buttonPool=getAvailablePool(
+    "mainButton",
+    {style:style.id}
+  );
 
   if(buttonPool.length===0){
 
-    alert(
-      "目前没有主扣库存。"
-    );
-
+    alert("目前没有主扣库存。");
     return null;
 
   }
 
+  const mainButton=randomItem(buttonPool);
+  const subButton=randomItem(buttonPool);
 
-  const mainButton=
-    randomItem(buttonPool);
-
-  const subButton=
-    randomItem(buttonPool);
-
-
-  const charm=
-    randomItem(
-      getAvailablePool(
-        "charm",
-        {
-          style:style.id
-        }
-      )
-    );
-
+  const charm=randomItem(
+    getAvailablePool(
+      "charm",
+      {style:style.id}
+    )
+  );
 
   if(!charm){
 
-    alert(
-      "目前没有小吊饰库存。"
-    );
-
+    alert("目前没有小吊饰库存。");
     return null;
 
   }
 
-
   return{
-
     style,
-
     mainColor,
-
     secondaryColor,
-
     mainButton,
-
     subButton,
-
     charm
-
   };
 
 }
-
 
 /* =====================================================
 START
@@ -2194,21 +1535,13 @@ START
 
 function startAll(){
 
-  const orderInput=
-    document.getElementById(
-      "orderInput"
-    );
+  const orderInput=document.getElementById("orderInput");
 
-
-  const order=
-    orderInput.value.trim();
-
+  const order=orderInput.value.trim();
 
   if(!order){
 
-    alert(
-      "💗 请先输入订单号"
-    );
+    alert("💗 请先输入订单号");
 
     orderInput.focus();
 
@@ -2216,45 +1549,26 @@ function startAll(){
 
   }
 
-
   if(isRunning){
-
     return;
-
   }
 
-
-  const result=
-    generateFinalResult();
-
+  const result=generateFinalResult();
 
   if(!result){
-
     return;
-
   }
 
-
   currentOrder=order;
-
   finalResult=result;
-
   isRunning=true;
 
+  document.getElementById("startAllBtn").disabled=true;
 
-  document.getElementById(
-    "startAllBtn"
-  ).disabled=true;
-
-
-  document.querySelectorAll(
-    ".machine-stop"
-  ).forEach(btn=>{
-
-    btn.disabled=false;
-
-  });
-
+  document.querySelectorAll(".machine-stop")
+    .forEach(btn=>{
+      btn.disabled=false;
+    });
 
   SLOTS.forEach(slot=>{
 
@@ -2270,82 +1584,48 @@ function startAll(){
 
 }
 
-
 /* =====================================================
 INFINITE SPIN
 ===================================================== */
 
-function startSlot(
-  key,
-  context
-){
+function startSlot(key,context){
 
-  const track=
-    document.getElementById(
-      "track_"+key
-    );
+  const track=document.getElementById("track_"+key);
 
-
-  const pool=
-    getVisualPool(
-      key,
-      context
-    );
-
+  const pool=getVisualPool(key,context);
 
   if(!pool.length){
-
     return;
-
   }
 
-
-  const state=
-    machineState[key];
-
+  const state=machineState[key];
 
   state.running=true;
 
+  let position=state.offset||0;
 
-  let position=
-    state.offset||0;
-
-
-  track.style.transition=
-    "none";
-
+  track.style.transition="none";
 
   function animate(){
 
     if(!state.running){
-
       return;
-
     }
 
-
     position-=10;
-
 
     track.style.transform=
       `translateY(${position}px)`;
 
-
     state.offset=position;
 
-
-    state.timer=
-      requestAnimationFrame(
-        animate
-      );
+    state.timer=requestAnimationFrame(animate);
 
   }
-
 
   animate();
 
 }
-
 
 /* =====================================================
 STOP SINGLE
@@ -2353,139 +1633,79 @@ STOP SINGLE
 
 function stopSingle(key){
 
-  const state=
-    machineState[key];
+  const state=machineState[key];
 
-
-  if(
-    !state ||
-    !state.running
-  ){
-
+  if(!state || !state.running){
     return;
-
   }
 
-
-  const resultItem=
-    finalResult[key];
-
+  const resultItem=finalResult[key];
 
   if(!resultItem){
-
     return;
-
   }
-
 
   state.running=false;
 
+  cancelAnimationFrame(state.timer);
 
-  cancelAnimationFrame(
-    state.timer
+  const track=document.getElementById("track_"+key);
+
+  const item=track.parentElement.querySelector(".reel-item");
+
+  const itemHeight=item.offsetHeight;
+
+  const pool=getVisualPool(
+    key,
+    {
+      style:finalResult.style.id,
+      mainColor:finalResult.mainColor.id
+    }
   );
 
-
-  const track=
-    document.getElementById(
-      "track_"+key
-    );
-
-
-  const item=
-    track.parentElement
-      .querySelector(
-        ".reel-item"
-      );
-
-
-  const itemHeight=
-    item.offsetHeight;
-
-
-  const pool=
-    getVisualPool(
-      key,
-      {
-        style:finalResult.style.id,
-        mainColor:finalResult.mainColor.id
-      }
-    );
-
-
-  let targetIndex=
-    pool.findIndex(
-      x=>x.id===resultItem.id
-    );
-
+  let targetIndex=pool.findIndex(
+    x=>x.id===resultItem.id
+  );
 
   if(targetIndex<0){
-
     targetIndex=0;
-
   }
 
+  const reelWindow=track.parentElement;
 
-  const reelWindow=
-    track.parentElement;
+  const windowCenter=reelWindow.clientHeight/2;
 
-
-  const windowCenter=
-    reelWindow.clientHeight/2;
-
-
-  const itemCenter=
-    itemHeight/2;
-
+  const itemCenter=itemHeight/2;
 
   const targetY=
     windowCenter-
     itemCenter-
     targetIndex*itemHeight;
 
-
   const extraLoops=
-    itemHeight*
-    pool.length*
-    3;
+    itemHeight*pool.length*3;
 
-
-  const finalY=
-    targetY-extraLoops;
-
+  const finalY=targetY-extraLoops;
 
   track.style.transition=
     "transform 1.3s cubic-bezier(.15,.75,.25,1)";
 
-
   track.style.transform=
     `translateY(${finalY}px)`;
 
-
   state.offset=finalY;
 
-
-  const stopBtn=
-    document.getElementById(
-      "stop_"+key
-    );
-
+  const stopBtn=document.getElementById("stop_"+key);
 
   if(stopBtn){
-
     stopBtn.disabled=true;
-
   }
 
-
   setTimeout(()=>{
-
     checkAllStopped();
-
   },1350);
 
 }
-
 
 /* =====================================================
 STOP ALL
@@ -2494,11 +1714,8 @@ STOP ALL
 function stopAll(){
 
   if(!isRunning){
-
     return;
-
   }
-
 
   SLOTS.forEach(slot=>{
 
@@ -2507,16 +1724,13 @@ function stopAll(){
       machineState[slot.key].running
     ){
 
-      stopSingle(
-        slot.key
-      );
+      stopSingle(slot.key);
 
     }
 
   });
 
 }
-
 
 /* =====================================================
 CHECK
@@ -2524,41 +1738,27 @@ CHECK
 
 function checkAllStopped(){
 
-  const stillRunning=
-    SLOTS.some(slot=>
-      machineState[slot.key] &&
-      machineState[slot.key].running
-    );
-
+  const stillRunning=SLOTS.some(slot=>
+    machineState[slot.key] &&
+    machineState[slot.key].running
+  );
 
   if(stillRunning){
-
     return;
-
   }
-
 
   isRunning=false;
 
+  document.getElementById("startAllBtn").disabled=false;
 
-  document.getElementById(
-    "startAllBtn"
-  ).disabled=false;
-
-
-  document.querySelectorAll(
-    ".machine-stop"
-  ).forEach(btn=>{
-
-    btn.disabled=true;
-
-  });
-
+  document.querySelectorAll(".machine-stop")
+    .forEach(btn=>{
+      btn.disabled=true;
+    });
 
   showResult();
 
 }
-
 
 /* =====================================================
 RESULT
@@ -2566,158 +1766,97 @@ RESULT
 
 function showResult(){
 
-  const modal=
-    document.getElementById(
-      "resultModal"
-    );
+  const modal=document.getElementById("resultModal");
 
+  const order=document.getElementById("resultOrder");
 
-  const order=
-    document.getElementById(
-      "resultOrder"
-    );
-
-
-  const list=
-    document.getElementById(
-      "resultList"
-    );
-
+  const list=document.getElementById("resultList");
 
   order.innerHTML=
     "订单号：<b>"+
     escapeHTML(currentOrder)+
     "</b>";
 
-
   list.innerHTML="";
-
 
   const resultMap=[
 
     ["style","款式"],
-
     ["mainColor","线材主色"],
-
     ["secondaryColor","线材配色"],
-
     ["mainButton","主扣"],
-
     ["subButton","副扣"],
-
     ["charm","小吊饰"]
 
   ];
 
+  resultMap.forEach(([key,label])=>{
 
-  resultMap.forEach(
-    ([key,label])=>{
+    const item=finalResult[key];
 
-      const item=
-        finalResult[key];
+    const row=document.createElement("div");
 
+    row.className="result-row";
 
-      const row=
-        document.createElement(
-          "div"
-        );
+    row.innerHTML=`
 
+      <div class="result-label">
+        ${label}
+      </div>
 
-      row.className=
-        "result-row";
+      ${resultVisualHTML(item)}
 
+      <div class="result-name">
+        ${escapeHTML(item.name)}
+      </div>
 
-      row.innerHTML=`
+    `;
 
-        <div class="result-label">
+    list.appendChild(row);
 
-          ${label}
-
-        </div>
-
-
-        ${resultVisualHTML(item)}
-
-
-        <div class="result-name">
-
-          ${escapeHTML(item.name)}
-
-        </div>
-
-      `;
-
-
-      list.appendChild(row);
-
-    }
-  );
-
+  });
 
   modal.classList.add("show");
 
 }
 
-
 /* =====================================================
-CONFIRM + SAVE HISTORY
+CONFIRM
 ===================================================== */
 
 function confirmResult(){
 
   if(!finalResult){
-
     return;
-
   }
 
+  decreaseStock("styles",finalResult.style.id);
 
-  decreaseStock(
-    "styles",
-    finalResult.style.id
-  );
-
-
-  decreaseStock(
-    "mainColors",
-    finalResult.mainColor.id
-  );
-
+  decreaseStock("mainColors",finalResult.mainColor.id);
 
   decreaseStock(
     "secondaryColors",
     finalResult.secondaryColor.id
   );
 
-
   decreaseStock(
     "mainButtons",
     finalResult.mainButton.id
   );
-
 
   decreaseStock(
     "mainButtons",
     finalResult.subButton.id
   );
 
-
   decreaseStock(
     "charms",
     finalResult.charm.id
   );
 
-
-  /* =========================
-     保存历史记录
-  ========================= */
-
   if(!Array.isArray(data.history)){
-
     data.history=[];
-
   }
-
 
   data.history.unshift({
 
@@ -2778,44 +1917,28 @@ function confirmResult(){
 
   });
 
-
   saveData();
 
-
-  document.getElementById(
-    "resultModal"
-  ).classList.remove("show");
-
+  document.getElementById("resultModal")
+    .classList.remove("show");
 
   finalResult=null;
-
 
   renderReels();
 
 }
 
-
 /* =====================================================
 STOCK
 ===================================================== */
 
-function decreaseStock(
-  category,
-  id
-){
+function decreaseStock(category,id){
 
-  const item=
-    data[category].find(
-      x=>x.id===id
-    );
-
+  const item=data[category].find(x=>x.id===id);
 
   if(!item){
-
     return;
-
   }
-
 
   item.stock=Math.max(
     0,
@@ -2824,7 +1947,6 @@ function decreaseStock(
 
 }
 
-
 /* =====================================================
 SETTINGS
 ===================================================== */
@@ -2832,13 +1954,9 @@ SETTINGS
 function renderSettings(){
 
   const container=
-    document.getElementById(
-      "settingsContent"
-    );
-
+    document.getElementById("settingsContent");
 
   container.innerHTML="";
-
 
   renderCategory(
     container,
@@ -2846,13 +1964,11 @@ function renderSettings(){
     "🎀 款式"
   );
 
-
   renderCategory(
     container,
     "mainColors",
     "🧶 线材主色"
   );
-
 
   renderCategory(
     container,
@@ -2860,13 +1976,11 @@ function renderSettings(){
     "🌷 线材配色"
   );
 
-
   renderCategory(
     container,
     "mainButtons",
     "🎀 主扣 / 副扣"
   );
-
 
   renderCategory(
     container,
@@ -2874,309 +1988,210 @@ function renderSettings(){
     "✨ 小吊饰"
   );
 
-
-  renderRules(
-    container
-  );
-
-
-  renderHistory();
+  renderRules(container);
 
 }
-
 
 /* =====================================================
 CATEGORY
 ===================================================== */
 
-function renderCategory(
-  container,
-  category,
-  title
-){
+function renderCategory(container,category,title){
 
-  const card=
-    document.createElement(
-      "div"
-    );
+  const card=document.createElement("div");
 
-
-  card.className=
-    "settings-card";
-
+  card.className="settings-card";
 
   card.innerHTML=`
 
     <h2>${title}</h2>
-
 
     <div class="add-area">
 
       <input
         id="add_${category}"
         class="add-input"
-        placeholder="输入新项目名称"
-      >
-
+        placeholder="输入新项目名称">
 
       <button
         class="add-btn"
-        onclick="addItem('${category}')"
-      >
-
+        onclick="addItem('${category}')">
         ＋ 添加
-
       </button>
 
     </div>
 
-
-    <div
-      id="list_${category}"
-    ></div>
+    <div id="list_${category}"></div>
 
   `;
 
+  container.appendChild(card);
 
-  container.appendChild(
-    card
-  );
+  const list=card.querySelector("#list_"+category);
 
-
-  const list=
-    card.querySelector(
-      "#list_"+category
-    );
-
-
-  if(
-    data[category].length===0
-  ){
+  if(data[category].length===0){
 
     list.innerHTML=
-      `<div class="empty">
-        暂无项目
-      </div>`;
+      `<div class="empty">暂无项目</div>`;
 
     return;
 
   }
 
+  data[category].forEach(item=>{
 
-  data[category].forEach(
-    item=>{
+    const row=document.createElement("div");
 
-      const row=
-        document.createElement(
-          "div"
-        );
+    row.className="setting-item";
 
+    row.innerHTML=`
 
-      row.className=
-        "setting-item";
+      <div class="setting-top">
 
-
-      row.innerHTML=`
-
-        <div class="setting-top">
-
-
-          <div class="item-preview">
-
-            ${
-              item.image
-              ?
-              `
-              <img
-                src="${item.image}"
-                alt=""
-              >
-              `
-              :
-              `<span>🧶</span>`
-            }
-
-          </div>
-
-
-          <div class="item-name">
-
-            ${escapeHTML(item.name)}
-
-          </div>
-
-
-          <label class="photo-check">
-
-            <input
-              type="checkbox"
-              ${item.photoOnly?"checked":""}
-
-              onchange="
-                togglePhotoOnly(
-                  '${category}',
-                  '${item.id}',
-                  this.checked
-                )
-              "
-            >
-
-            只显示照片
-
-          </label>
-
-
-          <button
-            class="photo-btn"
-
-            onclick="
-              uploadPhoto(
-                '${category}',
-                '${item.id}'
-              )
-            "
-          >
-
-            ${
-              item.image
-              ?
-              "更换照片"
-              :
-              "添加照片"
-            }
-
-          </button>
-
+        <div class="item-preview">
 
           ${
             item.image
             ?
-            `
-            <button
-              class="delete-btn"
-
-              onclick="
-                removePhoto(
-                  '${category}',
-                  '${item.id}'
-                )
-              "
-            >
-
-              删除照片
-
-            </button>
-            `
+            `<img src="${item.image}" alt="">`
             :
-            ""
+            `<span>🧶</span>`
           }
 
+        </div>
 
+        <div class="item-name">
+          ${escapeHTML(item.name)}
+        </div>
+
+        <label class="photo-check">
+
+          <input
+            type="checkbox"
+            ${item.photoOnly?"checked":""}
+            onchange="
+              togglePhotoOnly(
+                '${category}',
+                '${item.id}',
+                this.checked
+              )
+            ">
+
+          只显示照片
+
+        </label>
+
+        <button
+          class="photo-btn"
+          onclick="
+            uploadPhoto(
+              '${category}',
+              '${item.id}'
+            )
+          ">
+
+          ${item.image?"更换照片":"添加照片"}
+
+        </button>
+
+        ${
+          item.image
+          ?
+          `
           <button
             class="delete-btn"
-
             onclick="
-              deleteItem(
+              removePhoto(
                 '${category}',
                 '${item.id}'
               )
-            "
-          >
-
-            删除
-
+            ">
+            删除照片
           </button>
+          `
+          :
+          ""
+        }
 
+        <button
+          class="delete-btn"
+          onclick="
+            deleteItem(
+              '${category}',
+              '${item.id}'
+            )
+          ">
+          删除
+        </button>
 
-        </div>
+      </div>
 
+      <div class="stock-row">
 
-        <div class="stock-row">
+        <span>库存</span>
 
-          <span>
-            库存
-          </span>
+        <button
+          onclick="
+            changeStock(
+              '${category}',
+              '${item.id}',
+              -1
+            )
+          ">
+          −
+        </button>
 
+        <input
+          class="stock-input"
+          type="number"
+          min="0"
+          value="${Number(item.stock)||0}"
+          onchange="
+            setStock(
+              '${category}',
+              '${item.id}',
+              this.value
+            )
+          ">
 
-          <button
-            onclick="
-              changeStock(
-                '${category}',
-                '${item.id}',
-                -1
-              )
-            "
-          >
-            −
-          </button>
+        <button
+          onclick="
+            changeStock(
+              '${category}',
+              '${item.id}',
+              1
+            )
+          ">
+          ＋
+        </button>
 
-
-          <input
-            class="stock-input"
-            type="number"
-            min="0"
-            value="${Number(item.stock)||0}"
-
-            onchange="
-              setStock(
-                '${category}',
-                '${item.id}',
-                this.value
-              )
-            "
-          >
-
-
-          <button
-            onclick="
-              changeStock(
-                '${category}',
-                '${item.id}',
-                1
-              )
-            "
-          >
-            ＋
-          </button>
-
-
-          <span
-            class="
-              stock-status
-              ${
-                Number(item.stock)>0
-                ?
-                "in"
-                :
-                "out"
-              }
-            "
-          >
-
+        <span
+          class="
+            stock-status
             ${
               Number(item.stock)>0
-              ?
-              "有货"
-              :
-              "缺货"
+              ?"in"
+              :"out"
             }
+          ">
 
-          </span>
+          ${
+            Number(item.stock)>0
+            ?"有货"
+            :"缺货"
+          }
 
-        </div>
+        </span>
 
-      `;
+      </div>
 
+    `;
 
-      list.appendChild(
-        row
-      );
+    list.appendChild(row);
 
-    }
-  );
+  });
 
 }
-
 
 /* =====================================================
 ADD
@@ -3184,109 +2199,71 @@ ADD
 
 function addItem(category){
 
-  const input=
-    document.getElementById(
-      "add_"+category
-    );
+  const input=document.getElementById(
+    "add_"+category
+  );
 
-
-  const name=
-    input.value.trim();
-
+  const name=input.value.trim();
 
   if(!name){
 
-    alert(
-      "请输入名称"
-    );
-
+    alert("请输入名称");
     return;
 
   }
 
-
   data[category].push({
 
     id:createId(),
-
     name:name,
-
     image:"",
-
     photoOnly:false,
-
     stock:5
 
   });
 
-
   input.value="";
-
 
   saveData();
 
   renderSettings();
 
 }
-
 
 /* =====================================================
 DELETE
 ===================================================== */
 
-function deleteItem(
-  category,
-  id
-){
+function deleteItem(category,id){
 
-  const item=
-    data[category].find(
-      x=>x.id===id
-    );
-
+  const item=data[category].find(x=>x.id===id);
 
   if(!item){
-
     return;
-
   }
-
 
   if(!confirm(
     `确定要删除「${item.name}」吗？`
   )){
-
     return;
-
   }
 
-
-  data[category]=
-    data[category].filter(
-      x=>x.id!==id
-    );
-
-
-  Object.keys(
-    data.rules
-  ).forEach(
-    ruleGroup=>{
-
-      Object.keys(
-        data.rules[ruleGroup]
-      ).forEach(key=>{
-
-        data.rules[ruleGroup][key]=
-          data.rules[ruleGroup][key]
-            .filter(
-              x=>x!==id
-            );
-
-      });
-
-    }
+  data[category]=data[category].filter(
+    x=>x.id!==id
   );
 
+  Object.keys(data.rules).forEach(ruleGroup=>{
+
+    Object.keys(data.rules[ruleGroup]).forEach(key=>{
+
+      data.rules[ruleGroup][key]=
+        data.rules[ruleGroup][key].filter(
+          x=>x!==id
+        );
+
+    });
+
+  });
 
   saveData();
 
@@ -3294,62 +2271,38 @@ function deleteItem(
 
 }
 
-
 /* =====================================================
 PHOTO
 ===================================================== */
 
-function uploadPhoto(
-  category,
-  id
-){
+function uploadPhoto(category,id){
 
-  const input=
-    document.createElement(
-      "input"
-    );
-
+  const input=document.createElement("input");
 
   input.type="file";
-
   input.accept="image/*";
-
 
   input.onchange=function(){
 
-    const file=
-      input.files[0];
-
+    const file=input.files[0];
 
     if(!file){
-
       return;
-
     }
 
-
-    const reader=
-      new FileReader();
-
+    const reader=new FileReader();
 
     reader.onload=function(e){
 
-      const item=
-        data[category].find(
-          x=>x.id===id
-        );
-
+      const item=data[category].find(
+        x=>x.id===id
+      );
 
       if(!item){
-
         return;
-
       }
 
-
-      item.image=
-        e.target.result;
-
+      item.image=e.target.result;
 
       saveData();
 
@@ -3357,41 +2310,26 @@ function uploadPhoto(
 
     };
 
-
-    reader.readAsDataURL(
-      file
-    );
+    reader.readAsDataURL(file);
 
   };
-
 
   input.click();
 
 }
 
+function removePhoto(category,id){
 
-function removePhoto(
-  category,
-  id
-){
-
-  const item=
-    data[category].find(
-      x=>x.id===id
-    );
-
+  const item=data[category].find(
+    x=>x.id===id
+  );
 
   if(!item){
-
     return;
-
   }
 
-
   item.image="";
-
   item.photoOnly=false;
-
 
   saveData();
 
@@ -3399,130 +2337,83 @@ function removePhoto(
 
 }
 
+function togglePhotoOnly(category,id,checked){
 
-function togglePhotoOnly(
-  category,
-  id,
-  checked
-){
-
-  const item=
-    data[category].find(
-      x=>x.id===id
-    );
-
+  const item=data[category].find(
+    x=>x.id===id
+  );
 
   if(!item){
-
     return;
-
   }
 
-
-  item.photoOnly=
-    checked;
-
+  item.photoOnly=checked;
 
   saveData();
 
 }
 
-
 /* =====================================================
 STOCK
 ===================================================== */
 
-function changeStock(
-  category,
-  id,
-  amount
-){
+function changeStock(category,id,amount){
 
-  const item=
-    data[category].find(
-      x=>x.id===id
-    );
-
+  const item=data[category].find(
+    x=>x.id===id
+  );
 
   if(!item){
-
     return;
-
   }
-
 
   item.stock=Math.max(
     0,
     Number(item.stock||0)+amount
   );
 
-
   saveData();
 
   renderSettings();
 
 }
 
+function setStock(category,id,value){
 
-function setStock(
-  category,
-  id,
-  value
-){
-
-  const item=
-    data[category].find(
-      x=>x.id===id
-    );
-
+  const item=data[category].find(
+    x=>x.id===id
+  );
 
   if(!item){
-
     return;
-
   }
-
 
   item.stock=Math.max(
     0,
     parseInt(value)||0
   );
 
-
   saveData();
 
   renderSettings();
 
 }
 
-
 /* =====================================================
 RULES
 ===================================================== */
 
-function renderRules(
-  container
-){
+function renderRules(container){
 
-  const card=
-    document.createElement(
-      "div"
-    );
+  const card=document.createElement("div");
 
-
-  card.className=
-    "settings-card";
-
+  card.className="settings-card";
 
   card.innerHTML=`
 
-    <h2>
-      🎀 搭配限制
-    </h2>
-
+    <h2>🎀 搭配限制</h2>
 
     <div class="rules-box">
-
 
       <div class="rule-row">
 
@@ -3532,11 +2423,10 @@ function renderRules(
 
         <div
           id="rule_styleMain"
-          class="rule-options"
-        ></div>
+          class="rule-options">
+        </div>
 
       </div>
-
 
       <div class="rule-row">
 
@@ -3546,11 +2436,10 @@ function renderRules(
 
         <div
           id="rule_styleButtons"
-          class="rule-options"
-        ></div>
+          class="rule-options">
+        </div>
 
       </div>
-
 
       <div class="rule-row">
 
@@ -3560,11 +2449,10 @@ function renderRules(
 
         <div
           id="rule_styleCharms"
-          class="rule-options"
-        ></div>
+          class="rule-options">
+        </div>
 
       </div>
-
 
       <div class="rule-row">
 
@@ -3574,33 +2462,24 @@ function renderRules(
 
         <div
           id="rule_mainSecondary"
-          class="rule-options"
-        ></div>
+          class="rule-options">
+        </div>
 
       </div>
 
-
     </div>
-
 
     <p style="
       font-size:12px;
       color:#a78994;
       margin:12px 0 0;
     ">
-
-      💡 不勾选任何选项 =
-      不限制，可以随机抽取全部。
-
+      💡 不勾选任何选项 = 不限制，可以随机抽取全部。
     </p>
 
   `;
 
-
-  container.appendChild(
-    card
-  );
-
+  container.appendChild(card);
 
   renderRuleGroup(
     "rule_styleMain",
@@ -3609,7 +2488,6 @@ function renderRules(
     data.rules.styleMain
   );
 
-
   renderRuleGroup(
     "rule_styleButtons",
     data.styles,
@@ -3617,14 +2495,12 @@ function renderRules(
     data.rules.styleButtons
   );
 
-
   renderRuleGroup(
     "rule_styleCharms",
     data.styles,
     data.charms,
     data.rules.styleCharms
   );
-
 
   renderRuleGroup(
     "rule_mainSecondary",
@@ -3635,7 +2511,6 @@ function renderRules(
 
 }
 
-
 function renderRuleGroup(
   elementId,
   parents,
@@ -3643,116 +2518,74 @@ function renderRuleGroup(
   ruleObject
 ){
 
-  const box=
-    document.getElementById(
-      elementId
-    );
-
+  const box=document.getElementById(elementId);
 
   box.innerHTML="";
 
+  parents.forEach(parent=>{
 
-  parents.forEach(
-    parent=>{
+    const group=document.createElement("div");
 
-      const group=
-        document.createElement(
-          "div"
-        );
+    group.style.width="100%";
+    group.style.marginBottom="8px";
 
+    const current=ruleObject[parent.id]||[];
 
-      group.style.width=
-        "100%";
+    let html=`
 
-      group.style.marginBottom=
-        "8px";
+      <div style="
+        font-size:12px;
+        color:#a56d7e;
+        margin-bottom:5px;
+      ">
+        ${escapeHTML(parent.name)}
+      </div>
 
+      <div style="
+        display:flex;
+        flex-wrap:wrap;
+        gap:5px;
+      ">
 
-      const current=
-        ruleObject[parent.id]||[];
+    `;
 
+    children.forEach(child=>{
 
-      let html=`
+      const checked=current.includes(child.id);
 
-        <div style="
-          font-size:12px;
-          color:#a56d7e;
-          margin-bottom:5px;
-        ">
+      html+=`
 
-          ${escapeHTML(
-            parent.name
-          )}
+        <label class="rule-option">
 
-        </div>
+          <input
+            type="checkbox"
+            ${checked?"checked":""}
+            onchange="
+              toggleRule(
+                '${elementId}',
+                '${parent.id}',
+                '${child.id}',
+                this.checked
+              )
+            ">
 
+          ${escapeHTML(child.name)}
 
-        <div style="
-          display:flex;
-          flex-wrap:wrap;
-          gap:5px;
-        ">
+        </label>
 
       `;
 
+    });
 
-      children.forEach(
-        child=>{
+    html+=`</div>`;
 
-          const checked=
-            current.includes(
-              child.id
-            );
+    group.innerHTML=html;
 
+    box.appendChild(group);
 
-          html+=`
-
-            <label
-              class="rule-option"
-            >
-
-              <input
-                type="checkbox"
-                ${checked?"checked":""}
-
-                onchange="
-                  toggleRule(
-                    '${elementId}',
-                    '${parent.id}',
-                    '${child.id}',
-                    this.checked
-                  )
-                "
-              >
-
-              ${escapeHTML(
-                child.name
-              )}
-
-            </label>
-
-          `;
-
-        }
-      );
-
-
-      html+=`</div>`;
-
-
-      group.innerHTML=
-        html;
-
-
-      box.appendChild(
-        group
-      );
-
-    }
-  );
+  });
 
 }
-
 
 function toggleRule(
   elementId,
@@ -3763,115 +2596,68 @@ function toggleRule(
 
   let ruleName="";
 
-
-  if(
-    elementId==="rule_styleMain"
-  ){
-
+  if(elementId==="rule_styleMain"){
     ruleName="styleMain";
-
   }
 
-
-  if(
-    elementId==="rule_styleButtons"
-  ){
-
+  if(elementId==="rule_styleButtons"){
     ruleName="styleButtons";
-
   }
 
-
-  if(
-    elementId==="rule_styleCharms"
-  ){
-
+  if(elementId==="rule_styleCharms"){
     ruleName="styleCharms";
-
   }
 
-
-  if(
-    elementId==="rule_mainSecondary"
-  ){
-
+  if(elementId==="rule_mainSecondary"){
     ruleName="mainSecondary";
-
   }
-
 
   if(!ruleName){
-
     return;
-
   }
 
-
-  if(
-    !data.rules[ruleName][parentId]
-  ){
-
+  if(!data.rules[ruleName][parentId]){
     data.rules[ruleName][parentId]=[];
-
   }
 
-
-  let arr=
-    data.rules[ruleName][parentId];
-
+  let arr=data.rules[ruleName][parentId];
 
   if(checked){
 
-    if(
-      !arr.includes(childId)
-    ){
-
+    if(!arr.includes(childId)){
       arr.push(childId);
-
     }
 
   }else{
 
-    arr=
-      arr.filter(
-        x=>x!==childId
-      );
+    arr=arr.filter(x=>x!==childId);
 
-    data.rules[ruleName][parentId]=
-      arr;
+    data.rules[ruleName][parentId]=arr;
 
   }
-
 
   saveData();
 
 }
 
-
 /* =====================================================
-HISTORY
+HISTORY PAGE
 ===================================================== */
 
 function renderHistory(){
 
   const container=
-    document.getElementById(
-      "historyContent"
-    );
+    document.getElementById("historyContent");
 
+  if(!container){
+    return;
+  }
 
   container.innerHTML="";
 
+  const card=document.createElement("div");
 
-  const card=
-    document.createElement(
-      "div"
-    );
-
-
-  card.className=
-    "history-card";
-
+  card.className="history-card";
 
   card.innerHTML=`
 
@@ -3881,15 +2667,13 @@ function renderHistory(){
         📖 抽取历史记录
       </div>
 
-
       ${
         data.history.length
         ?
         `
         <button
           class="clear-history"
-          onclick="clearHistory()"
-        >
+          onclick="clearHistory()">
           清空记录
         </button>
         `
@@ -3899,31 +2683,20 @@ function renderHistory(){
 
     </div>
 
-
     <div id="historyList"></div>
 
   `;
 
+  container.appendChild(card);
 
-  container.appendChild(
-    card
-  );
-
-
-  const list=
-    document.getElementById(
-      "historyList"
-    );
-
+  const list=document.getElementById("historyList");
 
   if(!data.history.length){
 
     list.innerHTML=`
 
       <div class="empty">
-
         还没有抽取记录 💗
-
       </div>
 
     `;
@@ -3932,133 +2705,67 @@ function renderHistory(){
 
   }
 
+  data.history.forEach(record=>{
 
-  data.history.forEach(
-    record=>{
+    const item=document.createElement("div");
 
-      const item=
-        document.createElement(
-          "div"
-        );
+    item.className="history-item";
 
+    const result=record.result;
 
-      item.className=
-        "history-item";
+    item.innerHTML=`
 
+      <div class="history-head">
 
-      const result=
-        record.result;
-
-
-      item.innerHTML=`
-
-        <div class="history-head">
-
-          <div class="history-order">
-
-            📦
-            ${escapeHTML(
-              record.order
-            )}
-
-          </div>
-
-
-          <div class="history-time">
-
-            ${escapeHTML(
-              record.time
-            )}
-
-          </div>
-
+        <div class="history-order">
+          📦 ${escapeHTML(record.order)}
         </div>
 
-
-        <div class="history-results">
-
-
-          ${historyResult(
-            "款式",
-            result.style
-          )}
-
-
-          ${historyResult(
-            "主色",
-            result.mainColor
-          )}
-
-
-          ${historyResult(
-            "配色",
-            result.secondaryColor
-          )}
-
-
-          ${historyResult(
-            "主扣",
-            result.mainButton
-          )}
-
-
-          ${historyResult(
-            "副扣",
-            result.subButton
-          )}
-
-
-          ${historyResult(
-            "吊饰",
-            result.charm
-          )}
-
-
+        <div class="history-time">
+          ${escapeHTML(record.time)}
         </div>
 
+      </div>
 
-        <button
-          class="history-delete"
+      <div class="history-results">
 
-          onclick="
-            deleteHistory(
-              '${record.id}'
-            )
-          "
-        >
+        ${historyResult("款式",result.style)}
 
-          删除这条记录
+        ${historyResult("主色",result.mainColor)}
 
-        </button>
+        ${historyResult("配色",result.secondaryColor)}
 
-      `;
+        ${historyResult("主扣",result.mainButton)}
 
+        ${historyResult("副扣",result.subButton)}
 
-      list.appendChild(
-        item
-      );
+        ${historyResult("吊饰",result.charm)}
 
-    }
-  );
+      </div>
+
+      <button
+        class="history-delete"
+        onclick="deleteHistory('${record.id}')">
+        删除这条记录
+      </button>
+
+    `;
+
+    list.appendChild(item);
+
+  });
 
 }
 
-
-function historyResult(
-  label,
-  item
-){
+function historyResult(label,item){
 
   return `
 
     <div class="history-result">
 
       <div class="history-label">
-
         ${label}
-
       </div>
-
 
       ${
         item.image
@@ -4066,7 +2773,6 @@ function historyResult(
         `
         <img
           src="${item.image}"
-
           style="
             width:42px;
             height:42px;
@@ -4074,17 +2780,13 @@ function historyResult(
             border-radius:8px;
             display:block;
             margin-bottom:3px;
-          "
-        >
+          ">
         `
         :
         ""
       }
 
-
-      ${escapeHTML(
-        item.name
-      )}
+      ${escapeHTML(item.name)}
 
     </div>
 
@@ -4092,49 +2794,37 @@ function historyResult(
 
 }
 
-
 function deleteHistory(id){
 
-  data.history=
-    data.history.filter(
-      x=>x.id!==id
-    );
-
+  data.history=data.history.filter(
+    x=>x.id!==id
+  );
 
   saveData();
 
-  renderSettings();
+  renderHistory();
 
 }
-
 
 function clearHistory(){
 
   if(!data.history.length){
-
     return;
-
   }
-
 
   if(!confirm(
     "确定要清空全部历史记录吗？"
   )){
-
     return;
-
   }
-
 
   data.history=[];
 
-
   saveData();
 
-  renderSettings();
+  renderHistory();
 
 }
-
 
 /* =====================================================
 INITIAL
