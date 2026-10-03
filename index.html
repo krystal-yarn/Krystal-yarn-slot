@@ -2594,7 +2594,7 @@ function toggleMute(){
    抽取页面
 ========================================================= */
 
-function renderDrawPage(){
+async function renderDrawPage(){
 
   const p=getProduct(game.productId);
 
@@ -2614,8 +2614,28 @@ function renderDrawPage(){
 
   document.getElementById("materialConfirm").classList.add("hidden");
 
-}
+  /* 只显示款式，不自动开始 */
 
+  const styles=getAvailableStyles(p);
+
+  await renderSingleReel(
+    "styleReelGrid",
+    "款式",
+    styles,
+    "style"
+  );
+
+  reelStates.style={
+    spinning:false,
+    pool:styles,
+    selected:null,
+    index:0
+  };
+
+  document.getElementById("styleStartBtn").disabled=false;
+  document.getElementById("styleStopBtn").disabled=true;
+
+}
 
 /* =========================================================
    款式抽取
@@ -2648,13 +2668,6 @@ function startStyleStage(){
     selected:null,
     index:0
   };
-
-  renderSingleReel(
-    "styleReelGrid",
-    "款式",
-    styles,
-    "style"
-  );
 
   document.getElementById("styleStartBtn").disabled=true;
   document.getElementById("styleStopBtn").disabled=false;
