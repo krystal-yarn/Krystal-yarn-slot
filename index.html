@@ -3214,10 +3214,12 @@ function animateMaterial(slotId,reel){
 
   const pos=state.index%total;
 
+  const itemHeight=145;
+
   reel.style.transition="none";
 
   reel.style.transform=
-    `translateY(-${pos*125}px)`;
+    `translateY(-${pos*itemHeight}px)`;
 
   state.timer=setTimeout(
     ()=>animateMaterial(slotId,reel),
@@ -3225,7 +3227,6 @@ function animateMaterial(slotId,reel){
   );
 
 }
-
 async function stopOne(slotId){
 
   const state=reelStates[slotId];
@@ -3273,19 +3274,23 @@ async function stopOne(slotId){
     `[data-reel-key="${slotId}"] .reel-track`
   );
 
-  if(reel){
+if(reel){
 
-    const middle=
-      pool.length*2+pool.indexOf(selected);
+  const itemHeight=145;
 
-    reel.style.transition=
-      "transform .65s cubic-bezier(.15,.8,.25,1)";
+  const middle=
+    pool.length*2+pool.indexOf(selected);
 
-    reel.style.transform=
-      `translateY(-${middle*125}px)`;
+  const targetY=
+    -(middle*itemHeight);
 
-  }
+  reel.style.transition=
+    "transform .65s cubic-bezier(.15,.8,.25,1)";
 
+  reel.style.transform=
+    `translateY(${targetY}px)`;
+
+}
   updateMaterialButtons();
 
   if(allMaterialStopped()){
