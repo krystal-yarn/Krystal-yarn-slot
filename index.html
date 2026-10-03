@@ -2888,9 +2888,7 @@ function stopStyle(){
   if(!state?.spinning) return;
 
   clearTimeout(state.timer);
-  stopSlotSound();
-  playSlotStop();
-
+  
   const pool=state.pool;
 
   const selected=
@@ -3424,8 +3422,6 @@ function animateMaterial(slotId,reel){
   if(!state?.spinning) return;
 
   clearTimeout(state.timer);
-  stopSlotSound();
-  playSlotStop();
 
   const p=getProduct(game.productId);
 
