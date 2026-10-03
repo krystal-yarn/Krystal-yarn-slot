@@ -535,13 +535,15 @@ body:before{
   justify-content:center;
   padding:8px;
   gap:7px;
+  box-sizing:border-box;
 }
 
 .reel-item img{
-  width:78px;
-  height:78px;
+  width:72px;
+  height:72px;
   object-fit:cover;
   border-radius:17px;
+  flex-shrink:0;
 }
 
 .reel-item.photo-only span{
@@ -565,6 +567,7 @@ body:before{
   border-radius:16px;
   pointer-events:none;
   z-index:4;
+  box-sizing:border-box;
 }
 
 .reel-controls{
@@ -3214,7 +3217,9 @@ function animateMaterial(slotId,reel){
 
   const pos=state.index%total;
 
-  const itemHeight=145;
+  const itemHeight=
+    reel.querySelector(".reel-item")
+      ?.getBoundingClientRect().height || 145;
 
   reel.style.transition="none";
 
@@ -3226,8 +3231,7 @@ function animateMaterial(slotId,reel){
     65
   );
 
-}
-async function stopOne(slotId){
+}async function stopOne(slotId){
 
   const state=reelStates[slotId];
 
@@ -3276,7 +3280,9 @@ async function stopOne(slotId){
 
 if(reel){
 
-  const itemHeight=145;
+  const itemHeight=
+    reel.querySelector(".reel-item")
+      ?.getBoundingClientRect().height || 145;
 
   const middle=
     pool.length*2+pool.indexOf(selected);
