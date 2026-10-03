@@ -2523,6 +2523,19 @@ function stopAudio(){
 
 }
 
+  function stopSlotSound(){
+
+  if(audioState.slotSpin){
+
+    try{
+      audioState.slotSpin.stop();
+    }catch(e){}
+
+    audioState.slotSpin=null;
+  }
+
+}
+  
 async function playAudio(ref,loop=true){
 
   if(audioState.muted || !ref) return;
@@ -2561,16 +2574,176 @@ function playIdle(){
 
 function playSpin(){
 
-  const p=getProduct(game.productId);
+  if(audioState.muted) return;
 
-  if(!p) return;
+  stopSlotSound();
 
-  if(p.music?.spin){
-    playAudio(p.music.spin,false);
+  try{
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    if(!AudioContext) return;
+
+    const ctx=new AudioContext();
+
+    if(ctx.state==="suspended"){
+      ctx.resume();
+    }
+
+    let stopped=false;
+    let timer=null;
+
+    function tick(){
+
+      if(stopped) return;
+
+      const osc=ctx.createOscillator();
+      const gain=ctx.createGain();
+
+      osc.type="sine";
+
+      // 轻一点，不要赌场老虎机那种刺耳声音
+      osc.frequency.value=
+        520 + Math.random()*80;
+
+      gain.gain.setValueAtTime(
+        0.0001,
+        ctx.currentTime
+      );
+
+      gain.gain.exponentialRampToValueAtTime(
+        0.035,
+        ctx.currentTime+0.008
+      );
+
+      gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        ctx.currentTime+0.055
+      );
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(
+        ctx.currentTime+0.06
+      );
+
+      timer=setTimeout(
+        tick,
+        65
+      );
+
+    }
+
+    tick();
+
+    audioState.slotSpin={
+
+      stop(){
+
+        stopped=true;
+
+        if(timer){
+          clearTimeout(timer);
+        }
+
+        try{
+          ctx.close();
+        }catch(e){}
+
+      }
+
+    };
+
+  }catch(err){
+
+    console.log(
+      "slot spin sound error",
+      err
+    );
+
   }
 
 }
 
+function playSlotStop(){
+
+  if(audioState.muted) return;
+
+  try{
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    if(!AudioContext) return;
+
+    const ctx=new AudioContext();
+
+    if(ctx.state==="suspended"){
+      ctx.resume();
+    }
+
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+
+    osc.type="sine";
+
+    // 从稍高音滑到较低音，做出“叮～”的感觉
+    osc.frequency.setValueAtTime(
+      760,
+      ctx.currentTime
+    );
+
+    osc.frequency.exponentialRampToValueAtTime(
+      520,
+      ctx.currentTime+0.18
+    );
+
+    gain.gain.setValueAtTime(
+      0.0001,
+      ctx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.08,
+      ctx.currentTime+0.015
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001,
+      ctx.currentTime+0.3
+    );
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+
+    osc.stop(
+      ctx.currentTime+0.32
+    );
+
+    setTimeout(()=>{
+      try{
+        ctx.close();
+      }catch(e){}
+    },400);
+
+  }catch(err){
+
+    console.log(
+      "slot stop sound error",
+      err
+    );
+
+  }
+
+}
+  
 function toggleMute(){
 
   audioState.muted=!audioState.muted;
@@ -2715,6 +2888,8 @@ function stopStyle(){
   if(!state?.spinning) return;
 
   clearTimeout(state.timer);
+  stopSlotSound();
+  playSlotStop();
 
   const pool=state.pool;
 
@@ -3249,6 +3424,8 @@ function animateMaterial(slotId,reel){
   if(!state?.spinning) return;
 
   clearTimeout(state.timer);
+  stopSlotSound();
+  playSlotStop();
 
   const p=getProduct(game.productId);
 
