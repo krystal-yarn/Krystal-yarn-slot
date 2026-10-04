@@ -2958,8 +2958,6 @@ function startStyleStage(){
 
   playSpin();
 
-  startSlotSpinSound();
-
   animateReel("style",styles);
 
 }
@@ -3000,9 +2998,6 @@ function stopStyle(){
   if(!state?.spinning) return;
 
   clearTimeout(state.timer);
-
-  stopSlotSpinSound();
-  playSlotStopSound();
   
   const pool=state.pool;
 
@@ -3489,8 +3484,6 @@ function spinOne(slotId){
   state.pool=pool;
   state.spinning=true;
 
-  startSlotSpinSound();
-
   const reel=document.querySelector(
     `[data-reel-key="${slotId}"] .reel-track`
   );
@@ -3539,9 +3532,6 @@ function animateMaterial(slotId,reel){
   if(!state?.spinning) return;
 
   clearTimeout(state.timer);
-
-  stopSlotSpinSound();
-  playSlotStopSound();
 
   const p=getProduct(game.productId);
 
