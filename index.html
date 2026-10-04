@@ -2773,105 +2773,6 @@ function startSlotSpinSound(){
   }
 
 }
-
-
-/* =========================================================
-   停止老虎机转动音
-========================================================= */
-
-function stopSlotSpinSound(){
-
-  if(audioState.slotSpin){
-
-    try{
-      audioState.slotSpin.stop();
-    }catch(e){}
-
-    audioState.slotSpin=null;
-
-  }
-
-}
-
-
-/* =========================================================
-   ✨ 代码生成：老虎机定格音
-========================================================= */
-
-function playSlotStopSound(){
-
-  if(audioState.muted) return;
-
-  try{
-
-    const AudioContext =
-      window.AudioContext ||
-      window.webkitAudioContext;
-
-    if(!AudioContext) return;
-
-    const ctx=new AudioContext();
-
-    if(ctx.state==="suspended"){
-      ctx.resume();
-    }
-
-    const osc=ctx.createOscillator();
-    const gain=ctx.createGain();
-
-    osc.type="sine";
-
-    // 清脆的“叮～”
-    osc.frequency.setValueAtTime(
-      780,
-      ctx.currentTime
-    );
-
-    osc.frequency.exponentialRampToValueAtTime(
-      540,
-      ctx.currentTime+0.18
-    );
-
-    gain.gain.setValueAtTime(
-      0.0001,
-      ctx.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-      0.075,
-      ctx.currentTime+0.015
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-      0.0001,
-      ctx.currentTime+0.30
-    );
-
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-
-    osc.start();
-
-    osc.stop(
-      ctx.currentTime+0.32
-    );
-
-    setTimeout(()=>{
-      try{
-        ctx.close();
-      }catch(e){}
-    },400);
-
-  }catch(err){
-
-    console.log(
-      "slot stop sound error",
-      err
-    );
-
-  }
-
-}
   
 /* =========================================================
    抽取页面
@@ -2957,6 +2858,7 @@ function startStyleStage(){
   document.getElementById("styleConfirm").classList.add("hidden");
 
   playSpin();
+  playReelSpinSound();
 
   animateReel("style",styles);
 
@@ -2998,6 +2900,8 @@ function stopStyle(){
   if(!state?.spinning) return;
 
   clearTimeout(state.timer);
+
+  playReelStopSound();
   
   const pool=state.pool;
 
@@ -3533,6 +3437,8 @@ function animateMaterial(slotId,reel){
 
   clearTimeout(state.timer);
 
+  playReelStopSound();
+
   const p=getProduct(game.productId);
 
   const pool=getPoolForSlot(
@@ -3872,7 +3778,113 @@ function playFortuneSound(){
 document.getElementById("fortuneBtn").onclick=
   drawFortune;
 
+/* =========================================================
+   🎰 绿色老虎机音效
+========================================================= */
 
+function playReelSpinSound(){
+
+  try{
+
+    const AudioContext=
+      window.AudioContext||
+      window.webkitAudioContext;
+
+    if(!AudioContext) return;
+
+    const ctx=new AudioContext();
+
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+
+    osc.type="sine";
+
+    osc.frequency.value=420;
+
+    gain.gain.setValueAtTime(
+      .001,
+      ctx.currentTime
+    );
+
+    gain.gain.linearRampToValueAtTime(
+      .035,
+      ctx.currentTime+.01
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .001,
+      ctx.currentTime+.08
+    );
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+
+    osc.stop(
+      ctx.currentTime+.1
+    );
+
+  }catch{}
+
+}
+
+
+function playReelStopSound(){
+
+  try{
+
+    const AudioContext=
+      window.AudioContext||
+      window.webkitAudioContext;
+
+    if(!AudioContext) return;
+
+    const ctx=new AudioContext();
+
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+
+    osc.type="sine";
+
+    osc.frequency.setValueAtTime(
+      720,
+      ctx.currentTime
+    );
+
+    osc.frequency.exponentialRampToValueAtTime(
+      520,
+      ctx.currentTime+.18
+    );
+
+    gain.gain.setValueAtTime(
+      .001,
+      ctx.currentTime
+    );
+
+    gain.gain.linearRampToValueAtTime(
+      .07,
+      ctx.currentTime+.02
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .001,
+      ctx.currentTime+.25
+    );
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+
+    osc.stop(
+      ctx.currentTime+.28
+    );
+
+  }catch{}
+
+}
+  
 /* =========================================================
    撒花效果
 ========================================================= */
