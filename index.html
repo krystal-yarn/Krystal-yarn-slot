@@ -3289,8 +3289,7 @@ async function renderMaterialReel(
 
     html+=`
 
-      <div class="reel-item ${item.photoOnly?"photo-only":""}">
-
+      <div class="reel-item ${item.photoOnly?"photo-only":""}" data-item-id="${escapeHtml(item.id)}">
         ${
           image
             ? `<img src="${escapeHtml(image)}">`
@@ -3441,7 +3440,8 @@ function animateMaterial(slotId,reel){
     65
   );
 
-}async function stopOne(slotId){
+
+async function stopOne(slotId){
 
   const state=reelStates[slotId];
 
@@ -3449,18 +3449,16 @@ function animateMaterial(slotId,reel){
 
   clearTimeout(state.timer);
 
-  playReelStopSound();
-
   const p=getProduct(game.productId);
 
-
-const pool=getPoolForSlot(
-  p,
-  game.style,
-  state.slot
-).filter(item=>
-  Number(item.stock||0)>0
-);
+  // 只允许抽取有库存的材料
+  const pool=getPoolForSlot(
+    p,
+    game.style,
+    state.slot
+  ).filter(item=>
+    Number(item.stock||0)>0
+  );
 
   if(!pool.length){
 
@@ -3470,17 +3468,19 @@ const pool=getPoolForSlot(
       `${state.slot.title||"这个材料"}没有符合条件的可用库存。`
     );
 
+    updateMaterialButtons();
+
     return;
 
   }
 
-  state.pool=pool;
-
+  // 选出真正的抽取结果
   const selected=
     pool[Math.floor(Math.random()*pool.length)];
 
   state.selected=selected;
   state.spinning=false;
+  state.pool=pool;
 
   game.materialResults[slotId]={
     slotId,
@@ -3489,36 +3489,48 @@ const pool=getPoolForSlot(
     item:selected
   };
 
+  // 找到画面中对应的材料，避免库存池与显示池位置错乱
   const reel=document.querySelector(
     `[data-reel-key="${slotId}"] .reel-track`
   );
 
-if(reel){
+  if(reel){
 
-  const itemHeight=
-    reel.querySelector(".reel-item")
-      ?.getBoundingClientRect().height || 145;
+    const itemHeight=
+      reel.querySelector(".reel-item")
+        ?.getBoundingClientRect().height || 145;
 
-  const middle=
-    pool.length*2+pool.indexOf(selected);
+    const items=Array.from(
+      reel.querySelectorAll(".reel-item")
+    );
 
-  const targetY=
-    -(middle*itemHeight);
+    const targetIndex=items.findIndex(el=>
+      el.dataset.itemId===String(selected.id)
+    );
 
-  reel.style.transition=
-    "transform .65s cubic-bezier(.15,.8,.25,1)";
+    if(targetIndex>=0){
 
-  reel.style.transform=
-    `translateY(${targetY}px)`;
+      reel.style.transition=
+        "transform .65s cubic-bezier(.15,.8,.25,1)";
 
-}
+      reel.style.transform=
+        `translateY(-${targetIndex*itemHeight}px)`;
+
+    }
+
+  }
+
+  playReelStopSound();
+
   updateMaterialButtons();
 
   if(allMaterialStopped()){
 
     setTimeout(()=>{
+
       document.getElementById("materialConfirm")
         .classList.remove("hidden");
+
     },700);
 
   }
