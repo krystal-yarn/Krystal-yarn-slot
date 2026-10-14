@@ -2827,9 +2827,7 @@ async function renderDrawPage(){
 
 function getAvailableStyles(product){
 
-  return product.styles.filter(s=>
-    Number(s.stock||0)>0
-  );
+  return product.styles;
 
 }
 
@@ -2903,11 +2901,25 @@ function stopStyle(){
 
   playReelStopSound();
   
-  const pool=state.pool;
+  const pool=state.pool.filter(s=>
+  Number(s.stock||0)>0
+);
 
-  const selected=
-    pool[Math.floor(Math.random()*pool.length)];
+if(!pool.length){
 
+  state.spinning=false;
+
+  toast("目前所有款式库存都用完啦，请到后台补库存。");
+
+  document.getElementById("styleStartBtn").disabled=false;
+  document.getElementById("styleStopBtn").disabled=true;
+
+  return;
+
+}
+
+const selected=
+  pool[Math.floor(Math.random()*pool.length)];
   state.spinning=false;
   state.selected=selected;
 
@@ -3064,15 +3076,15 @@ function confirmStyle(){
    材料池
 ========================================================= */
 
+
 function getPoolForSlot(product,style,slot){
 
   const category=getCategory(product,slot.categoryId);
 
   if(!category) return [];
 
-  let pool=category.items.filter(item=>
-    Number(item.stock||0)>0
-  );
+  // 显示池：保留全部材料，包括没库存的
+  let pool=[...category.items];
 
   /*
     款式限制
@@ -3441,11 +3453,14 @@ function animateMaterial(slotId,reel){
 
   const p=getProduct(game.productId);
 
-  const pool=getPoolForSlot(
-    p,
-    game.style,
-    state.slot
-  );
+
+const pool=getPoolForSlot(
+  p,
+  game.style,
+  state.slot
+).filter(item=>
+  Number(item.stock||0)>0
+);
 
   if(!pool.length){
 
