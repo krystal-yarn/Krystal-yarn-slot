@@ -1092,7 +1092,7 @@ body:before{
 <section id="homeScreen" class="screen active">
 
   <div class="decor d1">🧶</div>
-  <div class="decor d2">✦</div>
+  <div class="decor d2">✨</div>
   <div class="decor d3">🌷</div>
   <div class="decor d4">💗</div>
 
@@ -1174,7 +1174,7 @@ body:before{
 
     <div class="draw-header">
       <div>
-        <div id="drawTitle" class="draw-title">🎰 幸运老虎机</div>
+        <div id="drawTitle" class="draw-title">🎰 老虎机转盘</div>
       </div>
 
       <div id="drawOrder" class="order-pill"></div>
@@ -1184,8 +1184,8 @@ body:before{
     <div id="styleStage" class="stage-card">
 
       <div class="stage-title">
-        <h2>🎀 先抽一个款式</h2>
-        <p>这一格只决定今天的款式</p>
+        <h2>🎀 款式抽取</h2>
+        <p>今天的款式</p>
       </div>
 
       <div class="slot-machine">
@@ -1238,10 +1238,10 @@ body:before{
 
       <div class="stage-title">
 
-        <h2>🧶 开始研究材料</h2>
+        <h2>🧶 抽取材料</h2>
 
         <p>
-          每一格都是今天的小小命运
+          今天的研究材料
         </p>
 
       </div>
@@ -1276,7 +1276,7 @@ body:before{
         <h3>✨ 材料全部抽好了</h3>
 
         <p>
-          最后一步，看看今天有没有特别的幸运签。
+          今日份幸运抽取
         </p>
 
         <button
@@ -1377,7 +1377,7 @@ body:before{
       <div class="fox"></div>
       <div>
         <div class="brand-title">抽取记录</div>
-        <div class="brand-sub">看看之前研究出了什么</div>
+        <div class="brand-sub">研究室档案</div>
       </div>
     </div>
 
@@ -2333,7 +2333,7 @@ function renderHome(){
 
       <h3>${escapeHtml(p.name)}</h3>
 
-      <p>点击选择这个研究室</p>
+      <p>进入研究室</p>
 
     </button>
 
@@ -3641,7 +3641,7 @@ async function drawFortune(){
     escapeHtml(slip.content||"今天也要有小小的好运～");
 
   document.getElementById("fortuneModalReward").textContent=
-    slip.reward||"✨ 收下这份幸运";
+    slip.reward||"✨ 接收好运";
 
   document.getElementById("fortuneModal")
     .classList.add("show");
