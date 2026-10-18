@@ -144,7 +144,7 @@ body:before{
   width:66px;
   height:66px;
   position:relative;
-  background:#f7a8c3;
+  background:transparent;
   flex:none;
 }
 
@@ -1140,7 +1140,7 @@ body:before{
 
     <div style="max-width:480px;margin:0 auto">
       <button id="startBtn" class="primary-btn">
-        🎰 开始抽取
+        🎰 进入研究室
       </button>
     </div>
 
@@ -2333,7 +2333,7 @@ function renderHome(){
 
       <h3>${escapeHtml(p.name)}</h3>
 
-      <p>进入研究室</p>
+      <p>研究室</p>
 
     </button>
 
@@ -7245,30 +7245,6 @@ async function init(){
 init();
 
 </script>
-
-  <!-- =========================================================
-     🎵 YouTube：后台背景音乐 BGM
-     隐藏播放器 · 循环播放
-========================================================= -->
-
-<div id="youtubeBgmPlayer" style="
-  position:fixed;
-  width:1px;
-  height:1px;
-  left:-9999px;
-  top:-9999px;
-  overflow:hidden;
-">
-  <iframe
-    id="youtubeBgmFrame"
-    width="1"
-    height="1"
-    src="https://www.youtube.com/embed/4KXesdR7fr0?autoplay=1&loop=1&playlist=4KXesdR7fr0&playsinline=1"
-    title="背景音乐"
-    frameborder="0"
-    allow="autoplay; encrypted-media">
-  </iframe>
-</div>
   
 </body>
 </html>
