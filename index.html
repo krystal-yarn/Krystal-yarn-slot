@@ -7247,20 +7247,22 @@ init();
 </script>
 
   <!-- =========================================================
-     🎵 YouTube：背景音乐 BGM
-     自动播放 · 循环播放
+     🎵 YouTube：后台背景音乐 BGM
+     隐藏播放器 · 循环播放
 ========================================================= -->
 
 <div id="youtubeBgmPlayer" style="
   position:fixed;
-  right:12px;
-  bottom:12px;
-  z-index:999;
+  width:1px;
+  height:1px;
+  left:-9999px;
+  top:-9999px;
+  overflow:hidden;
 ">
   <iframe
     id="youtubeBgmFrame"
-    width="200"
-    height="120"
+    width="1"
+    height="1"
     src="https://www.youtube.com/embed/4KXesdR7fr0?autoplay=1&loop=1&playlist=4KXesdR7fr0&playsinline=1"
     title="背景音乐"
     frameborder="0"
