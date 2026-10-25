@@ -2829,6 +2829,7 @@ function animateReel(key,pool){
 
 }
 
+
 function stopStyle(){
 
   const state=reelStates.style;
@@ -2838,26 +2839,31 @@ function stopStyle(){
   clearTimeout(state.timer);
 
   playReelStopSound();
-  
-  const pool=state.pool.filter(s=>
-  Number(s.stock||0)>0
-);
 
-if(!pool.length){
+  // 保留所有款式，用于计算转盘上的实际位置
+  const allStyles=state.pool;
 
-  state.spinning=false;
+  // 只允许抽中有库存的款式
+  const availableStyles=allStyles.filter(s=>
+    Number(s.stock||0)>0
+  );
 
-  toast("目前所有款式库存都用完啦，请到后台补库存。");
+  if(!availableStyles.length){
 
-  document.getElementById("styleStartBtn").disabled=false;
-  document.getElementById("styleStopBtn").disabled=true;
+    state.spinning=false;
 
-  return;
+    toast("目前所有款式库存都用完啦，请到后台补库存。");
 
-}
+    document.getElementById("styleStartBtn").disabled=false;
+    document.getElementById("styleStopBtn").disabled=true;
 
-const selected=
-  pool[Math.floor(Math.random()*pool.length)];
+    return;
+
+  }
+
+  const selected=
+    availableStyles[Math.floor(Math.random()*availableStyles.length)];
+
   state.spinning=false;
   state.selected=selected;
 
@@ -2869,7 +2875,9 @@ const selected=
 
   if(reel){
 
-    const middle=pool.length*2+pool.indexOf(selected);
+    // 根据完整款式列表计算位置，确保画面与结果一致
+    const styleIndex=allStyles.indexOf(selected);
+    const middle=allStyles.length*2+styleIndex;
 
     reel.style.transition=
       "transform .7s cubic-bezier(.15,.8,.25,1)";
