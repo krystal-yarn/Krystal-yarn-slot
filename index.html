@@ -1520,7 +1520,17 @@ body:before{
 
 
 <div id="toast" class="toast"></div>
-
+<div id="sharedGalleryModal" class="modal-layer" style="display:none;z-index:1500;align-items:center;justify-content:center">
+  <div style="width:min(760px,96vw);max-height:88vh;overflow:auto;background:#fffdfb;border-radius:22px;padding:18px;box-shadow:0 20px 60px #0002">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px">
+      <strong id="sharedGalleryTitle">选择共用图库照片</strong>
+      <button type="button" class="secondary-btn" onclick="closeSharedGallery()">关闭</button>
+    </div>
+    <input id="sharedGallerySearch" class="input" placeholder="搜索照片文件名…" oninput="renderSharedGallery()" style="margin-bottom:10px">
+    <div id="sharedGalleryStatus" class="help">正在读取共用图库…</div>
+    <div id="sharedGalleryGrid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px"></div>
+  </div>
+</div>
 
 <script>
 /* =========================================================
@@ -4944,7 +4954,13 @@ function renderCategoryItemsHtml(p,cat){
                   "
                 >
               </label>
-
+<button
+  type="button"
+  class="secondary-btn"
+  onclick="openSharedGallery('material', '${cat.id}', '${item.id}')"
+>
+  🖼️ 从共用图库选择
+</button>
             </div>
 
           </div>
@@ -5414,7 +5430,13 @@ function renderStyleEditorHtml(p,style){
           >
           只显示照片
         </label>
-
+ <button
+  type="button"
+  class="secondary-btn"
+  onclick="openSharedGallery('style')"
+>
+  🖼️ 从共用图库选择
+</button>
       </div>
 
     </div>
@@ -6894,6 +6916,24 @@ function renderAdminMusic(el){
 
   el.innerHTML=`
 
+ <div class="setting-group" style="margin-top:16px">
+  <h3>共用图库设置</h3>
+  <p class="help">与顾客网页共用照片。Token 不要分享给别人。</p>
+  <label for="sharedGithubToken">GitHub Token</label>
+  <input
+    id="sharedGithubToken"
+    class="input"
+    type="password"
+    autocomplete="off"
+    placeholder="粘贴你自己保存的 Token"
+  >
+  <div style="display:flex;gap:8px;margin-top:8px">
+    <button type="button" onclick="saveSharedGithubToken()">保存 Token</button>
+    <button type="button" class="secondary-btn" onclick="clearSharedGithubToken()">清除 Token</button>
+  </div>
+  <div id="sharedGithubTokenStatus" class="help" style="margin-top:8px"></div>
+</div>
+
     <div class="admin-section">
 
       <h2>🦊 店铺吉祥物</h2>
@@ -7249,7 +7289,208 @@ async function init(){
 }
 
 init();
+/* ===== 共用图库：GitHub 设置与读取 ===== */
+const SHARED_GALLERY_API =
+  "https://api.github.com/repos/krystal-yarn/Customer-box/contents/";
 
+const SHARED_GALLERY_RAW =
+  "https://raw.githubusercontent.com/krystal-yarn/Customer-box/main/";
+
+const SHARED_GALLERY_TOKEN_KEY = "krystalGalleryGithubToken";
+
+let sharedGalleryTarget = "style";
+let sharedGalleryFiles = [];
+let sharedGalleryItem = null;
+
+function saveSharedGithubToken(){
+  const input = document.getElementById("sharedGithubToken");
+  if(!input){
+    toast("找不到 Token 输入框，请检查第二步添加的位置。");
+    return;
+  }
+
+  const token = input.value.trim();
+  if(!token){
+    toast("请先输入你自己的 GitHub Token。");
+    return;
+  }
+
+  localStorage.setItem(SHARED_GALLERY_TOKEN_KEY, token);
+
+  const status = document.getElementById("sharedGithubTokenStatus");
+  if(status) status.textContent = "Token 已保存到当前浏览器。";
+
+  toast("共用图库 Token 已保存。");
+}
+
+function clearSharedGithubToken(){
+  localStorage.removeItem(SHARED_GALLERY_TOKEN_KEY);
+
+  const input = document.getElementById("sharedGithubToken");
+  const status = document.getElementById("sharedGithubTokenStatus");
+
+  if(input) input.value = "";
+  if(status) status.textContent = "Token 已清除。";
+
+  toast("已清除保存的 Token。");
+}
+
+function openSharedGallery(target, categoryId, itemId){
+  sharedGalleryTarget = target;
+  sharedGalleryItem = {categoryId, itemId};
+
+  const modal = document.getElementById("sharedGalleryModal");
+  const title = document.getElementById("sharedGalleryTitle");
+  const status = document.getElementById("sharedGalleryStatus");
+  const grid = document.getElementById("sharedGalleryGrid");
+  const search = document.getElementById("sharedGallerySearch");
+
+  if(!modal || !status || !grid){
+    toast("找不到共用图库窗口，请检查第一步。");
+    return;
+  }
+
+  modal.style.display = "flex";
+  title.textContent = target === "style"
+    ? "选择款式照片"
+    : "选择材料照片";
+
+  status.textContent = "正在读取共用图库…";
+  grid.innerHTML = "";
+  search.value = "";
+
+  loadSharedGallery();
+}
+
+function closeSharedGallery(){
+  const modal = document.getElementById("sharedGalleryModal");
+  if(modal) modal.style.display = "none";
+}
+
+async function loadSharedGallery(){
+  const status = document.getElementById("sharedGalleryStatus");
+  const grid = document.getElementById("sharedGalleryGrid");
+
+  try{
+    const folder = sharedGalleryTarget === "style"
+      ? "photo/Styles"
+      : "photo/Materials";
+
+    const response = await fetch(SHARED_GALLERY_API + folder, {
+      headers: {"Accept":"application/vnd.github+json"}
+    });
+
+    if(!response.ok){
+      throw new Error("读取失败，HTTP " + response.status);
+    }
+
+    const files = await response.json();
+
+    sharedGalleryFiles = files
+      .filter(f => f.type === "file" && /\.(jpe?g|png|webp|gif)$/i.test(f.name))
+      .map(f => ({
+        name: f.name,
+        path: f.path,
+        url: f.download_url || SHARED_GALLERY_RAW + f.path
+      }));
+
+    renderSharedGallery();
+  }catch(error){
+    status.textContent =
+      "图库读取失败。请确认 Customer-box 里存在 " +
+      (sharedGalleryTarget === "style" ? "photo/Styles" : "photo/Materials") +
+      " 文件夹，并且其中有照片。";
+
+    console.error(error);
+  }
+}
+
+function renderSharedGallery(){
+  const status = document.getElementById("sharedGalleryStatus");
+  const grid = document.getElementById("sharedGalleryGrid");
+  const search = document.getElementById("sharedGallerySearch");
+
+  if(!status || !grid) return;
+
+  const query = (search.value || "").trim().toLowerCase();
+  const files = sharedGalleryFiles.filter(f =>
+    f.name.toLowerCase().includes(query)
+  );
+
+  grid.innerHTML = "";
+
+  files.forEach(file => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.style.cssText =
+      "border:1px solid #f0d5e0;border-radius:12px;padding:8px;" +
+      "background:#fff;color:#654b57;min-width:0;overflow-wrap:anywhere;";
+
+    const img = document.createElement("img");
+    img.src = file.url;
+    img.alt = file.name;
+    img.style.cssText =
+      "width:100%;height:105px;object-fit:contain;border-radius:8px;background:#fff8fb;";
+
+    const name = document.createElement("div");
+    name.textContent = file.name;
+    name.style.cssText = "font-size:11px;margin-top:5px;";
+
+    button.append(img, name);
+    button.addEventListener("click", () => {
+      applySharedGalleryPhoto(file);
+    });
+
+    grid.appendChild(button);
+  });
+
+  status.textContent = files.length
+    ? "找到 " + files.length + " 张照片，点击照片即可选择。"
+    : "没有找到照片，请检查图库文件夹或搜索条件。";
+}
+
+function applySharedGalleryPhoto(file){
+  const imageUrl = SHARED_GALLERY_RAW + file.path;
+
+  if(sharedGalleryTarget === "style"){
+    const product = getProduct(adminStyleProduct);
+    const style = getStyle(product, adminStyleId);
+
+    if(!style){
+      toast("请先在款式设置中选择一个款式。");
+      return;
+    }
+
+    style.image = imageUrl;
+    saveData();
+    renderAdmin();
+    toast("已为当前款式选择共用图库照片 📷");
+  }else{
+    if(!sharedGalleryItem){
+      toast("请先选择要修改的材料。");
+      return;
+    }
+
+    const product = getProduct(adminCategoryProduct);
+    const item = getItem(
+      product,
+      sharedGalleryItem.categoryId,
+      sharedGalleryItem.itemId
+    );
+
+    if(!item){
+      toast("找不到当前材料，请重新打开图库。");
+      return;
+    }
+
+    item.image = imageUrl;
+    saveData();
+    renderAdmin();
+    toast("已为当前材料选择共用图库照片 📷");
+  }
+
+  closeSharedGallery();
+}
 </script>
   
 </body>
